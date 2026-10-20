@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { CheckCircle2, CornerDownRight, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import {
@@ -89,7 +90,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="px-2 pb-2 pt-20 sm:px-4 lg:pt-28">
-      <div className="rounded-[2rem] bg-ink px-6 py-14 text-cream sm:rounded-[3rem] sm:px-10 lg:px-16 lg:py-20">
+      <div className="bg-grain bg-dots-dark relative overflow-hidden rounded-[2rem] bg-forest px-6 py-14 text-cream sm:rounded-[3rem] sm:px-10 lg:px-16 lg:py-20">
         {/* Section header */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <a
@@ -164,6 +165,20 @@ export function ContactSection() {
               person will respond today. Prefer that we call you? Fill the form
               instead. It takes 30 seconds.
             </p>
+
+            <div className="relative mt-8 max-w-md overflow-hidden rounded-2xl border border-cream/15">
+              <Image
+                src="/images/real/team.jpg"
+                alt="The Altagracia team ready to help at the support desk"
+                width={1400}
+                height={788}
+                sizes="(min-width: 1024px) 32rem, 100vw"
+                className="h-44 w-full object-cover sm:h-52"
+              />
+              <p className="absolute bottom-2.5 left-2.5 rounded-full bg-cream/90 px-3 py-1 text-[11px] font-semibold text-ink">
+                Inside our Lagos support desk
+              </p>
+            </div>
 
             <dl className="mt-10 space-y-7">
               <div>

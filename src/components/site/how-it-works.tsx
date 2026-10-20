@@ -17,6 +17,8 @@ const STEPS = [
       "Fix something that stopped working",
       "Promote your business online",
     ],
+    photo: "/images/real/support.jpg",
+    alt: "A friendly Altagracia agent taking a customer's call",
     progress: 33,
   },
   {
@@ -29,6 +31,8 @@ const STEPS = [
       "Transparent, upfront pricing",
       "Genuine products with warranty",
     ],
+    photo: "/images/real/repair.jpg",
+    alt: "A technician diagnosing a laptop before quoting the repair",
     progress: 66,
   },
   {
@@ -41,6 +45,8 @@ const STEPS = [
       "Delivery & installation support",
       "Help whenever you need it later",
     ],
+    photo: "/images/real/team.jpg",
+    alt: "The Altagracia team at the support desk, ready to help after delivery",
     progress: 100,
   },
 ];
@@ -118,7 +124,7 @@ export function HowItWorks() {
             </div>
             <div className="mt-3 h-3 overflow-hidden rounded-full bg-ink/10">
               <motion.div
-                className="h-full rounded-full bg-ink"
+                className="h-full rounded-full bg-forest"
                 animate={{ width: `${current.progress}%` }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               />
@@ -139,7 +145,7 @@ export function HowItWorks() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col justify-between rounded-[1.75rem] bg-secondary/80 p-7 sm:p-9"
+              className="flex flex-col justify-between rounded-[1.75rem] bg-sand/80 p-7 sm:p-9"
             >
               <div>
                 <p className="font-display text-lg font-semibold leading-snug text-ink sm:text-xl">
@@ -162,23 +168,48 @@ export function HowItWorks() {
               </div>
               <a
                 href="#contact"
-                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-ink/85"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-forest"
               >
                 Start step {step + 1} now — talk to us
               </a>
             </motion.div>
           </AnimatePresence>
 
+          {/* Photo panel: all steps stacked, crossfade + slow zoom */}
           <Reveal className="h-full">
-            <div className="h-full overflow-hidden rounded-[1.75rem] border border-ink/10">
-              <Image
-                src="/images/process-illustration.png"
-                alt="Illustration of two technicians installing a server rack"
-                width={1152}
-                height={864}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="h-full w-full object-cover"
-              />
+            <div className="relative h-full min-h-72 overflow-hidden rounded-[1.75rem] border border-ink/10 sm:min-h-96 lg:min-h-[30rem]">
+              {STEPS.map((s, i) => (
+                <div
+                  key={s.photo}
+                  className={cn(
+                    "absolute inset-0 transition-opacity duration-700",
+                    i === step ? "opacity-100" : "opacity-0"
+                  )}
+                  aria-hidden={i !== step}
+                >
+                  <Image
+                    src={s.photo}
+                    alt={s.alt}
+                    width={1400}
+                    height={900}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className={cn(
+                      "h-full w-full object-cover",
+                      i === step && "animate-kenburns"
+                    )}
+                    priority={i === 0}
+                  />
+                </div>
+              ))}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-cream/95 px-4 py-2 shadow-sm">
+                <span className="font-display text-sm font-bold text-ink">
+                  {current.tab}
+                </span>
+                <span className="text-xs font-medium text-ink/60">
+                  {current.title}
+                </span>
+              </div>
             </div>
           </Reveal>
         </div>

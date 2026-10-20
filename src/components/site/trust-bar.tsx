@@ -69,7 +69,7 @@ export function TrustBar() {
                   (i % 2 === 1 ? "border-l border-ink/10 lg:border-l" : "")
                 }
               >
-                <p className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                <p className="font-display text-3xl font-bold tracking-tight text-forest sm:text-4xl">
                   <StatValue
                     value={stat.value}
                     format={stat.format}
@@ -80,6 +80,7 @@ export function TrustBar() {
                 <p className="mt-1.5 text-[11px] font-medium uppercase leading-snug tracking-[0.14em] text-ink/50 sm:text-xs">
                   {stat.label}
                 </p>
+                <span className="mt-2 block h-px w-10 bg-sage" aria-hidden="true" />
               </div>
             ))}
           </div>

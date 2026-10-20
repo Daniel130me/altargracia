@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Quote } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
 import { cn } from "@/lib/utils";
 
@@ -12,21 +13,21 @@ const TESTIMONIALS = [
       "It's now easy to get genuine laptops for our school — Altagracia supplied everything and even helped us set it all up. Very honest people.",
     name: "Mrs. Adaeze Okafor",
     role: "School Administrator, Surulere",
-    initials: "AO",
+    photo: "/images/real/avatar-1.jpg",
   },
   {
     quote:
       "My laptop stopped working and they fixed it the same day. They explained the problem in a way I could understand. I have found my tech people.",
     name: "Kunle Adeyemi",
     role: "Small Business Owner, Lagos Island",
-    initials: "KA",
+    photo: "/images/real/avatar-2.jpg",
   },
   {
     quote:
       "They manage our social media adverts, and now we get customer calls every single week. Reliable and professional from day one.",
     name: "Chiamaka Nwosu",
     role: "Boutique Owner, Ikeja",
-    initials: "CN",
+    photo: "/images/real/avatar-3.jpg",
   },
 ];
 
@@ -47,9 +48,9 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="border-y border-ink/10 bg-secondary/60 py-20 lg:py-28"
+      className="bg-grain border-y border-ink/10 bg-sand py-20 lg:py-28"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <Reveal>
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
@@ -60,6 +61,9 @@ export function Testimonials() {
               <br />
               others say
             </h2>
+            <span className="mt-8 hidden h-14 w-14 items-center justify-center rounded-full bg-ink text-sand lg:flex">
+              <Quote className="h-6 w-6" aria-hidden="true" />
+            </span>
           </Reveal>
 
           <Reveal
@@ -82,11 +86,15 @@ export function Testimonials() {
                     “{t.quote}”
                   </blockquote>
                   <figcaption className="mt-7 flex items-center gap-3">
-                    <span
-                      className="flex h-11 w-11 items-center justify-center rounded-full bg-sage font-display text-sm font-bold text-ink"
-                      aria-hidden="true"
-                    >
-                      {t.initials}
+                    <span className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-ink/10">
+                      <Image
+                        src={t.photo}
+                        alt={`Portrait of ${t.name}`}
+                        width={96}
+                        height={96}
+                        sizes="48px"
+                        className="h-full w-full object-cover"
+                      />
                     </span>
                     <span>
                       <span className="block text-sm font-semibold text-ink">
@@ -124,7 +132,7 @@ export function Testimonials() {
                   setIndex((i) => (i + 1) % TESTIMONIALS.length);
                   setPaused(true);
                 }}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream transition-colors hover:bg-ink/85"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream transition-colors hover:bg-forest"
               >
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </button>

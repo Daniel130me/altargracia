@@ -42,3 +42,29 @@ Stage Summary:
 - Homepage now fully matches the inspiration video's studio-agency design language: Space Grotesk display type, cream/ink/sage palette, pill CTAs, floating dock nav, numbered service list, marquee ticker, animated process steps, testimonial slider, dark mega CTA footer with underline form.
 - Trust-first content strategy, section order, site-config.ts placeholders, /api/contact + ContactRequest schema all preserved from Task 1.
 - Real contact details / stats / testimonials remain placeholders pending client input (edit src/lib/site-config.ts only).
+
+---
+Task ID: 3
+Agent: Z.ai Code (main agent)
+Task: Make the design original — add real images sourced from the web, richer background colors, improved animations, and use pictures throughout.
+
+Work Log:
+- User feedback: redesign was good but "lacks originality; add real images based on the website, use better background colors, improve the animations, use pictures more".
+- Sourced 14 real photos via `z-ai image-search` (10+ sequential queries — parallel calls hit 429 rate limits). Visually inspected ~20 candidates and rejected every watermarked/branded one (Alamy/Shutterstock/Dreamstime/depositphotos/eufy/PENBO logos).
+- Processed selected photos with sharp (installed in /tmp scratch dir) into public/images/real/: hero-main.jpg (showroom office w/ laptops), hero-side.jpg (desk setup), repair.jpg (technician), phones.jpg (hand w/ smartphone), marketing.jpg (analytics), training.jpg (authentic African computer classroom), contracts.jpg (ICT lab planning), support.jpg (agent on headset), team.jpg (support desk team), avatar-1/2/3.jpg (face-centered square crops for testimonials).
+- globals.css: added forest/forest-2/moss/sand/blush brand tokens; new keyframes kenburns + ping-soft; textures bg-grain (SVG noise), bg-dots, bg-dots-dark, bg-lines (ledger rules); warmer base --background #f4f2eb; html{position:relative} to silence framer-motion static-container warning.
+- hero.tsx: rewritten — word-by-word staggered headline reveal (overflow-hidden per word, y:110%→0), real-photo collage with scroll parallax (useScroll + useTransform on both photos), floating secondary photo w/ animate-float, "We answer, same day" chip, social-proof row with real customer avatars + 5-star rating, sand marquee band. Fixed badge clipping by moving AsteriskBadge inline (h-[0.52em]) outside the clipping word span.
+- services.tsx: signature interaction — floating photo preview card that follows the cursor (motion values driven by mousemove, rotate +3°, label bar), gated on NOT (pointer: coarse) via useSyncExternalStore; mobile/touch users get always-visible rounded thumbnails per row; bg-lines texture. Replaced broken useSpring(source) X-axis (Y-only tracking bug) with direct motion values.
+- why-us.tsx: rebuilt as deep forest-green section (bg-forest + grain + dark dots + glow blobs); real support photo card with gradient overlay + caption; 2×2 reasons grid on forest-2 with sage icon circles that rotate on hover.
+- how-it-works.tsx: step photos swapped per step (support/repair/team) — stacked images crossfaded by step state with slow Ken Burns zoom + /0N/ label chip; progress bar now forest.
+- testimonials.tsx: sand bg + grain, real portrait avatars (face-centered crops), quote badge.
+- NEW photos-marquee.tsx: "Real people. Real ICT." full-width auto-scrolling marquee of 8 labeled real photos (pauses on hover).
+- contact.tsx: forest mega-section + dark dots, team photo card ("Inside our Lagos support desk") added to info column; footer.tsx → forest.
+- trust-bar.tsx: forest numerals + sage underline accent.
+- Verification fixes: (1) headless reports pointer:none for ALL pointer/hover media queries → gate changed to !(pointer:coarse) so the preview renders on real desktops and in tests; (2) stale Turbopack CSS after edits served old html rule → killed server, rm -rf .next, restarted double-forked; (3) transient one-off hydration warning (Radix aria-controls id) right after cold recompile — did NOT reproduce on 2 fresh navigations.
+- Verified end-to-end (agent-browser): desktop 1440px (hero collage+parallax, staggered headline, cursor-following preview tracks x/y across rows, step tabs /03/ → 100% + photo crossfade, testimonial avatars, photo marquee, form fill→submit→"Thank you, Browser!"→Prisma row→test record deleted, footer flush) and mobile 390px (stacked hero, service row thumbnails, forest why-us, hamburger menu → Services nav servicesTop=80px, footer gap 0). Console: zero errors/warnings after fixes. Lint clean.
+
+Stage Summary:
+- Homepage now has an original identity: warm paper + sand rhythm alternating with deep forest-green dark sections, paper-grain/dot/ledger textures, and real photography everywhere (hero collage, 6 service previews + mobile thumbnails, why-us photo, 3 step photos, testimonial portraits, 8-photo marquee, contact team card).
+- Animation system upgraded: staggered word reveal, scroll parallax, cursor-following preview, Ken Burns step photos, counters, marquees, ping-soft live dot, float, spin-slow — all transform/opacity-only or CSS keyframes.
+- site-config.ts, /api/contact, Prisma schema, dock-nav, header logic untouched. Contact details/stats/testimonials remain placeholders pending client input.

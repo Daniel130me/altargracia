@@ -21,7 +21,7 @@ export function Footer() {
 
   return (
     <footer className="mt-auto px-2 pb-24 sm:px-4 sm:pb-4">
-      <div className="rounded-[2rem] bg-ink px-6 py-12 text-cream/70 sm:rounded-[3rem] sm:px-10 lg:px-16">
+      <div className="bg-grain relative overflow-hidden rounded-[2rem] bg-forest px-6 py-12 text-cream/70 sm:rounded-[3rem] sm:px-10 lg:px-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-lg font-bold tracking-tight text-cream">

@@ -5,6 +5,7 @@ import { Services } from "@/components/site/services";
 import { WhyUs } from "@/components/site/why-us";
 import { HowItWorks } from "@/components/site/how-it-works";
 import { Testimonials } from "@/components/site/testimonials";
+import { PhotoMarquee } from "@/components/site/photos-marquee";
 import { ContactSection } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
 import { DockNav } from "@/components/site/dock-nav";
@@ -20,6 +21,7 @@ export default function Home() {
         <WhyUs />
         <HowItWorks />
         <Testimonials />
+        <PhotoMarquee />
         <ContactSection />
       </main>
       <Footer />
