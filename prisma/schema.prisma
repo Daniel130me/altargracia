@@ -30,3 +30,12 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model ContactRequest {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  need      String
+  message   String?
+  createdAt DateTime @default(now())
+}
