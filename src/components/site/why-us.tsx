@@ -1,20 +1,21 @@
-import Image from "next/image";
+"use client";
+
 import { BadgeCheck, HeartHandshake, PhoneCall, ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/site/reveal";
-import { MessageCircle } from "lucide-react";
+import { Sparkle } from "@/components/site/doodles";
 import { SITE } from "@/lib/site-config";
 
 const REASONS = [
   {
     icon: BadgeCheck,
     title: "Registered & verified",
-    desc: "Fully registered with the Corporate Affairs Commission (BN 3143241). We are a real, accountable business — not a random online seller.",
+    desc: "Fully registered with the Corporate Affairs Commission (BN 3143241). A real, accountable business — not a random online seller.",
   },
   {
     icon: ShieldCheck,
     title: "Genuine products only",
-    desc: "No fakes and no 'tokunbo' surprises. Everything we sell is original and covered by warranty.",
+    desc: "No fakes and no “tokunbo” surprises. Everything we sell is original and covered by warranty.",
   },
   {
     icon: PhoneCall,
@@ -30,109 +31,84 @@ const REASONS = [
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="relative overflow-hidden bg-emerald-950 py-20 lg:py-28">
-      <div
-        aria-hidden="true"
-        className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-emerald-800/40 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -bottom-40 -left-24 h-80 w-80 rounded-full bg-amber-500/10 blur-3xl"
-      />
-
-      <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2">
-        <Reveal>
-          <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
-              <Image
-                src="/images/support.png"
-                alt="Altagracia technician handing a repaired laptop to a happy customer"
-                width={1152}
-                height={864}
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="h-auto w-full object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-6 left-6 rounded-2xl bg-white p-4 shadow-xl sm:left-8">
-              <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-100">
-                  <ShieldCheck
-                    className="h-6 w-6 text-amber-600"
-                    aria-hidden="true"
-                  />
-                </span>
-                <div>
-                  <p className="font-display text-lg font-bold leading-tight text-emerald-950">
-                    5+ years
-                  </p>
-                  <p className="text-xs text-emerald-900/60">
-                    Serving Lagos with trust
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <div>
+    <section id="why-us" className="border-y border-ink/10 bg-secondary/60 py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-300">
-              Why Choose Us
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
+              / Why Altagracia /
             </p>
-            <h2 className="mt-3 font-display text-3xl font-bold text-white sm:text-4xl">
-              The ICT partner you can actually rely on.
+            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl">
+              The ICT partner you
+              <br />
+              can actually rely on.
+              <Sparkle
+                className="ml-3 inline-block h-7 w-7 text-mauve sm:h-9 sm:w-9"
+                aria-hidden="true"
+              />
             </h2>
-            <p className="mt-4 leading-relaxed text-emerald-100/80">
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="max-w-md text-base leading-relaxed text-ink/60 lg:justify-self-end">
               Anyone can sell you a device. Here is what makes us different —
               and why our customers keep coming back.
             </p>
           </Reveal>
-
-          <div className="mt-8 grid gap-5 sm:grid-cols-2">
-            {REASONS.map((reason, i) => (
-              <Reveal key={reason.title} delay={i * 0.08}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-colors duration-300 hover:border-emerald-400/30 hover:bg-white/10">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-400/15">
-                    <reason.icon
-                      className="h-5 w-5 text-amber-300"
-                      aria-hidden="true"
-                    />
-                  </span>
-                  <h3 className="mt-4 font-display text-base font-semibold text-white">
-                    {reason.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-emerald-100/70">
-                    {reason.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button
-                asChild
-                className="bg-amber-400 font-semibold text-emerald-950 hover:bg-amber-300"
-              >
-                <a href={SITE.phoneHref}>
-                  <PhoneCall className="h-4 w-4" aria-hidden="true" />
-                  Call Us Today
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
-              >
-                <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  WhatsApp Us
-                </a>
-              </Button>
-            </div>
-          </Reveal>
         </div>
+
+        <div className="mt-12 grid overflow-hidden rounded-[1.75rem] border border-ink/10 bg-background sm:grid-cols-2 sm:rounded-[2.5rem] lg:mt-16">
+          {REASONS.map((reason, i) => (
+            <motion.div
+              key={reason.title}
+              initial={{ y: 16 }}
+              whileInView={{ y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+              className={
+                "group p-7 transition-colors duration-300 hover:bg-accent/40 sm:p-9 " +
+                (i % 2 === 1 ? "border-l border-ink/10 " : "") +
+                (i >= 2 ? "border-t border-ink/10 " : "") +
+                (i === 1 ? "max-sm:border-t max-sm:border-ink/10 " : "") +
+                (i === 3 ? "max-sm:border-t max-sm:border-ink/10" : "")
+              }
+            >
+              <div className="flex items-start justify-between gap-4">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream">
+                  <reason.icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span className="font-display text-sm font-medium text-ink/30">
+                  ({String(i + 1).padStart(2, "0")})
+                </span>
+              </div>
+              <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-ink sm:text-2xl">
+                {reason.title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-ink/60">
+                {reason.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <Reveal delay={0.15} className="mt-10">
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={SITE.phoneHref}
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-ink px-7 text-base font-medium text-cream transition-colors hover:bg-ink/85"
+            >
+              <PhoneCall className="h-5 w-5" aria-hidden="true" />
+              Call us today
+            </a>
+            <a
+              href={SITE.whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-ink/25 px-7 text-base font-medium text-ink transition-colors hover:bg-secondary"
+            >
+              WhatsApp us
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

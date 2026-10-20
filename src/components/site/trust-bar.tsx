@@ -1,32 +1,85 @@
-import { BadgeCheck, Laptop, PhoneCall, Users } from "lucide-react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import { Reveal } from "@/components/site/reveal";
 
 const STATS = [
-  { icon: BadgeCheck, value: "2020", label: "Registered with the CAC" },
-  { icon: Laptop, value: "1,000+", label: "Devices & gadgets delivered" },
-  { icon: Users, value: "50+", label: "Businesses & schools served" },
-  { icon: PhoneCall, value: "Same-day", label: "Response to every message" },
+  { value: 2020, format: (n: number) => `${n}`, label: "Registered with the CAC", animate: true },
+  { value: 1000, format: (n: number) => `${n.toLocaleString()}+`, label: "Devices & gadgets delivered", animate: true },
+  { value: 50, format: (n: number) => `${n}+`, label: "Businesses & schools served", animate: true },
+  { value: 0, format: () => "Same-day", label: "Response to every message", animate: false },
 ];
 
+/**
+ * Shows the final value by default (content is never hidden or blanked),
+ * and plays a count-up animation the first time it scrolls into view.
+ */
+function StatValue({
+  value,
+  format,
+  animate,
+  start,
+}: {
+  value: number;
+  format: (n: number) => string;
+  animate: boolean;
+  start: boolean;
+}) {
+  const [display, setDisplay] = useState(value);
+  const played = useRef(false);
+
+  useEffect(() => {
+    if (!animate || !start || played.current) return;
+    played.current = true;
+    let raf = 0;
+    const t0 = performance.now();
+    const duration = 1400;
+    const tick = (now: number) => {
+      const p = Math.min((now - t0) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setDisplay(Math.round(value * eased));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [animate, start, value]);
+
+  return <>{animate ? format(display) : format(value)}</>;
+}
+
 export function TrustBar() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
+
   return (
-    <section aria-label="Company highlights" className="relative z-10 -mt-14 pb-4">
+    <section aria-label="Company highlights" className="border-b border-ink/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-6 rounded-3xl border border-emerald-900/10 bg-white p-6 shadow-xl shadow-emerald-950/5 sm:p-8 lg:grid-cols-4">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="flex items-center gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-100">
-                  <stat.icon className="h-6 w-6 text-emerald-700" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="font-display text-2xl font-bold text-emerald-950">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs leading-snug text-emerald-900/60 sm:text-sm">
-                    {stat.label}
-                  </p>
-                </div>
+          <div
+            ref={ref}
+            className="grid grid-cols-2 gap-y-8 py-10 lg:grid-cols-4 lg:gap-y-0"
+          >
+            {STATS.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={
+                  "px-2 sm:px-6 " +
+                  (i > 0 ? "lg:border-l lg:border-ink/10 " : "") +
+                  (i % 2 === 1 ? "border-l border-ink/10 lg:border-l" : "")
+                }
+              >
+                <p className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                  <StatValue
+                    value={stat.value}
+                    format={stat.format}
+                    animate={stat.animate}
+                    start={inView}
+                  />
+                </p>
+                <p className="mt-1.5 text-[11px] font-medium uppercase leading-snug tracking-[0.14em] text-ink/50 sm:text-xs">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

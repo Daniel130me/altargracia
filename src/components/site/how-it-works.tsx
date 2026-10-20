@@ -1,91 +1,187 @@
-import { MessageSquareText, PackageCheck, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/site/reveal";
-import { SITE } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 const STEPS = [
   {
-    icon: PhoneCall,
+    tab: "/01/",
     title: "Reach out to us",
-    desc: "Call, WhatsApp or email. Tell us what you need in your own words — no technical grammar required.",
+    bold: "Call, WhatsApp or email — tell us what you need in your own words.",
+    desc: "No technical grammar required. If you can say it in plain English, we can handle it.",
+    needs: [
+      "Buy a laptop, phone or office device",
+      "Fix something that stopped working",
+      "Promote your business online",
+    ],
+    progress: 33,
   },
   {
-    icon: MessageSquareText,
+    tab: "/02/",
     title: "Get clear answers & a fair price",
-    desc: "We explain your options in simple English and agree on the price upfront. No hidden charges.",
+    bold: "We explain your options in simple English and agree the price upfront.",
+    desc: "No hidden charges, no surprises. You decide only when you fully understand.",
+    needs: [
+      "Plain-English explanations",
+      "Transparent, upfront pricing",
+      "Genuine products with warranty",
+    ],
+    progress: 66,
   },
   {
-    icon: PackageCheck,
+    tab: "/03/",
     title: "We deliver & stay with you",
-    desc: "Quick delivery or service, plus support after you pay. That is our promise to you.",
+    bold: "Quick delivery or service — plus support after you pay.",
+    desc: "That is our promise. We are still here long after the receipt is printed.",
+    needs: [
+      "Same-day response to messages",
+      "Delivery & installation support",
+      "Help whenever you need it later",
+    ],
+    progress: 100,
   },
 ];
 
 export function HowItWorks() {
+  const [step, setStep] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => {
+      setStep((s) => (s + 1) % STEPS.length);
+    }, 6000);
+    return () => window.clearInterval(timer);
+  }, [paused]);
+
+  const current = STEPS[step];
+
   return (
     <section id="how-it-works" className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-600">
-            How It Works
+        <Reveal>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
+            / How It Works /
           </p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-emerald-950 sm:text-4xl">
-            Getting what you need is easy.
+          <h2 className="mt-4 max-w-2xl font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl">
+            Three easy steps. That is all it takes.
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Three simple steps — that is all it takes to sort out your
-            technology.
-          </p>
         </Reveal>
 
-        <div className="relative mt-14">
-          <div
-            aria-hidden="true"
-            className="absolute left-0 right-0 top-8 hidden border-t-2 border-dashed border-emerald-900/15 md:block"
-          />
-          <div className="grid gap-10 md:grid-cols-3 md:gap-8">
-            {STEPS.map((step, i) => (
-              <Reveal key={step.title} delay={i * 0.12}>
-                <div className="relative flex flex-col items-start">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary shadow-lg shadow-emerald-700/20">
-                    <step.icon
-                      className="h-7 w-7 text-primary-foreground"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <span className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
-                    Step {i + 1}
-                  </span>
-                  <h3 className="mt-2 font-display text-xl font-semibold text-emerald-950">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    {step.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+        {/* Step title + progress bar */}
+        <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-[1fr_1.1fr] lg:items-end lg:gap-14">
+          <AnimatePresence mode="wait">
+            <motion.h3
+              key={current.title}
+              initial={{ y: 14 }}
+              animate={{ y: 0 }}
+              exit={{ y: -14 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="font-display text-3xl font-medium tracking-[-0.02em] text-ink sm:text-4xl"
+            >
+              {current.title}
+            </motion.h3>
+          </AnimatePresence>
+
+          <div>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-1 text-xs font-semibold uppercase tracking-wider sm:gap-2 sm:text-sm">
+                {STEPS.map((s, i) => (
+                  <button
+                    key={s.tab}
+                    type="button"
+                    onClick={() => {
+                      setStep(i);
+                      setPaused(true);
+                    }}
+                    aria-label={`Show step ${i + 1}`}
+                    className={cn(
+                      "rounded px-1 py-0.5 transition-colors",
+                      i === step
+                        ? "text-ink underline underline-offset-4"
+                        : "text-ink/35 hover:text-ink/70"
+                    )}
+                  >
+                    {s.tab}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs font-medium uppercase tracking-wider text-ink/40">
+                Progress{" "}
+                <span className="font-display text-sm font-bold text-ink">
+                  {current.progress}%
+                </span>
+              </p>
+            </div>
+            <div className="mt-3 h-3 overflow-hidden rounded-full bg-ink/10">
+              <motion.div
+                className="h-full rounded-full bg-ink"
+                animate={{ width: `${current.progress}%` }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              />
+            </div>
           </div>
         </div>
 
-        <Reveal delay={0.2} className="mt-14 text-center">
-          <h3 className="font-display text-2xl font-semibold text-emerald-950">
-            Ready to get started?
-          </h3>
-          <p className="mt-2 text-muted-foreground">
-            No forms, no stress — just a friendly conversation.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="mt-6 h-12 bg-amber-400 px-8 text-base font-semibold text-emerald-950 hover:bg-amber-300"
-          >
-            <a href={SITE.phoneHref}>
-              <PhoneCall className="h-5 w-5" aria-hidden="true" />
-              Call Us Now — {SITE.phoneDisplay}
-            </a>
-          </Button>
-        </Reveal>
+        {/* Step content */}
+        <div
+          className="mt-8 grid gap-5 lg:mt-10 lg:grid-cols-2"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col justify-between rounded-[1.75rem] bg-secondary/80 p-7 sm:p-9"
+            >
+              <div>
+                <p className="font-display text-lg font-semibold leading-snug text-ink sm:text-xl">
+                  {current.bold}
+                  <span className="text-ink/45"> {current.desc}</span>
+                </p>
+                <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-ink/50">
+                  Perfect if you need to:
+                </p>
+                <ul className="mt-3">
+                  {current.needs.map((need) => (
+                    <li
+                      key={need}
+                      className="border-b border-dashed border-ink/20 py-2.5 text-sm text-ink/70 last:border-0"
+                    >
+                      {need}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a
+                href="#contact"
+                className="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-ink/85"
+              >
+                Start step {step + 1} now — talk to us
+              </a>
+            </motion.div>
+          </AnimatePresence>
+
+          <Reveal className="h-full">
+            <div className="h-full overflow-hidden rounded-[1.75rem] border border-ink/10">
+              <Image
+                src="/images/process-illustration.png"
+                alt="Illustration of two technicians installing a server rack"
+                width={1152}
+                height={864}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

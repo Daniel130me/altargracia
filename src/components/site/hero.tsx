@@ -2,160 +2,173 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import {
-  BadgeCheck,
-  CheckCircle2,
-  Mail,
-  MessageCircle,
-  Phone,
-  ShieldCheck,
-  Star,
-} from "lucide-react";
+import { CornerDownRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Asterisk,
+  AsteriskBadge,
+  LongArrow,
+  SquiggleArrow,
+} from "@/components/site/doodles";
 import { SITE } from "@/lib/site-config";
 
-const TRUST_CHIPS = [
-  "Registered with CAC",
-  "100% genuine products",
-  "Real office in Surulere",
-  "Same-day response",
+const TICKER_ITEMS = [
+  "Computers & Laptops",
+  "Phones & Accessories",
+  "Repairs & Maintenance",
+  "Digital Marketing",
+  "ICT Training",
+  "General Contracts",
 ];
+
+function TickerGroup() {
+  return (
+    <div className="flex shrink-0 items-center">
+      {/* repeat the set enough times to fill ultrawide screens */}
+      {[0, 1, 2].map((set) =>
+        TICKER_ITEMS.map((item, i) => (
+          <span key={`${set}-${i}`} className="flex shrink-0 items-center">
+            <span
+              className={
+                i % 2 === 0
+                  ? "text-sm uppercase tracking-wide text-ink/45"
+                  : "text-sm font-semibold uppercase tracking-wide text-ink"
+              }
+            >
+              {item}
+            </span>
+            {i < TICKER_ITEMS.length - 1 ? (
+              <LongArrow className="mx-6 text-ink/40" />
+            ) : (
+              <Asterisk className="mx-6 h-3.5 w-3.5 text-ink/40" />
+            )}
+          </span>
+        ))
+      )}
+    </div>
+  );
+}
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-emerald-950">
-      <Image
-        src="/images/hero.png"
-        alt="Inside the Altagracia Technologies store — laptops and phones on display"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover opacity-40"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-br from-emerald-950/95 via-emerald-950/85 to-emerald-900/60"
-      />
-
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-4 pb-28 pt-16 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pb-36 lg:pt-24">
+    <section id="home" className="relative overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:pt-16">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 24 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-900/50 px-4 py-1.5 text-xs font-medium text-emerald-100 backdrop-blur">
-            <ShieldCheck className="h-4 w-4 text-amber-300" aria-hidden="true" />
-            Registered ICT Company · Lagos, Nigeria
-          </span>
-
-          <h1 className="mt-6 font-display text-4xl font-bold leading-[1.08] text-white sm:text-5xl xl:text-[3.5rem]">
-            Everything ICT.{" "}
-            <span className="text-amber-300">One place you can trust.</span>
-          </h1>
-
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-emerald-50/90">
-            Computers, phones, repairs, digital marketing and training — we
-            handle the technology side of your home or business, so you never
-            have to stress.
+          <p className="flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
+            <span className="h-2 w-2 rounded-full bg-sage" aria-hidden="true" />
+            ICT Company · Lagos, Nigeria
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div className="mt-5 grid gap-8 lg:grid-cols-[1fr_290px] lg:items-end lg:gap-14">
+            <h1 className="font-display text-[clamp(2.9rem,8.2vw,6.8rem)] font-medium leading-[1.02] tracking-[-0.03em] text-ink">
+              <span className="block">Everything ICT.</span>
+              <span className="block">
+                One place you can{" "}
+                <span className="relative inline-block">
+                  trust
+                  <AsteriskBadge
+                    tone="sage"
+                    className="absolute -right-[1.15em] bottom-[0.28em] hidden sm:inline-flex"
+                  />
+                </span>
+                <SquiggleArrow className="ml-3 inline-block h-[0.42em] w-auto text-ink/70" />
+              </span>
+            </h1>
+
+            <div className="hidden lg:block">
+              <p className="text-xs font-medium uppercase leading-[1.9] tracking-[0.14em] text-ink/55">
+                Altagracia is a registered ICT company helping homes and
+                businesses in Lagos buy, fix, promote and learn — without
+                stress.
+              </p>
+              <a
+                href="#services"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 transition-colors hover:text-ink/60 hover:underline"
+              >
+                <CornerDownRight
+                  className="h-4 w-4"
+                  aria-hidden="true"
+                />
+                Explore our services
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button
               asChild
               size="lg"
-              className="h-12 bg-amber-400 px-7 text-base font-semibold text-emerald-950 hover:bg-amber-300"
+              className="h-12 rounded-full bg-ink px-7 text-base font-medium text-cream hover:bg-ink/85"
             >
               <a href={SITE.phoneHref}>
                 <Phone className="h-5 w-5" aria-hidden="true" />
-                Call Us Now
+                Call {SITE.phoneDisplay}
               </a>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-12 border-white/30 bg-white/5 px-7 text-base text-white hover:bg-white/15 hover:text-white"
+              className="h-12 rounded-full border-ink/25 bg-transparent px-7 text-base font-medium text-ink hover:bg-secondary hover:text-ink"
             >
-              <a href={SITE.whatsappHref} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              <a
+                href={SITE.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Chat on WhatsApp
               </a>
             </Button>
           </div>
-
-          <a
-            href={SITE.emailHref}
-            className="mt-4 inline-flex items-center gap-2 text-sm text-emerald-100/80 underline-offset-4 transition-colors hover:text-amber-300 hover:underline"
-          >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            Prefer email? Write to us — we reply fast.
-          </a>
-
-          <ul className="mt-9 grid max-w-lg grid-cols-1 gap-2.5 sm:grid-cols-2">
-            {TRUST_CHIPS.map((chip) => (
-              <li
-                key={chip}
-                className="flex items-center gap-2 text-sm font-medium text-emerald-50"
-              >
-                <CheckCircle2
-                  className="h-4 w-4 shrink-0 text-amber-300"
-                  aria-hidden="true"
-                />
-                {chip}
-              </li>
-            ))}
-          </ul>
         </motion.div>
+      </div>
 
+      {/* Marquee ticker */}
+      <div
+        className="marquee-hover mt-12 overflow-hidden border-y border-ink/10 py-3.5"
+        aria-hidden="true"
+      >
+        <div className="animate-marquee flex w-max">
+          <TickerGroup />
+          <TickerGroup />
+        </div>
+      </div>
+
+      {/* Illustration */}
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:pb-24">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 24 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
+          initial={{ y: 32 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          className="relative hidden lg:block"
+          className="relative"
         >
-          <div className="relative overflow-hidden rounded-3xl border border-white/15 shadow-2xl">
+          <div className="overflow-hidden rounded-[1.75rem] border border-ink/10 sm:rounded-[2.5rem]">
             <Image
-              src="/images/team.png"
-              alt="Altagracia Technologies team leading a practical ICT training session"
-              width={1152}
-              height={864}
-              sizes="(min-width: 1024px) 45vw, 100vw"
+              src="/images/hero-illustration.png"
+              alt="Illustration of a technology workshop — a robotic arm placing a smartphone among computers, a server rack and office devices"
+              width={1344}
+              height={768}
+              priority
+              sizes="(min-width: 1280px) 80rem, 100vw"
               className="h-auto w-full object-cover"
             />
           </div>
-
-          <div className="absolute -left-6 top-8 animate-float rounded-2xl bg-white p-4 shadow-xl">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
-                <BadgeCheck className="h-5 w-5 text-emerald-700" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="text-sm font-bold text-emerald-950">
-                  Trusted since 2020
-                </p>
-                <p className="text-xs text-emerald-900/60">
-                  Registered ICT company
-                </p>
-              </div>
+          <div className="absolute -bottom-6 right-4 flex animate-float items-center gap-3 rounded-2xl bg-cream p-4 shadow-[0_16px_40px_rgba(29,29,27,0.16)] sm:right-8">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-sage">
+              <Asterisk className="h-4 w-4 text-ink" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="font-display text-sm font-bold leading-tight text-ink">
+                We answer, same day
+              </p>
+              <p className="text-xs text-ink/55">
+                Mon – Sat · 8:00 AM – 6:00 PM
+              </p>
             </div>
-          </div>
-
-          <div
-            className="absolute -bottom-6 right-6 animate-float rounded-2xl bg-white p-4 shadow-xl"
-            style={{ animationDelay: "1.6s" }}
-          >
-            <div className="flex items-center gap-0.5 pb-1" aria-label="5 star rating">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  className="h-4 w-4 fill-amber-400 text-amber-400"
-                  aria-hidden="true"
-                />
-              ))}
-            </div>
-            <p className="text-sm font-bold text-emerald-950">
-              1,000+ happy customers
-            </p>
           </div>
         </motion.div>
       </div>

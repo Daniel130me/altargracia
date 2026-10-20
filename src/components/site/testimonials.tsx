@@ -1,10 +1,15 @@
-import { Quote, Star } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/site/reveal";
+import { cn } from "@/lib/utils";
 
 const TESTIMONIALS = [
   {
     quote:
-      "Altagracia supplied all the laptops for our school. Everything was genuine, and they even helped us set everything up. Very honest people.",
+      "It's now easy to get genuine laptops for our school — Altagracia supplied everything and even helped us set it all up. Very honest people.",
     name: "Mrs. Adaeze Okafor",
     role: "School Administrator, Surulere",
     initials: "AO",
@@ -26,62 +31,105 @@ const TESTIMONIALS = [
 ];
 
 export function Testimonials() {
-  return (
-    <section id="testimonials" className="bg-secondary/50 py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-emerald-600">
-            Testimonials
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-bold text-emerald-950 sm:text-4xl">
-            What our customers say.
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Real feedback from real people across Lagos who trusted us with
-            their technology.
-          </p>
-        </Reveal>
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.1} className="h-full">
-              <figure className="flex h-full flex-col rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/5">
-                <Quote
-                  className="h-8 w-8 text-emerald-200"
-                  aria-hidden="true"
-                />
-                <div
-                  className="mt-3 flex items-center gap-0.5"
-                  aria-label="Rated 5 out of 5"
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => {
+      setIndex((i) => (i + 1) % TESTIMONIALS.length);
+    }, 7000);
+    return () => window.clearInterval(timer);
+  }, [paused]);
+
+  const t = TESTIMONIALS[index];
+
+  return (
+    <section
+      id="testimonials"
+      className="border-y border-ink/10 bg-secondary/60 py-20 lg:py-28"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
+              / Testimonials /
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl">
+              Here&apos;s what
+              <br />
+              others say
+            </h2>
+          </Reveal>
+
+          <Reveal
+            delay={0.1}
+            className="flex flex-col justify-between"
+          >
+            <div
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            >
+              <AnimatePresence mode="wait">
+                <motion.figure
+                  key={index}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -14 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star
-                      key={s}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
+                  <blockquote className="font-display text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl">
+                    “{t.quote}”
+                  </blockquote>
+                  <figcaption className="mt-7 flex items-center gap-3">
+                    <span
+                      className="flex h-11 w-11 items-center justify-center rounded-full bg-sage font-display text-sm font-bold text-ink"
                       aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-emerald-900/80">
-                  {t.quote}
-                </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3 border-t border-emerald-900/10 pt-4">
-                  <span
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary"
-                    aria-hidden="true"
-                  >
-                    {t.initials}
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-emerald-950">
-                      {t.name}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{t.role}</p>
-                  </div>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
+                    >
+                      {t.initials}
+                    </span>
+                    <span>
+                      <span className="block text-sm font-semibold text-ink">
+                        {t.name}
+                      </span>
+                      <span className="block text-xs text-ink/50">{t.role}</span>
+                    </span>
+                  </figcaption>
+                </motion.figure>
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-10 flex items-center justify-between border-t border-ink/10 pt-6">
+              <div className="flex items-center gap-2">
+                {TESTIMONIALS.map((item, i) => (
+                  <button
+                    key={item.name}
+                    type="button"
+                    aria-label={`Show review from ${item.name}`}
+                    onClick={() => {
+                      setIndex(i);
+                      setPaused(true);
+                    }}
+                    className={cn(
+                      "h-2 rounded-full transition-all duration-300",
+                      i === index ? "w-8 bg-ink" : "w-2 bg-ink/20 hover:bg-ink/40"
+                    )}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                aria-label="Next review"
+                onClick={() => {
+                  setIndex((i) => (i + 1) % TESTIMONIALS.length);
+                  setPaused(true);
+                }}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream transition-colors hover:bg-ink/85"
+              >
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

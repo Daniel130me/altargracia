@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/site/how-it-works";
 import { Testimonials } from "@/components/site/testimonials";
 import { ContactSection } from "@/components/site/contact";
 import { Footer } from "@/components/site/footer";
+import { DockNav } from "@/components/site/dock-nav";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <ContactSection />
       </main>
       <Footer />
+      <DockNav />
     </div>
   );
 }

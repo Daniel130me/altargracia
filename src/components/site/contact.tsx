@@ -1,34 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { CheckCircle2, CornerDownRight, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 import {
-  CheckCircle2,
-  Loader2,
-  Mail,
-  MapPin,
-  MessageCircle,
-  PhoneCall,
-  Send,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Reveal } from "@/components/site/reveal";
+  AsteriskBadge,
+  Sparkle,
+  SquiggleArrow,
+} from "@/components/site/doodles";
 import { SITE } from "@/lib/site-config";
 
 const NEEDS = [
@@ -38,36 +17,6 @@ const NEEDS = [
   { value: "training", label: "ICT training" },
   { value: "contract", label: "Bulk supply / general contract" },
   { value: "other", label: "Something else" },
-];
-
-const CHANNELS = [
-  {
-    icon: PhoneCall,
-    label: "Call Us",
-    value: SITE.phoneDisplay,
-    href: SITE.phoneHref,
-    note: "We answer Mon – Sat, 8am – 6pm",
-  },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: SITE.phoneDisplay,
-    href: SITE.whatsappHref,
-    note: "Chat with us instantly",
-  },
-  {
-    icon: Mail,
-    label: "Email Us",
-    value: SITE.email,
-    href: SITE.emailHref,
-    note: "We reply within 24 hours",
-  },
-  {
-    icon: MapPin,
-    label: "Visit Our Office",
-    value: SITE.address,
-    note: "Walk-ins are welcome",
-  },
 ];
 
 export function ContactSection() {
@@ -135,245 +84,278 @@ export function ContactSection() {
     setMessage("");
   }
 
-  return (
-    <section id="contact" className="py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        {/* Big CTA banner */}
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-800 via-emerald-900 to-emerald-950 px-6 py-14 text-center sm:px-12">
-            <div
-              aria-hidden="true"
-              className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-emerald-400/10 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl"
-            />
-            <h2 className="relative font-display text-3xl font-bold text-white sm:text-4xl">
-              Need anything ICT? Let&apos;s talk today.
-            </h2>
-            <p className="relative mx-auto mt-4 max-w-2xl text-emerald-50/90">
-              Call, WhatsApp or email us right now — a real person will respond
-              today. No long forms, no stress.
-            </p>
-            <div className="relative mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="h-12 bg-amber-400 px-7 text-base font-semibold text-emerald-950 hover:bg-amber-300"
-              >
-                <a href={SITE.phoneHref}>
-                  <PhoneCall className="h-5 w-5" aria-hidden="true" />
-                  {SITE.phoneDisplay}
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                className="h-12 bg-white px-7 text-base font-semibold text-emerald-950 hover:bg-emerald-50"
-              >
-                <a
-                  href={SITE.whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <MessageCircle className="h-5 w-5" aria-hidden="true" />
-                  WhatsApp Us
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 border-white/30 bg-transparent px-7 text-base text-white hover:bg-white/10 hover:text-white"
-              >
-                <a href={SITE.emailHref}>
-                  <Mail className="h-5 w-5" aria-hidden="true" />
-                  Email Us
-                </a>
-              </Button>
-            </div>
-          </div>
-        </Reveal>
+  const underlineField =
+    "w-full border-0 border-b border-cream/25 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 focus:border-cream focus:outline-none focus:ring-0";
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-          {/* Contact channels */}
-          <div className="grid content-start gap-4 sm:grid-cols-2">
-            {CHANNELS.map((channel, i) => {
-              const inner = (
-                <>
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                    <channel.icon
-                      className="h-5 w-5 text-primary"
+  return (
+    <section id="contact" className="px-2 pb-2 pt-20 sm:px-4 lg:pt-28">
+      <div className="rounded-[2rem] bg-ink px-6 py-14 text-cream sm:rounded-[3rem] sm:px-10 lg:px-16 lg:py-20">
+        {/* Section header */}
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <a
+            href="#top"
+            className="inline-flex items-center gap-2.5 rounded-full bg-cream py-1.5 pl-2 pr-4 text-ink"
+          >
+            <span
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-cream"
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                <path
+                  d="M12 2.5v19M2.5 12h19M5.3 5.3l13.4 13.4M18.7 5.3L5.3 18.7"
+                  stroke="currentColor"
+                  strokeWidth="2.6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            <span className="leading-none">
+              <span className="block font-display text-base font-bold tracking-tight">
+                altagracia
+              </span>
+              <span className="block text-[9px] font-semibold uppercase tracking-[0.3em] text-ink/60">
+                Technologies
+              </span>
+            </span>
+          </a>
+          <div className="flex items-center gap-2.5">
+            <a
+              href={SITE.phoneHref}
+              className="inline-flex h-10 items-center rounded-full bg-cream px-5 text-sm font-medium text-ink transition-colors hover:bg-white"
+            >
+              Book a call
+            </a>
+            <a
+              href={SITE.emailHref}
+              className="inline-flex h-10 items-center gap-1.5 text-sm font-medium text-cream/80 transition-colors hover:text-cream"
+            >
+              <CornerDownRight className="h-4 w-4" aria-hidden="true" />
+              Let&apos;s connect
+            </a>
+          </div>
+        </div>
+
+        {/* Giant heading */}
+        <motion.h2
+          initial={{ y: 24 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-10 max-w-4xl font-display text-[clamp(2.6rem,7vw,5.5rem)] font-medium leading-[1.04] tracking-[-0.03em] lg:mt-14"
+        >
+          Let&apos;s get you
+          <br />
+          connected
+          <SquiggleArrow className="ml-4 inline-block h-[0.45em] w-auto text-sage" />
+          <AsteriskBadge tone="mauve" className="ml-3 hidden sm:inline-flex" />
+          <AsteriskBadge tone="mist" className="ml-1.5 hidden sm:inline-flex" />
+        </motion.h2>
+
+        <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+          {/* Contact info */}
+          <motion.div
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="max-w-md text-base leading-relaxed text-cream/70">
+              Call, WhatsApp, email or visit — tell us what you need and a real
+              person will respond today. Prefer that we call you? Fill the form
+              instead. It takes 30 seconds.
+            </p>
+
+            <dl className="mt-10 space-y-7">
+              <div>
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40">
+                  Contact us
+                </dt>
+                <dd className="mt-2 space-y-1 text-lg">
+                  <a
+                    href={SITE.phoneHref}
+                    className="block font-medium text-cream transition-colors hover:text-sage"
+                  >
+                    {SITE.phoneDisplay}
+                  </a>
+                  <a
+                    href={SITE.whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-base text-cream/70 transition-colors hover:text-cream"
+                  >
+                    WhatsApp us instantly →
+                  </a>
+                  <a
+                    href={SITE.emailHref}
+                    className="block break-all text-base text-cream/70 transition-colors hover:text-cream"
+                  >
+                    {SITE.email}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40">
+                  Visit us
+                </dt>
+                <dd className="mt-2 text-base text-cream/70">
+                  {SITE.address}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40">
+                  Opening hours
+                </dt>
+                <dd className="mt-2 text-base text-cream/70">{SITE.hours}</dd>
+              </div>
+            </dl>
+          </motion.div>
+
+          {/* Form */}
+          <motion.div
+            initial={{ y: 20 }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {success ? (
+              <div className="flex h-full flex-col items-center justify-center gap-4 py-10 text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-sage">
+                  <CheckCircle2
+                    className="h-8 w-8 text-ink"
+                    aria-hidden="true"
+                  />
+                </span>
+                <h3 className="font-display text-2xl font-semibold text-cream">
+                  Thank you, {name.split(" ")[0]}!
+                </h3>
+                <p className="max-w-sm text-sm leading-relaxed text-cream/60">
+                  We received your request and will call you shortly. Need help
+                  right now? Call or WhatsApp us directly.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="mt-2 inline-flex h-11 items-center rounded-full border border-cream/30 px-6 text-sm font-medium text-cream transition-colors hover:bg-cream/10"
+                >
+                  Send another request
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} noValidate className="space-y-7">
+                <div>
+                  <label
+                    htmlFor="contact-name"
+                    className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40"
+                  >
+                    First &amp; last name *
+                  </label>
+                  <input
+                    id="contact-name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    autoComplete="name"
+                    className={underlineField}
+                    placeholder="Adaeze Okafor"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="contact-phone"
+                    className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40"
+                  >
+                    Phone / WhatsApp number *
+                  </label>
+                  <input
+                    id="contact-phone"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    autoComplete="tel"
+                    className={underlineField}
+                    placeholder="0803 123 4567"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="contact-need"
+                    className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40"
+                  >
+                    What do you need? *
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="contact-need"
+                      value={need}
+                      onChange={(e) => setNeed(e.target.value)}
+                      className={`${underlineField} appearance-none pr-8 [&>option]:text-ink`}
+                    >
+                      <option value="" disabled>
+                        Choose one…
+                      </option>
+                      {NEEDS.map((n) => (
+                        <option key={n.value} value={n.value}>
+                          {n.label}
+                        </option>
+                      ))}
+                    </select>
+                    <Sparkle
+                      className="pointer-events-none absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-cream/40"
                       aria-hidden="true"
                     />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-emerald-950">
-                      {channel.label}
-                    </p>
-                    <p className="truncate text-sm font-medium text-emerald-700">
-                      {channel.value}
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {channel.note}
-                    </p>
                   </div>
-                </>
-              );
-              const classes =
-                "flex h-full items-start gap-4 rounded-2xl border border-emerald-900/10 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md";
-              return (
-                <Reveal key={channel.label} delay={i * 0.08} className="h-full">
-                  {channel.href ? (
-                    <a
-                      href={channel.href}
-                      target={
-                        channel.href.startsWith("http") ? "_blank" : undefined
-                      }
-                      rel="noopener noreferrer"
-                      className={classes}
-                    >
-                      {inner}
-                    </a>
-                  ) : (
-                    <div className={classes}>{inner}</div>
-                  )}
-                </Reveal>
-              );
-            })}
-          </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/40"
+                  >
+                    About your project
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    rows={3}
+                    className={`${underlineField} resize-none`}
+                    placeholder="e.g. I need 10 laptops for my office…"
+                  />
+                </div>
 
-          {/* Call-back form */}
-          <Reveal delay={0.1}>
-            <Card className="border-emerald-900/10 shadow-xl shadow-emerald-950/5">
-              <CardHeader>
-                <CardTitle className="font-display text-2xl text-emerald-950">
-                  Request a call back
-                </CardTitle>
-                <CardDescription>
-                  Fill this short form and we will call you — usually within a
-                  few hours.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {success ? (
-                  <div className="flex flex-col items-center gap-3 py-10 text-center">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-                      <CheckCircle2
-                        className="h-8 w-8 text-emerald-700"
+                {error && (
+                  <p className="text-sm font-medium text-mauve" role="alert">
+                    {error}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="inline-flex h-12 items-center gap-2 rounded-full bg-cream px-7 text-base font-medium text-ink transition-colors hover:bg-white disabled:opacity-60"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2
+                        className="h-5 w-5 animate-spin"
                         aria-hidden="true"
                       />
-                    </span>
-                    <h3 className="font-display text-xl font-semibold text-emerald-950">
-                      Thank you, {name.split(" ")[0]}!
-                    </h3>
-                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-                      We received your request and will call you shortly. Need
-                      help right now? Call or WhatsApp us directly.
-                    </p>
-                    <div className="mt-2 flex flex-wrap justify-center gap-3">
-                      <Button
-                        asChild
-                        className="bg-amber-400 font-semibold text-emerald-950 hover:bg-amber-300"
-                      >
-                        <a href={SITE.phoneHref}>
-                          <PhoneCall className="h-4 w-4" aria-hidden="true" />
-                          Call Now
-                        </a>
-                      </Button>
-                      <Button variant="outline" onClick={resetForm}>
-                        Send another request
-                      </Button>
-                    </div>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <Label htmlFor="callback-name">Your name *</Label>
-                        <Input
-                          id="callback-name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="e.g. Adaeze Okafor"
-                          autoComplete="name"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="callback-phone">
-                          Phone / WhatsApp number *
-                        </Label>
-                        <Input
-                          id="callback-phone"
-                          type="tel"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="e.g. 0803 123 4567"
-                          autoComplete="tel"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="callback-need">What do you need? *</Label>
-                      <Select value={need} onValueChange={setNeed}>
-                        <SelectTrigger id="callback-need" className="w-full">
-                          <SelectValue placeholder="Choose one…" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {NEEDS.map((n) => (
-                            <SelectItem key={n.value} value={n.value}>
-                              {n.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="callback-message">
-                        Tell us more (optional)
-                      </Label>
-                      <Textarea
-                        id="callback-message"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="e.g. I need 10 laptops for my office…"
-                        rows={4}
+                      Sending…
+                    </>
+                  ) : (
+                    <>
+                      <CornerDownRight
+                        className="h-5 w-5"
+                        aria-hidden="true"
                       />
-                    </div>
-                    {error && (
-                      <p className="text-sm font-medium text-red-600" role="alert">
-                        {error}
-                      </p>
-                    )}
-                    <Button
-                      type="submit"
-                      disabled={loading}
-                      className="h-12 w-full text-base"
-                    >
-                      {loading ? (
-                        <>
-                          <Loader2
-                            className="h-5 w-5 animate-spin"
-                            aria-hidden="true"
-                          />
-                          Sending…
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-5 w-5" aria-hidden="true" />
-                          Send My Request
-                        </>
-                      )}
-                    </Button>
-                    <p className="text-center text-xs text-muted-foreground">
-                      We will only use your details to respond to this request.
-                    </p>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
-          </Reveal>
+                      Send message
+                    </>
+                  )}
+                </button>
+                <p className="text-xs text-cream/40">
+                  We will only use your details to respond to this request.
+                </p>
+              </form>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>
