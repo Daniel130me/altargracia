@@ -48,8 +48,17 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="bg-grain border-y border-ink/10 bg-sand py-20 lg:py-28"
+      className="bg-grain relative overflow-hidden border-y border-ink/10 bg-gradient-to-br from-sand via-blush/20 to-mauve/15 py-20 lg:py-28"
     >
+      {/* Decorative blob */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-mauve/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-10 h-64 w-64 rounded-full bg-blush/30 blur-3xl"
+      />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <Reveal>

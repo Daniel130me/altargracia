@@ -34,16 +34,20 @@ export function WhyUs() {
   return (
     <section
       id="why-us"
-      className="bg-grain bg-dots-dark relative overflow-hidden bg-forest py-20 text-cream lg:py-28"
+      className="bg-grain bg-dots-dark relative overflow-hidden bg-gradient-to-br from-forest via-forest to-forest-2 py-20 text-cream lg:py-28"
     >
-      {/* soft glow blobs */}
+      {/* vibrant glow blobs */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-moss/50 blur-3xl"
+        className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-amber/10 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-sage/15 blur-3xl"
+        className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-sage/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-1/3 top-1/2 h-64 w-64 rounded-full bg-moss/40 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
@@ -95,8 +99,15 @@ export function WhyUs() {
           </Reveal>
 
           {/* 2×2 reasons */}
-          <div className="grid overflow-hidden rounded-[1.75rem] border border-cream/15 bg-forest-2 sm:grid-cols-2">
-            {REASONS.map((reason, i) => (
+          <div className="grid overflow-hidden rounded-[1.75rem] border border-cream/15 bg-forest-2/80 backdrop-blur-sm sm:grid-cols-2">
+            {REASONS.map((reason, i) => {
+              const iconBgs = [
+                "bg-sage text-ink",
+                "bg-amber/80 text-ink",
+                "bg-mauve/80 text-ink",
+                "bg-mist/80 text-ink",
+              ];
+              return (
               <motion.div
                 key={reason.title}
                 initial={{ y: 16 }}
@@ -112,7 +123,7 @@ export function WhyUs() {
                 }
               >
                 <div className="flex items-start justify-between gap-4">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sage text-ink transition-transform duration-300 group-hover:-rotate-12">
+                  <span className={`flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-300 group-hover:-rotate-12 ${iconBgs[i]}`}>
                     <reason.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <span className="font-display text-sm font-medium text-cream/30">
@@ -126,7 +137,8 @@ export function WhyUs() {
                   {reason.desc}
                 </p>
               </motion.div>
-            ))}
+            );
+            })}
           </div>
         </div>
 

@@ -147,14 +147,23 @@ export function Hero() {
 
   return (
     <section id="home" className="bg-grain relative overflow-hidden">
-      {/* soft original background blobs */}
+      {/* Warm gradient wash across the hero */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-sage-light/60 blur-3xl"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-light via-background to-sky-light opacity-70"
+      />
+      {/* Vibrant blobs */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-amber/20 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-48 top-1/2 h-[28rem] w-[28rem] rounded-full bg-blush/50 blur-3xl"
+        className="pointer-events-none absolute -left-48 top-1/2 h-[28rem] w-[28rem] rounded-full bg-mauve/40 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-1/3 h-[20rem] w-[20rem] rounded-full bg-sage-light/50 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:pt-14">
@@ -303,9 +312,9 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Marquee ticker on sand band */}
+      {/* Marquee ticker on amber band */}
       <div
-        className="marquee-hover relative mt-14 overflow-hidden border-y border-ink/10 bg-sand py-4"
+        className="marquee-hover relative mt-14 overflow-hidden border-y border-ink/10 bg-gradient-to-r from-amber-light via-sand to-amber-light/60 py-4"
         aria-hidden="true"
       >
         <div className="animate-marquee flex w-max">

@@ -73,7 +73,12 @@ function MomentGroup() {
 /** Full-width marquee of real photos from the business. */
 export function PhotoMarquee() {
   return (
-    <section aria-label="Photos of Altagracia at work" className="overflow-hidden py-16 lg:py-20">
+    <section aria-label="Photos of Altagracia at work" className="relative overflow-hidden bg-gradient-to-b from-background via-peach-light/40 to-background py-16 lg:py-20">
+      {/* warm accent blob */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-0 h-64 w-[60%] -translate-x-1/2 rounded-full bg-amber/10 blur-3xl"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="font-display text-3xl font-medium tracking-[-0.02em] text-ink sm:text-4xl">

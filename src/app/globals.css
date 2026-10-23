@@ -17,6 +17,15 @@
   --color-moss: #3d5647;
   --color-sand: #ede8db;
   --color-blush: #ead8dc;
+  /* Vibrant accent extensions */
+  --color-amber: #e8a838;
+  --color-amber-light: #fdf3dc;
+  --color-sky: #c2d8e8;
+  --color-sky-light: #e8f2f8;
+  --color-peach: #f0c8b0;
+  --color-peach-light: #fdf0e8;
+  --color-lavender: #c8c0d8;
+  --color-lavender-light: #eeeaf8;
 }
 
 @theme inline {

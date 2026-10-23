@@ -92,8 +92,17 @@ export function ContactSection() {
     "w-full border-0 border-b border-cream/25 bg-transparent px-0 py-3 text-base text-cream placeholder:text-cream/30 focus:border-cream focus:outline-none focus:ring-0";
 
   return (
-    <section id="contact" className="px-2 pb-2 pt-20 sm:px-4 lg:pt-28">
-      <div className="bg-grain bg-dots-dark relative overflow-hidden rounded-[2rem] bg-forest px-6 py-14 text-cream sm:rounded-[3rem] sm:px-10 lg:px-16 lg:py-20">
+    <section id="contact" className="bg-gradient-to-b from-sand/60 to-peach-light/50 px-2 pb-2 pt-20 sm:px-4 lg:pt-28">
+      <div className="bg-grain bg-dots-dark relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest via-forest to-forest-2 px-6 py-14 text-cream sm:rounded-[3rem] sm:px-10 lg:px-16 lg:py-20">
+        {/* Vibrant accent blobs inside the card */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-amber/10 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-sage/15 blur-3xl"
+        />
         {/* Section header */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <a

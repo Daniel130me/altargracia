@@ -23,8 +23,13 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto px-2 pb-24 sm:px-4 sm:pb-4">
-      <div className="bg-grain relative overflow-hidden rounded-[2rem] bg-forest px-6 py-12 text-cream/70 sm:rounded-[3rem] sm:px-10 lg:px-16">
+    <footer className="mt-auto bg-gradient-to-b from-peach-light/40 to-background/0 px-2 pb-24 sm:px-4 sm:pb-4">
+      <div className="bg-grain relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-forest via-forest-2 to-forest px-6 py-12 text-cream/70 sm:rounded-[3rem] sm:px-10 lg:px-16">
+        {/* Accent blob */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 rounded-full bg-sage/10 blur-3xl"
+        />
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display text-lg font-bold tracking-tight text-cream">

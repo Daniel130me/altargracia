@@ -53,7 +53,7 @@ export function TrustBar() {
   const inView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section aria-label="Company highlights" className="border-b border-ink/10">
+    <section aria-label="Company highlights" className="border-b border-ink/10 bg-gradient-to-r from-sage-light/30 via-background to-sky-light/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div

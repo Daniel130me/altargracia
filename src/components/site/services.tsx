@@ -64,7 +64,12 @@ const SERVICES = [
 
 export function Services() {
   return (
-    <section id="services" className="bg-lines py-20 lg:py-28">
+    <section id="services" className="relative overflow-hidden bg-gradient-to-b from-peach-light via-background to-amber-light/20 py-20 lg:py-28">
+      {/* Decorative blob */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-20 h-80 w-80 rounded-full bg-peach/30 blur-3xl"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
           <motion.div

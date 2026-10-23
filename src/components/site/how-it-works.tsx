@@ -66,7 +66,16 @@ export function HowItWorks() {
   const current = STEPS[step];
 
   return (
-    <section id="how-it-works" className="py-20 lg:py-28">
+    <section id="how-it-works" className="relative overflow-hidden bg-gradient-to-br from-sky-light via-background to-lavender-light/40 py-20 lg:py-28">
+      {/* Decorative blobs */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-sky/25 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-24 h-64 w-64 rounded-full bg-lavender/20 blur-3xl"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
@@ -145,7 +154,7 @@ export function HowItWorks() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col justify-between rounded-[1.75rem] bg-sand/80 p-7 sm:p-9"
+              className="flex flex-col justify-between rounded-[1.75rem] bg-gradient-to-br from-amber-light to-sand p-7 shadow-sm sm:p-9"
             >
               <div>
                 <p className="font-display text-lg font-semibold leading-snug text-ink sm:text-xl">
