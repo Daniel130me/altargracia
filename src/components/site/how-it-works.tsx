@@ -45,8 +45,8 @@ const STEPS = [
       "Delivery & installation support",
       "Help whenever you need it later",
     ],
-    photo: "/images/real/team.jpg",
-    alt: "The Altagracia team at the support desk, ready to help after delivery",
+    photo: "/images/real/contracts.jpg",
+    alt: "A team working on an ICT installation in a computer lab",
     progress: 100,
   },
 ];
@@ -180,7 +180,7 @@ export function HowItWorks() {
             <div className="relative h-full min-h-72 overflow-hidden rounded-[1.75rem] border border-ink/10 sm:min-h-96 lg:min-h-[30rem]">
               {STEPS.map((s, i) => (
                 <div
-                  key={s.photo}
+                  key={s.tab}
                   className={cn(
                     "absolute inset-0 transition-opacity duration-700",
                     i === step ? "opacity-100" : "opacity-0"

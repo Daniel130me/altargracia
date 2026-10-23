@@ -21,14 +21,17 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Altagracia Technologies | Everything ICT — One Place You Can Trust",
   description:
-    "Computers & office equipment, phones & accessories, repairs, digital marketing and ICT training in Surulere, Lagos. Registered business, genuine products, same-day response. Call, WhatsApp or visit us today.",
+    "Computers, phones, repairs, web design and development, software development, UI/UX design, digital marketing and ICT training. Practical technology solutions for businesses and individuals.",
   keywords: [
-    "ICT company Lagos",
-    "computer sales Lagos",
-    "phone accessories Surulere",
-    "laptop repair Lagos",
-    "digital marketing Nigeria",
-    "ICT training Lagos",
+    "ICT solutions",
+    "computer sales",
+    "phone accessories",
+    "laptop repair",
+    "web design and development",
+    "software development",
+    "UI/UX design",
+    "digital marketing",
+    "ICT training",
     "Altagracia Technologies",
   ],
   authors: [{ name: "Altagracia Technologies" }],
@@ -38,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Altagracia Technologies | Everything ICT — One Place You Can Trust",
     description:
-      "Computers, phones, repairs, digital marketing and training — all your ICT needs handled in one trusted place in Lagos, Nigeria.",
+      "Computers, phones, repairs, web design and development, software development, UI/UX design, digital marketing and ICT training — practical technology solutions for businesses and individuals.",
     siteName: "Altagracia Technologies",
     type: "website",
   },

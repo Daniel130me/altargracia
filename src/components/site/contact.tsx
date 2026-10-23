@@ -15,7 +15,10 @@ const NEEDS = [
   { value: "device", label: "Buying a computer / phone" },
   { value: "repair", label: "Repair or maintenance" },
   { value: "marketing", label: "Digital marketing" },
-  { value: "training", label: "ICT training" },
+  { value: "web", label: "Web design and development" },
+  { value: "software", label: "Software development" },
+  { value: "uiux", label: "UI/UX design" },
+  { value: "training", label: "ICT training across all areas" },
   { value: "contract", label: "Bulk supply / general contract" },
   { value: "other", label: "Something else" },
 ];
@@ -176,7 +179,7 @@ export function ContactSection() {
                 className="h-44 w-full object-cover sm:h-52"
               />
               <p className="absolute bottom-2.5 left-2.5 rounded-full bg-cream/90 px-3 py-1 text-[11px] font-semibold text-ink">
-                Inside our Lagos support desk
+                Inside our support desk
               </p>
             </div>
 

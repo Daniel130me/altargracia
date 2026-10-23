@@ -1,12 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useRef, useState, useSyncExternalStore } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Asterisk } from "@/components/site/doodles";
 
@@ -36,8 +31,26 @@ const SERVICES = [
     alt: "A marketer reviewing website analytics charts on a laptop and phone",
   },
   {
+    title: "Web Design & Development",
+    desc: "Websites designed and developed around your business, services and audience.",
+    photo: "/images/real/marketing.jpg",
+    alt: "A marketer reviewing website analytics on a laptop and phone",
+  },
+  {
+    title: "Software Development",
+    desc: "Software solutions designed around your workflows and the needs of your organisation.",
+    photo: "/images/real/contracts.jpg",
+    alt: "A team planning an ICT installation in a computer lab",
+  },
+  {
+    title: "UI/UX Design",
+    desc: "User interface and experience design that makes digital products clear and easy to use.",
+    photo: "/images/real/hero-main.jpg",
+    alt: "Customers working on laptops inside a modern computer showroom",
+  },
+  {
     title: "ICT Training",
-    desc: "Practical, hands-on training for you or your team — from computer basics to digital skills.",
+    desc: "Practical training across ICT areas, from computer basics and digital skills to the tools your team uses every day.",
     photo: "/images/real/training.jpg",
     alt: "A trainer teaching students in a computer classroom",
   },
@@ -50,31 +63,6 @@ const SERVICES = [
 ];
 
 export function Services() {
-  const listRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState<number | null>(null);
-
-  // The cursor-following preview is for mouse users; hide it on touch devices
-  // (pointer: coarse). Headless/keyboard-only environments simply never hover.
-  const showCursorPreview = useSyncExternalStore(
-    useCallback((onChange: () => void) => {
-      const mq = window.matchMedia("(pointer: coarse)");
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    }, []),
-    () => !window.matchMedia("(pointer: coarse)").matches,
-    () => false
-  );
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = listRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    mx.set(e.clientX - rect.left);
-    my.set(e.clientY - rect.top);
-  }
-
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-
   return (
     <section id="services" className="bg-lines py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
@@ -111,56 +99,7 @@ export function Services() {
           </motion.p>
         </div>
 
-        <div
-          ref={listRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={() => setActive(null)}
-          className="relative mt-12 lg:mt-16"
-        >
-          {/* Floating photo preview that follows the cursor (desktop only) */}
-          {showCursorPreview && (
-            <AnimatePresence>
-              {active !== null && (
-                <motion.div
-                  key="preview"
-                  initial={{ opacity: 0, scale: 0.7, rotate: -4 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 3 }}
-                  exit={{ opacity: 0, scale: 0.7, rotate: 6 }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ x: mx, y: my }}
-                  className="pointer-events-none absolute left-0 top-0 z-20 hidden lg:block"
-                  aria-hidden="true"
-                >
-                  <div className="-translate-x-1/2 -translate-y-[115%]">
-                    <div className="w-64 overflow-hidden rounded-2xl border-2 border-ink/10 shadow-[0_24px_60px_rgba(24,42,32,0.28)]">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={active}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.22 }}
-                        >
-                          <Image
-                            src={SERVICES[active].photo}
-                            alt=""
-                            width={640}
-                            height={480}
-                            sizes="256px"
-                            className="aspect-[4/3] w-full object-cover"
-                          />
-                        </motion.div>
-                      </AnimatePresence>
-                      <p className="bg-ink px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-cream">
-                        {SERVICES[active].title}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          )}
-
+        <div className="mt-12 lg:mt-16">
           {SERVICES.map((service, i) => (
             <motion.a
               key={service.title}
@@ -169,9 +108,6 @@ export function Services() {
               whileInView={{ y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              onBlur={() => setActive(null)}
               className="group relative grid grid-cols-[auto_1fr_auto] items-center gap-4 border-t border-ink/12 py-6 transition-colors duration-300 last:border-b hover:bg-accent/50 sm:gap-8 sm:py-7"
             >
               <span className="w-8 text-sm font-medium text-ink/35 sm:w-12 sm:text-base">
@@ -186,14 +122,13 @@ export function Services() {
                 </span>
               </span>
               <span className="flex items-center gap-3 sm:gap-4">
-                {/* Always-visible thumbnail on touch / small screens */}
-                <span className="block h-14 w-14 overflow-hidden rounded-xl border border-ink/10 sm:h-16 sm:w-16 lg:hidden">
+                <span className="block h-14 w-14 shrink-0 overflow-hidden rounded-xl border border-ink/10 sm:h-16 sm:w-16 lg:h-20 lg:w-20">
                   <Image
                     src={service.photo}
                     alt={service.alt}
                     width={96}
                     height={96}
-                    sizes="64px"
+                    sizes="(min-width: 1024px) 80px, 64px"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </span>

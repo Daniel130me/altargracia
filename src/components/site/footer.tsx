@@ -12,7 +12,10 @@ const SERVICES = [
   "Phones & Accessories",
   "Repairs & Maintenance",
   "Digital Marketing",
-  "ICT Training",
+  "Web Design & Development",
+  "Software Development",
+  "UI/UX Design",
+  "ICT Training Across All Areas",
   "General Contracts",
 ];
 
@@ -29,8 +32,9 @@ export function Footer() {
               <span className="text-sage">.</span>
             </p>
             <p className="mt-3 max-w-xs text-sm leading-relaxed">
-              Your one trusted place for everything ICT in Lagos — genuine
-              products, honest advice and support that never disappears.
+              Practical ICT solutions for businesses and individuals —
+              from devices and repairs to web, software, design, marketing and
+              training.
             </p>
             <p className="mt-4 text-xs leading-relaxed text-cream/45">
               {SITE.registration}

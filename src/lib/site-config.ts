@@ -3,7 +3,7 @@ export const SITE = {
   shortName: "Altagracia",
   tagline: "Everything ICT. One Place You Can Trust.",
   description:
-    "Computers, phones, repairs, digital marketing and ICT training — Altagracia Technologies handles the technology side of your home or business in Lagos, Nigeria.",
+    "Computers, phones, repairs, web design and development, software development, UI/UX design, digital marketing and ICT training — practical technology solutions for businesses and individuals.",
   phoneDisplay: "+234 801 234 5678",
   phoneHref: "tel:+2348012345678",
   whatsappHref: "https://wa.me/2348012345678",

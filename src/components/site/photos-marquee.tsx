@@ -5,7 +5,7 @@ import Image from "next/image";
 const MOMENTS = [
   {
     src: "/images/real/hero-main.jpg",
-    label: "Our Lagos showroom",
+    label: "Our showroom",
     alt: "Customers testing laptops inside a bright modern computer showroom",
   },
   {

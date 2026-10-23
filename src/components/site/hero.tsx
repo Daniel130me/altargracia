@@ -8,7 +8,7 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { CornerDownRight, Phone, Star } from "lucide-react";
+import { CornerDownRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Asterisk,
@@ -23,12 +23,23 @@ const TICKER_ITEMS = [
   "Phones & Accessories",
   "Repairs & Maintenance",
   "Digital Marketing",
+  "Web Design & Development",
+  "Software Development",
+  "UI/UX Design",
   "ICT Training",
   "General Contracts",
 ];
 
-const HEADLINE_LINE_1 = ["Everything", "ICT."];
-const HEADLINE_LINE_2 = ["One", "place", "you", "can", "trust."];
+const HEADLINE_WORDS = [
+  "Technology",
+  "made",
+  "easier,",
+  "for",
+  "work",
+  "and",
+  "everyday",
+  "life.",
+];
 
 const wordVariants: Variants = {
   hidden: { y: "110%" },
@@ -150,39 +161,26 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-10">
           {/* Copy */}
           <div>
+            <h1 className="mt-0 font-display text-[clamp(2.7rem,7.4vw,6rem)] font-medium leading-[1.03] tracking-[-0.03em] text-ink lg:text-[clamp(3.5rem,5vw,4.5rem)]">
+              <StaggeredWords words={HEADLINE_WORDS} offset={0} />
+            </h1>
+
             <motion.p
               variants={fadeVariants}
               custom={0}
               initial="hidden"
               animate="show"
-              className="flex items-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping-soft absolute inline-flex h-full w-full rounded-full bg-sage" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-sage" />
-              </span>
-              ICT Company · Lagos, Nigeria
-            </motion.p>
-
-            <h1 className="mt-5 font-display text-[clamp(2.7rem,7.4vw,6rem)] font-medium leading-[1.03] tracking-[-0.03em] text-ink">
-              <StaggeredWords words={HEADLINE_LINE_1} offset={0} />
-              <StaggeredWords words={HEADLINE_LINE_2} offset={2} trustedWord />
-            </h1>
-
-            <motion.p
-              variants={fadeVariants}
-              custom={1}
-              initial="hidden"
-              animate="show"
               className="mt-6 max-w-md text-base leading-relaxed text-ink/60 sm:text-lg"
             >
-              Altagracia is a registered ICT company helping homes and
-              businesses in Lagos buy, fix, promote and learn — without stress.
+              From computers, phones and repairs to web design and development,
+              software development, UI/UX design, digital marketing and training
+              across ICT, we help businesses and individuals find practical
+              technology solutions.
             </motion.p>
 
             <motion.div
               variants={fadeVariants}
-              custom={2}
+              custom={1}
               initial="hidden"
               animate="show"
               className="mt-8 flex flex-wrap items-center gap-3"
@@ -192,9 +190,9 @@ export function Hero() {
                 size="lg"
                 className="h-12 rounded-full bg-ink px-7 text-base font-medium text-cream hover:bg-forest"
               >
-                <a href={SITE.phoneHref}>
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                  Call {SITE.phoneDisplay}
+                <a href="#services">
+                  <CornerDownRight className="h-5 w-5" aria-hidden="true" />
+                  Explore our services
                 </a>
               </Button>
               <Button
@@ -203,12 +201,8 @@ export function Hero() {
                 variant="outline"
                 className="h-12 rounded-full border-ink/25 bg-transparent px-7 text-base font-medium text-ink hover:bg-secondary hover:text-ink"
               >
-                <a
-                  href={SITE.whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Chat on WhatsApp
+                <a href="#contact">
+                  Get in touch
                 </a>
               </Button>
             </motion.div>
@@ -216,7 +210,7 @@ export function Hero() {
             {/* Social proof with real customer photos */}
             <motion.div
               variants={fadeVariants}
-              custom={3}
+              custom={2}
               initial="hidden"
               animate="show"
               className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3"
@@ -247,16 +241,9 @@ export function Hero() {
                   ))}
                 </div>
                 <p className="mt-0.5 text-xs font-medium text-ink/55">
-                  Trusted by 50+ businesses &amp; schools in Lagos
+                  Trusted by 50+ businesses &amp; schools
                 </p>
               </div>
-              <a
-                href="#services"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-ink underline-offset-4 transition-colors hover:text-ink/60 hover:underline"
-              >
-                <CornerDownRight className="h-4 w-4" aria-hidden="true" />
-                Explore our services
-              </a>
             </motion.div>
           </div>
 
@@ -272,7 +259,7 @@ export function Hero() {
                 <div className="overflow-hidden rounded-[2rem] border border-ink/10 shadow-[0_24px_60px_rgba(24,42,32,0.18)] sm:rounded-[2.75rem]">
                   <Image
                     src="/images/real/hero-main.jpg"
-                    alt="Customers working on laptops inside Altagracia's modern computer showroom in Lagos"
+                    alt="Customers working on laptops inside Altagracia's modern computer showroom"
                     width={1600}
                     height={679}
                     priority
