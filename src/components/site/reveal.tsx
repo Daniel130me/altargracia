@@ -1,6 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+  type Variants,
+} from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /** Shared signature easing — fast start, long soft settle. */
@@ -209,5 +217,99 @@ export function MaskWords({
         {words.map((w) => w.text).join(" ")}
       </span>
     </span>
+  );
+}
+
+/* ── Scroll-linked effects ───────────────────────────────────────── */
+
+type ScrollWordsProps = {
+  words: MaskWord[];
+  className?: string;
+  /** Progress start point: element top vs viewport, e.g. ["start 0.9", "start 0.4"]. */
+  offset?: [string, string];
+};
+
+/**
+ * Apple-style scroll-linked text: each word fades up from a faint ghost
+ * to full strength as the user scrolls, staggered across the block.
+ * Progress is tied to scroll position, so scrolling back re-dims the text.
+ */
+export function ScrollWords({ words, className, offset }: ScrollWordsProps) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLParagraphElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: offset ?? ["start 0.92", "start 0.42"],
+  });
+
+  return (
+    <p ref={ref} className={className}>
+      {words.map((word, i) => (
+        <ScrollWord
+          key={`${word.text}-${i}`}
+          progress={scrollYProgress}
+          range={[i / words.length, (i + 1) / words.length]}
+          em={word.em}
+          reduce={reduce}
+        >
+          {word.text}
+        </ScrollWord>
+      ))}
+    </p>
+  );
+}
+
+function ScrollWord({
+  children,
+  progress,
+  range,
+  em,
+  reduce,
+}: {
+  children: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+  em?: boolean;
+  reduce: boolean | null;
+}) {
+  const opacity = useTransform(progress, range, [0.12, 1]);
+
+  return (
+    <span className="mr-[0.28em] inline-block">
+      <motion.span
+        style={reduce ? { opacity: 1 } : { opacity }}
+        className={cn(em && "font-light italic text-sky")}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+}
+
+type ScrollRotateProps = {
+  children: React.ReactNode;
+  className?: string;
+  /** Total rotation (degrees) across the element's journey through the viewport. */
+  deg?: number;
+};
+
+/** Rotates its child continuously as it travels through the viewport. */
+export function ScrollRotate({ children, className, deg = 120 }: ScrollRotateProps) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : deg]);
+
+  return (
+    <motion.div
+      ref={ref}
+      className={cn(className)}
+      style={reduce ? undefined : { rotate }}
+    >
+      {children}
+    </motion.div>
   );
 }

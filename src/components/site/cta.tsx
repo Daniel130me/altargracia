@@ -1,3 +1,12 @@
+"use client";
+
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Asterisk, Mail, Phone } from "lucide-react";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
@@ -18,8 +27,19 @@ const contactOptions = [
 ];
 
 export function Cta() {
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const driftUp = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -70]);
+  const driftDown = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 56]);
+
   return (
     <section
+      ref={sectionRef}
       id="contact"
       className="relative isolate overflow-hidden bg-royal py-24 lg:py-32"
     >
@@ -28,26 +48,44 @@ export function Cta() {
         aria-hidden="true"
         className="bg-dots-white pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_80%_75%_at_50%_45%,black,transparent)]"
       />
-      <div
+      {/* pulsing glow, drifts down with scroll */}
+      <motion.div
+        style={{ y: driftDown }}
         aria-hidden="true"
-        className="animate-pulse-glow absolute -bottom-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"
-      />
-      <Asterisk
+        className="absolute -bottom-40 left-1/2 -z-10"
+      >
+        <div className="animate-pulse-glow size-[42rem] -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
+      </motion.div>
+      {/* spinning asterisks that drift with scroll */}
+      <motion.div
+        style={{ y: driftUp }}
         aria-hidden="true"
-        className="animate-spin-slow absolute left-[6%] top-16 hidden size-14 text-white/25 lg:block"
-      />
-      <Asterisk
+        className="absolute left-[6%] top-16 hidden lg:block"
+      >
+        <Asterisk className="animate-spin-slow size-14 text-white/25" />
+      </motion.div>
+      <motion.div
+        style={{ y: driftDown }}
         aria-hidden="true"
-        className="animate-spin-slow absolute bottom-14 right-[8%] hidden size-20 text-white/25 [animation-direction:reverse] [animation-duration:22s] lg:block"
-      />
-      <div
+        className="absolute bottom-14 right-[8%] hidden lg:block"
+      >
+        <Asterisk className="animate-spin-slow size-20 text-white/25 [animation-direction:reverse] [animation-duration:22s]" />
+      </motion.div>
+      {/* floating rings, drift in opposite directions */}
+      <motion.div
+        style={{ y: driftUp }}
         aria-hidden="true"
-        className="animate-float-slow absolute -right-24 -top-24 size-72 rounded-full border-[22px] border-white/15"
-      />
-      <div
+        className="absolute -right-24 -top-24"
+      >
+        <div className="animate-float-slow size-72 rounded-full border-[22px] border-white/15" />
+      </motion.div>
+      <motion.div
+        style={{ y: driftDown }}
         aria-hidden="true"
-        className="animate-float absolute -left-16 bottom-24 hidden size-40 rounded-full border-[14px] border-white/10 lg:block"
-      />
+        className="absolute -left-16 bottom-24 hidden lg:block"
+      >
+        <div className="animate-float size-40 rounded-full border-[14px] border-white/10" />
+      </motion.div>
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         <Reveal>

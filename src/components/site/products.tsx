@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { CircuitBoard, Monitor, Printer, Smartphone } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
+import { ParallaxImage } from "./parallax-image";
 
 const categories = [
   {
@@ -35,13 +35,13 @@ export function Products() {
           {/* image */}
           <Reveal y={36}>
             <div className="relative">
-              <div className="overflow-hidden rounded-[2rem] rounded-tr-[6rem] rounded-bl-[6rem] shadow-soft">
-                <Image
+              <div className="h-[20rem] overflow-hidden rounded-[2rem] rounded-tr-[6rem] rounded-bl-[6rem] shadow-soft sm:h-[26rem]">
+                <ParallaxImage
                   src="/images/products-desk.png"
                   alt="Modern workspace with laptop, monitor and office technology in cool blue light"
-                  width={1344}
-                  height={768}
-                  className="h-[20rem] w-full object-cover sm:h-[26rem]"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="h-full w-full"
+                  range={34}
                 />
               </div>
               <div className="absolute -bottom-6 left-6 flex max-w-xs items-start gap-3 rounded-2xl border border-haze bg-white p-4 shadow-card sm:left-10">

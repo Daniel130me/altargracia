@@ -40,3 +40,24 @@ Stage Summary:
 - What We Do cards: numbers removed, dark borders removed (both card families).
 - Faint blue dot/line patterns + 3D hero grid floor added across hero, solutions, why-us, work, process, CTA, footer — all very low opacity and masked.
 - Full animation suite from Task 2 verified in browser; console clean; lint clean.
+
+---
+Task ID: 4
+Agent: main (Z.ai)
+Task: Add scroll effects to make the site "a little wonder" — scroll-driven wow moments.
+
+Work Log:
+- NEW scroll-progress.tsx: fixed 3px gradient bar (royal→sky→royal) at top, scaleX tied to useScroll + useSpring, z-[70].
+- reveal.tsx additions: ScrollWords (Apple-style scroll-linked per-word opacity reveal, progress tied to element position in viewport; reduced-motion = static) and ScrollRotate (scroll-linked rotation wrapper).
+- marquee.tsx rewritten as JS-driven velocity marquee: base drift ~1.35%/s, useVelocity(scrollY) spring-smoothed → multiplies speed, REVERSES when scrolling up, adds ±3.5deg skewY lean at speed; pauses on hover; seamless two-half track (fixes old 16px CSS loop seam); reduced-motion = static row.
+- parallax-image.tsx: added `unveil` prop — clip-path curtain reveal (inset 18%/10% round 3rem → 0 round 2rem, 1.15s) on first viewport entry; work.tsx enables it (range 44).
+- Fixed regression: unveil wrapper broke h-full height chain (images collapsed to 88px) — wrapper now h-full w-full; verified img heights restored (813/861px) and naturalWidth loaded.
+- why-us.tsx: quote now ScrollWords ("Your requirements come first. The technology follows." — sky italic emphasis words); big asterisk wrapped in ScrollRotate(160deg) composing with its CSS spin.
+- cta.tsx converted to client: section-scoped scroll parallax — glow + lower ring + reverse asterisk drift down, upper asterisk + top ring drift up (float loops preserved via nesting).
+- hero.tsx: 3D grid floor now drifts +110px down as hero scrolls away (driving-forward feel).
+- products.tsx: image switched to ParallaxImage (range 34) — depth effect in products section.
+- page.tsx: ScrollProgress rendered above Header.
+- Verification: bun run lint clean; console clean; agent-browser checks — progress bar width grows with scroll (429px @3000px depth), marquee transform shows speed-up + skew on scroll (matrix skew 0.0041→0.0499 rad, x advanced), quote words visibly gradient-lit mid-scroll (screenshot), work unveil mid + settled captured, products image 484px parallax track, CTA + mobile 390px OK.
+
+Stage Summary:
+- Site now has 8 distinct scroll-driven effects: progress bar, velocity marquee (speed/reverse/skew), scroll-linked word reveal, image curtain unveil, image parallax (hero/work/products), decor parallax (hero shapes/CTA), scroll rotation, grid floor drift — all reduced-motion safe and spring-smoothed.

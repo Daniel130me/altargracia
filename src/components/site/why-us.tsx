@@ -1,6 +1,12 @@
 import { Asterisk } from "lucide-react";
 import { SectionHeading } from "./section-heading";
-import { Reveal, Stagger, StaggerItem } from "./reveal";
+import {
+  Reveal,
+  ScrollRotate,
+  ScrollWords,
+  Stagger,
+  StaggerItem,
+} from "./reveal";
 
 const pillars = [
   {
@@ -60,10 +66,12 @@ export function WhyUs() {
           </div>
           <div className="flex items-end lg:col-span-6 lg:justify-end">
             <Reveal delay={0.2}>
-              <Asterisk
-                className="animate-spin-slow size-20 text-sky/70 lg:size-28"
-                aria-hidden="true"
-              />
+              <ScrollRotate deg={160}>
+                <Asterisk
+                  className="animate-spin-slow size-20 text-sky/70 lg:size-28"
+                  aria-hidden="true"
+                />
+              </ScrollRotate>
             </Reveal>
           </div>
         </div>
@@ -89,15 +97,18 @@ export function WhyUs() {
           ))}
         </Stagger>
 
-        <Reveal delay={0.15}>
-          <p className="font-display mx-auto mt-16 max-w-3xl text-center text-balance text-2xl leading-snug text-white sm:text-3xl lg:text-4xl">
-            &ldquo;Your requirements come first.{" "}
-            <em className="font-light italic text-sky">
-              The technology follows.
-            </em>
-            &rdquo;
-          </p>
-        </Reveal>
+        <ScrollWords
+          className="font-display mx-auto mt-16 max-w-3xl text-center text-2xl leading-snug text-white sm:text-3xl lg:text-4xl"
+          words={[
+            { text: "\u201CYour" },
+            { text: "requirements" },
+            { text: "come" },
+            { text: "first." },
+            { text: "The", em: true },
+            { text: "technology", em: true },
+            { text: "follows.\u201D", em: true },
+          ]}
+        />
       </div>
     </section>
   );

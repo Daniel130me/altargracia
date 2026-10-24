@@ -34,6 +34,7 @@ export function Hero() {
   const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 48]);
   const circleY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -56]);
   const ringY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 44]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
 
   return (
     <section
@@ -41,13 +42,14 @@ export function Hero() {
       id="home"
       className="relative isolate overflow-hidden bg-white"
     >
-      {/* faint 3D perspective grid floor */}
-      <div
+      {/* faint 3D perspective grid floor — drifts away as you scroll */}
+      <motion.div
+        style={{ y: gridY }}
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 [perspective:900px]"
       >
         <div className="bg-grid-royal absolute inset-0 origin-top opacity-80 [mask-image:linear-gradient(to_top,black_15%,transparent_78%)] [transform:rotateX(58deg)_scale(1.5)]" />
-      </div>
+      </motion.div>
 
       {/* decorative shapes — float loop + scroll parallax */}
       <motion.div
