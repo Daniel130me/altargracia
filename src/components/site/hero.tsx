@@ -39,8 +39,16 @@ export function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative overflow-hidden bg-white"
+      className="relative isolate overflow-hidden bg-white"
     >
+      {/* faint 3D perspective grid floor */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 [perspective:900px]"
+      >
+        <div className="bg-grid-royal absolute inset-0 origin-top opacity-80 [mask-image:linear-gradient(to_top,black_15%,transparent_78%)] [transform:rotateX(58deg)_scale(1.5)]" />
+      </div>
+
       {/* decorative shapes — float loop + scroll parallax */}
       <motion.div
         style={{ y: circleY }}

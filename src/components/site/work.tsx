@@ -26,7 +26,15 @@ const projects = [
 
 export function Work() {
   return (
-    <section id="work" className="bg-white py-24 lg:py-32">
+    <section
+      id="work"
+      className="relative isolate overflow-hidden bg-white py-24 lg:py-32"
+    >
+      {/* faint dot texture on the right half */}
+      <div
+        aria-hidden="true"
+        className="bg-dots-royal pointer-events-none absolute inset-y-0 right-0 -z-10 w-3/5 [mask-image:radial-gradient(ellipse_75%_70%_at_75%_35%,black,transparent)]"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading

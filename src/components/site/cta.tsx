@@ -19,7 +19,15 @@ const contactOptions = [
 
 export function Cta() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-royal py-24 lg:py-32">
+    <section
+      id="contact"
+      className="relative isolate overflow-hidden bg-royal py-24 lg:py-32"
+    >
+      {/* faint white dot texture */}
+      <div
+        aria-hidden="true"
+        className="bg-dots-white pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_80%_75%_at_50%_45%,black,transparent)]"
+      />
       <div
         aria-hidden="true"
         className="animate-pulse-glow absolute -bottom-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"

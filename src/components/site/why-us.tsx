@@ -27,7 +27,20 @@ const pillars = [
 
 export function WhyUs() {
   return (
-    <section className="bg-ink py-24 text-white lg:py-32">
+    <section className="relative isolate overflow-hidden bg-ink py-24 text-white lg:py-32">
+      {/* faint grid + blue depth glows */}
+      <div
+        aria-hidden="true"
+        className="bg-grid-white pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_75%_65%_at_65%_15%,black,transparent)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 right-[5%] -z-10 size-[28rem] rounded-full bg-royal/20 blur-[130px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-32 left-[-8%] -z-10 size-96 rounded-full bg-sky/10 blur-[130px]"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">

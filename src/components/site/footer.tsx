@@ -41,7 +41,12 @@ const contactRows = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-ink text-white">
+    <footer className="relative isolate mt-auto overflow-hidden bg-ink text-white">
+      {/* faint grid texture, strongest at the top */}
+      <div
+        aria-hidden="true"
+        className="bg-grid-white pointer-events-none absolute inset-0 -z-10 opacity-70 [mask-image:linear-gradient(to_bottom,black_5%,transparent_55%)]"
+      />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           {/* brand */}

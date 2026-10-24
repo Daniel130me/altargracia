@@ -22,3 +22,21 @@ Stage Summary:
 - All contrast pairs fixed for accessibility (white text on royal/blue surfaces).
 - 3 images regenerated in blue tones; logo SVG updated in-component.
 - Verified end-to-end in browser at desktop + mobile; lint and runtime clean.
+
+---
+Task ID: 3
+Agent: main (Z.ai)
+Task: User follow-ups — remove service-card numbers, remove dark card borders, add faint background patterns; plus finish pending browser walkthrough from Task 2.
+
+Work Log:
+- solutions.tsx: removed the big ghost numbers (01–05) from "What We Do" cards, deleted the number fields from data (keys now use title), icon circle moved to top-left; card hover now lifts + soft shadow with NO dark border (hover:border-ink removed).
+- audiences.tsx: same dark hover border removed (hover:border-ink → clean lift/shadow).
+- globals.css: added faint pattern utilities — bg-dots-royal / bg-dots-white (24px dot grids at 9–13% alpha), bg-grid-royal / bg-grid-white (54px line grids at 4.5–5% alpha); html { position: relative } to silence framer-motion useScroll static-container dev warning.
+- Applied patterns (each section relative isolate + -z-10 pattern + mask fade): hero 3D perspective grid floor (rotateX 58deg, origin-top, masked), solutions blueprint grid fading from top, why-us white grid + royal/sky blur glows, work right-half dot texture, process bottom dot texture, CTA white dot wash, footer top grid fade. Products/FAQ/Audiences/Intro left clean on purpose.
+- Walkthrough (agent-browser): desktop 1440px — hero word-mask headline + 3D floor OK, marquee mask, solutions cards (no numbers/borders, hover verified no dark ring), audiences stagger, why-us grid+glow, work parallax + dots, process line + dots, FAQ open/close, CTA dots/rings/glow, footer grid. Mobile 390px — hero, menu sheet, sections OK. Back-to-top ring present.
+- Console: zero errors; framer-motion "static container" warning root-caused (scrollingElement is static by default) and fixed via html{position:relative}; verified gone after reload. bun run lint clean.
+
+Stage Summary:
+- What We Do cards: numbers removed, dark borders removed (both card families).
+- Faint blue dot/line patterns + 3D hero grid floor added across hero, solutions, why-us, work, process, CTA, footer — all very low opacity and masked.
+- Full animation suite from Task 2 verified in browser; console clean; lint clean.

@@ -27,7 +27,12 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="bg-mist py-24 lg:py-32">
+    <section className="relative isolate overflow-hidden bg-mist py-24 lg:py-32">
+      {/* faint dot texture rising from the bottom */}
+      <div
+        aria-hidden="true"
+        className="bg-dots-royal pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 [mask-image:linear-gradient(to_top,black_10%,transparent_80%)]"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Our Process"

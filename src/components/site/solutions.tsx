@@ -13,7 +13,6 @@ import { Pill } from "./pill";
 
 const solutions = [
   {
-    number: "01",
     icon: Monitor,
     title: "ICT Equipment & Technology Supply",
     tagline: "Equip your business with the technology it needs.",
@@ -21,7 +20,6 @@ const solutions = [
     link: "Explore ICT Supply",
   },
   {
-    number: "02",
     icon: Code2,
     title: "Software & Digital Solutions",
     tagline: "Build technology around the way your business works.",
@@ -29,7 +27,6 @@ const solutions = [
     link: "Explore Digital Solutions",
   },
   {
-    number: "03",
     icon: Megaphone,
     title: "Digital Marketing & Business Visibility",
     tagline: "Help more people find and connect with your business.",
@@ -37,7 +34,6 @@ const solutions = [
     link: "Explore Digital Marketing",
   },
   {
-    number: "04",
     icon: GraduationCap,
     title: "ICT Training & Capacity Development",
     tagline: "Build the skills your people need to do more.",
@@ -45,7 +41,6 @@ const solutions = [
     link: "Explore ICT Training",
   },
   {
-    number: "05",
     icon: Wrench,
     title: "Technical Support & ICT Maintenance",
     tagline: "Keep your technology working when it matters.",
@@ -56,7 +51,15 @@ const solutions = [
 
 export function Solutions() {
   return (
-    <section id="solutions" className="bg-mist py-24 lg:py-32">
+    <section
+      id="solutions"
+      className="relative isolate overflow-hidden bg-mist py-24 lg:py-32"
+    >
+      {/* faint blueprint grid, fading down from the top */}
+      <div
+        aria-hidden="true"
+        className="bg-grid-royal pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_5%,transparent_65%)]"
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
@@ -75,19 +78,14 @@ export function Solutions() {
         <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {solutions.map((item, index) => (
             <Reveal
-              key={item.number}
+              key={item.title}
               delay={(index % 3) * 0.08}
               className={index === 0 ? "md:col-span-2 lg:col-span-1" : ""}
             >
-              <article className="group flex h-full flex-col rounded-[1.75rem] border border-haze bg-white p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-ink hover:shadow-card sm:p-8">
-                <div className="flex items-start justify-between">
-                  <span className="font-display text-4xl font-medium text-ink/15 transition-colors duration-300 group-hover:text-ink">
-                    {item.number}
-                  </span>
-                  <span className="flex size-11 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white">
-                    <item.icon className="size-5" aria-hidden="true" />
-                  </span>
-                </div>
+              <article className="group flex h-full flex-col rounded-[1.75rem] border border-haze bg-white p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-soft sm:p-8">
+                <span className="flex size-11 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white">
+                  <item.icon className="size-5" aria-hidden="true" />
+                </span>
                 <h3 className="font-display mt-6 text-2xl leading-tight font-medium text-ink">
                   {item.title}
                 </h3>

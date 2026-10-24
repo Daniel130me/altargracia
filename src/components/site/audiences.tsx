@@ -49,7 +49,7 @@ export function Audiences() {
           >
             {audiences.map((item) => (
               <StaggerItem key={item.title} className="h-full">
-                <article className="group h-full rounded-[1.5rem] border border-haze bg-mist p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-ink hover:shadow-card">
+                <article className="group h-full rounded-[1.5rem] border border-haze bg-mist p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-soft">
                   <span className="flex size-12 items-center justify-center rounded-full bg-royal text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-110">
                     <item.icon className="size-5" aria-hidden="true" />
                   </span>
