@@ -20,25 +20,33 @@ const contactOptions = [
 export function Cta() {
   return (
     <section id="contact" className="relative overflow-hidden bg-royal py-24 lg:py-32">
+      <div
+        aria-hidden="true"
+        className="animate-pulse-glow absolute -bottom-40 left-1/2 size-[42rem] -translate-x-1/2 rounded-full bg-white/10 blur-3xl"
+      />
       <Asterisk
         aria-hidden="true"
         className="animate-spin-slow absolute left-[6%] top-16 hidden size-14 text-white/25 lg:block"
       />
       <Asterisk
         aria-hidden="true"
-        className="animate-spin-slow absolute bottom-14 right-[8%] hidden size-20 text-white/25 lg:block"
+        className="animate-spin-slow absolute bottom-14 right-[8%] hidden size-20 text-white/25 [animation-direction:reverse] [animation-duration:22s] lg:block"
       />
       <div
         aria-hidden="true"
-        className="absolute -right-24 -top-24 size-72 rounded-full border-[22px] border-white/15"
+        className="animate-float-slow absolute -right-24 -top-24 size-72 rounded-full border-[22px] border-white/15"
+      />
+      <div
+        aria-hidden="true"
+        className="animate-float absolute -left-16 bottom-24 hidden size-40 rounded-full border-[14px] border-white/10 lg:block"
       />
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
         <Reveal>
           <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white">
-            <span className="size-1.5 rotate-45 bg-white" />
+            <span className="animate-pulse size-1.5 rotate-45 bg-white" />
             Let&rsquo;s Work Together
-            <span className="size-1.5 rotate-45 bg-white" />
+            <span className="animate-pulse size-1.5 rotate-45 bg-white [animation-delay:1s]" />
           </p>
         </Reveal>
 
@@ -74,9 +82,9 @@ export function Cta() {
               <a
                 key={option.label}
                 href={option.href}
-                className="group flex items-center gap-4 rounded-full border border-white/25 bg-white/10 py-3 pl-4 pr-7 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/20"
+                className="group flex items-center gap-4 rounded-full border border-white/25 bg-white/10 py-3 pl-4 pr-7 backdrop-blur-sm transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-white/50 hover:bg-white/20"
               >
-                <span className="flex size-10 items-center justify-center rounded-full bg-white text-royal transition-transform duration-300 group-hover:scale-110">
+                <span className="flex size-10 items-center justify-center rounded-full bg-white text-royal transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-6">
                   <option.icon className="size-4.5" aria-hidden="true" />
                 </span>
                 <span className="text-left">

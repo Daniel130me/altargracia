@@ -21,6 +21,10 @@
 
   --animate-marquee: marquee 36s linear infinite;
   --animate-spin-slow: spin 14s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out 0.8s infinite;
+  --animate-bounce-soft: bounce-soft 2.6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 7s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -28,6 +32,38 @@
     }
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+
+  @keyframes bounce-soft {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(7px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.85;
+      transform: scale(1.07);
     }
   }
 }
@@ -170,5 +206,37 @@
   }
   .text-balance {
     text-wrap: balance;
+  }
+  /* Soft-faded edges for the scrolling marquee */
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+  }
+}
+
+/* Respect users who prefer reduced motion — freeze all decorative loops */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-float,
+  .animate-float-slow,
+  .animate-bounce-soft,
+  .animate-pulse-glow {
+    animation: none;
   }
 }

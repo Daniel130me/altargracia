@@ -1,42 +1,91 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ArrowDown, Asterisk } from "lucide-react";
 import { Pill } from "./pill";
-import { Reveal } from "./reveal";
+import { EASE, MaskWords, Reveal } from "./reveal";
 
 const railWords = ["Corporate ICT", "Digital Services", "Technology Supply"];
 
+const headlineWords = [
+  { text: "Technology" },
+  { text: "solutions" },
+  { text: "that" },
+  { text: "move", em: true },
+  { text: "business", em: true },
+  { text: "forward." },
+];
+
 export function Hero() {
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 48]);
+  const circleY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -56]);
+  const ringY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 44]);
+
   return (
-    <section id="home" className="relative overflow-hidden bg-white">
-      {/* decorative shapes */}
-      <div
+    <section
+      ref={sectionRef}
+      id="home"
+      className="relative overflow-hidden bg-white"
+    >
+      {/* decorative shapes — float loop + scroll parallax */}
+      <motion.div
+        style={{ y: circleY }}
         aria-hidden="true"
-        className="absolute -top-24 right-[8%] size-56 rounded-full bg-royal/80 blur-[2px] sm:size-72"
-      />
-      <div
+        className="absolute -top-24 right-[8%] sm:size-72"
+      >
+        <div className="animate-float size-56 rounded-full bg-royal/80 blur-[2px] sm:size-72" />
+      </motion.div>
+      <motion.div
+        style={{ y: ringY }}
         aria-hidden="true"
-        className="absolute bottom-16 left-[38%] hidden size-24 rounded-full border-[10px] border-ink/5 lg:block"
-      />
-      <Asterisk
+        className="absolute bottom-16 left-[38%] hidden lg:block"
+      >
+        <div className="animate-float-slow size-24 rounded-full border-[10px] border-ink/5" />
+      </motion.div>
+      <motion.div
+        style={{ y: circleY }}
         aria-hidden="true"
-        className="animate-spin-slow absolute left-[45%] top-28 hidden size-10 text-ink/15 lg:block"
-      />
+        className="absolute left-[45%] top-28 hidden lg:block"
+      >
+        <Asterisk className="animate-spin-slow size-10 text-ink/15" />
+      </motion.div>
 
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44">
         <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-8">
           {/* left rail */}
           <div className="hidden lg:col-span-2 lg:block">
             <ul className="space-y-2.5">
-              {railWords.map((word) => (
+              {railWords.map((word, i) => (
                 <li
                   key={word}
                   className="font-display text-lg leading-snug text-ink/70"
                 >
-                  {word}
+                  <Reveal delay={0.35 + i * 0.08} variant="left" y={undefined}>
+                    {word}
+                  </Reveal>
                 </li>
               ))}
             </ul>
-            <ArrowDown className="mt-10 size-6 text-ink/30" aria-hidden="true" />
+            <Reveal delay={0.6} variant="fade" y={undefined}>
+              <ArrowDown
+                className="animate-bounce-soft mt-10 size-6 text-ink/30"
+                aria-hidden="true"
+              />
+            </Reveal>
           </div>
 
           {/* headline + copy + CTAs */}
@@ -48,14 +97,11 @@ export function Hero() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.08}>
-              <h1 className="font-display mt-7 text-balance text-[clamp(2.9rem,6.4vw,5.2rem)] leading-[1.0] font-medium tracking-tight text-ink">
-                Technology solutions that{" "}
-                <em className="font-light italic">move business</em> forward.
-              </h1>
-            </Reveal>
+            <h1 className="font-display mt-7 text-[clamp(2.9rem,6.4vw,5.2rem)] leading-[1.0] font-medium tracking-tight text-ink">
+              <MaskWords words={headlineWords} baseDelay={0.2} step={0.065} />
+            </h1>
 
-            <Reveal delay={0.16}>
+            <Reveal delay={0.55}>
               <p className="mt-8 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
                 We help businesses and organizations meet their technology needs
                 through ICT solutions, equipment supply, digital services and
@@ -67,7 +113,7 @@ export function Hero() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.24}>
+            <Reveal delay={0.68}>
               <div className="mt-10 flex flex-wrap items-center gap-3.5">
                 <Pill href="#solutions" variant="royal">
                   Explore Our Solutions
@@ -81,30 +127,46 @@ export function Hero() {
 
           {/* image */}
           <div className="relative lg:col-span-4">
-            <Reveal delay={0.15} y={40}>
-              <div className="relative overflow-hidden rounded-[2rem] rounded-tl-[6rem] rounded-br-[6rem] shadow-soft">
-                <Image
-                  src="/images/hero-team.jpg"
-                  alt="Business team collaborating around a computer in a modern office"
-                  width={1184}
-                  height={810}
-                  priority
-                  className="h-[22rem] w-full object-cover sm:h-[26rem] lg:h-[30rem]"
-                />
+            <Reveal delay={0.3} y={40}>
+              <div className="relative h-[22rem] overflow-hidden rounded-[2rem] rounded-tl-[6rem] rounded-br-[6rem] shadow-soft sm:h-[26rem] lg:h-[30rem]">
+                <motion.div
+                  className="absolute inset-x-0 -top-12 h-[calc(100%+6rem)]"
+                  style={{ y: imageY }}
+                  initial={
+                    reduce ? { opacity: 0 } : { opacity: 0, scale: 1.12 }
+                  }
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.5, ease: EASE, delay: 0.25 }}
+                >
+                  <Image
+                    src="/images/hero-team.jpg"
+                    alt="Business team collaborating around a computer in a modern office"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover"
+                  />
+                </motion.div>
               </div>
             </Reveal>
           </div>
         </div>
 
         {/* supporting card */}
-        <Reveal delay={0.3}>
-          <div className="mt-12 inline-flex max-w-sm items-center gap-5 rounded-[1.75rem] border border-haze bg-white p-6 shadow-card lg:ml-2">
-            <Asterisk className="size-8 shrink-0 text-ink" aria-hidden="true" />
+        <Reveal delay={0.55}>
+          <div className="mt-12 inline-flex max-w-sm items-center gap-5 rounded-[1.75rem] border border-haze bg-white p-6 shadow-card transition-transform duration-500 ease-out hover:-translate-y-1 hover:shadow-soft lg:ml-2">
+            <Asterisk
+              className="animate-spin-slow size-8 shrink-0 text-ink"
+              aria-hidden="true"
+            />
             <div>
               <p className="font-display text-lg leading-snug text-ink">
                 Technology for businesses. Solutions for progress.
               </p>
-              <span className="mt-2 block h-px w-16 bg-ink/20" aria-hidden="true" />
+              <span
+                className="mt-2 block h-px w-16 bg-ink/20"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </Reveal>

@@ -1,7 +1,7 @@
 import { Building2, GraduationCap, Landmark, Rocket } from "lucide-react";
 import { SectionHeading } from "./section-heading";
 import { Pill } from "./pill";
-import { Reveal } from "./reveal";
+import { Reveal, Stagger, StaggerItem } from "./reveal";
 
 const audiences = [
   {
@@ -43,11 +43,14 @@ export function Audiences() {
             lede="Every organization has its own goals, systems and technology requirements. We work to understand those differences before recommending a solution."
           />
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {audiences.map((item, index) => (
-              <Reveal key={item.title} delay={index * 0.08}>
-                <article className="group h-full rounded-[1.5rem] border border-haze bg-mist p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-ink hover:shadow-card">
-                  <span className="flex size-12 items-center justify-center rounded-full bg-royal text-white transition-transform duration-300 group-hover:scale-110">
+          <Stagger
+            className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            stagger={0.1}
+          >
+            {audiences.map((item) => (
+              <StaggerItem key={item.title} className="h-full">
+                <article className="group h-full rounded-[1.5rem] border border-haze bg-mist p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-ink hover:shadow-card">
+                  <span className="flex size-12 items-center justify-center rounded-full bg-royal text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-110">
                     <item.icon className="size-5" aria-hidden="true" />
                   </span>
                   <h3 className="font-display mt-6 text-xl leading-snug font-medium text-ink">
@@ -57,9 +60,9 @@ export function Audiences() {
                     {item.body}
                   </p>
                 </article>
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
           <Reveal delay={0.12}>
             <div className="mt-12 flex justify-center">

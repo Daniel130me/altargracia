@@ -79,12 +79,12 @@ export function Solutions() {
               delay={(index % 3) * 0.08}
               className={index === 0 ? "md:col-span-2 lg:col-span-1" : ""}
             >
-              <article className="group flex h-full flex-col rounded-[1.75rem] border border-haze bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-ink hover:shadow-card sm:p-8">
+              <article className="group flex h-full flex-col rounded-[1.75rem] border border-haze bg-white p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:border-ink hover:shadow-card sm:p-8">
                 <div className="flex items-start justify-between">
                   <span className="font-display text-4xl font-medium text-ink/15 transition-colors duration-300 group-hover:text-ink">
                     {item.number}
                   </span>
-                  <span className="flex size-11 items-center justify-center rounded-full bg-mist-2 text-ink transition-colors duration-300 group-hover:bg-royal group-hover:text-white">
+                  <span className="flex size-11 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white">
                     <item.icon className="size-5" aria-hidden="true" />
                   </span>
                 </div>
@@ -104,7 +104,10 @@ export function Solutions() {
                   <span className="border-b border-ink/25 pb-0.5 transition-colors group-hover:border-ink/50">
                     {item.link}
                   </span>
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
+                  <ArrowUpRight
+                    className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
                 </Link>
               </article>
             </Reveal>
@@ -114,10 +117,10 @@ export function Solutions() {
           <Reveal delay={0.16}>
             <Link
               href="#contact"
-              className="group flex h-full min-h-[16rem] flex-col justify-between rounded-[1.75rem] bg-ink p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card"
+              className="group flex h-full min-h-[16rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-ink p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-soft"
               aria-label="View all solutions and talk to our team"
             >
-              <span className="flex size-11 items-center justify-center rounded-full bg-royal text-white transition-transform duration-300 group-hover:rotate-45">
+              <span className="flex size-11 items-center justify-center rounded-full bg-royal text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-hover:scale-110">
                 <ArrowUpRight className="size-5" aria-hidden="true" />
               </span>
               <span>

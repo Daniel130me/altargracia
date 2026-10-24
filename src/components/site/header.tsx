@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ChevronDown,
   Code2,
@@ -20,6 +21,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { EASE } from "./reveal";
 import { Logo } from "./logo";
 import { Pill } from "./pill";
 
@@ -60,21 +62,38 @@ const navLinks = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      // Hide when scrolling down past the hero top, reveal instantly on scroll up
+      setHidden(y > lastY && y > 260 && !open && !dropdownOpen);
+      lastY = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open, dropdownOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+    <motion.header
+      initial={reduce ? { opacity: 0 } : { y: -72, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: EASE, delay: 0.05 }}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4"
+    >
       <div
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-500 sm:px-5",
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-5",
+          hidden
+            ? "pointer-events-none -translate-y-[130%] opacity-0"
+            : "translate-y-0 opacity-100",
           scrolled
             ? "border-haze bg-white/90 shadow-card backdrop-blur-xl"
             : "border-transparent bg-white/60 backdrop-blur-md"
@@ -119,10 +138,10 @@ export function Header() {
             </Link>
             <div
               className={cn(
-                "absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3 transition-all duration-300",
+                "absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top",
                 dropdownOpen
-                  ? "visible translate-y-0 opacity-100"
-                  : "invisible -translate-y-1 opacity-0"
+                  ? "visible translate-y-0 scale-100 opacity-100"
+                  : "invisible -translate-y-2 scale-[0.96] opacity-0"
               )}
             >
               <div className="w-[22rem] rounded-3xl border border-haze bg-white p-2 shadow-soft">
@@ -131,9 +150,9 @@ export function Header() {
                     key={item.label}
                     href="#solutions"
                     onClick={() => setDropdownOpen(false)}
-                    className="flex items-start gap-3.5 rounded-2xl px-4 py-3 transition-colors hover:bg-mist"
+                    className="group/item flex items-start gap-3.5 rounded-2xl px-4 py-3 transition-all duration-300 ease-out hover:bg-mist hover:pl-5"
                   >
-                    <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-royal text-white">
+                    <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-royal text-white transition-transform duration-300 group-hover/item:scale-110">
                       <item.icon className="size-4" />
                     </span>
                     <span>
@@ -220,6 +239,6 @@ export function Header() {
           </Sheet>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

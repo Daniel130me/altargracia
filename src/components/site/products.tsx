@@ -69,8 +69,8 @@ export function Products() {
             <ul className="mt-10 divide-y divide-haze border-y border-haze">
               {categories.map((category, index) => (
                 <Reveal key={category.title} delay={index * 0.06}>
-                  <li className="group flex items-center gap-5 py-5 transition-colors">
-                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition-colors duration-300 group-hover:bg-royal group-hover:text-white">
+                  <li className="group flex items-center gap-5 py-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:bg-royal group-hover:text-white">
                       <category.icon className="size-5" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">

@@ -1,6 +1,6 @@
 import { Asterisk } from "lucide-react";
 import { SectionHeading } from "./section-heading";
-import { Reveal } from "./reveal";
+import { Reveal, Stagger, StaggerItem } from "./reveal";
 
 const pillars = [
   {
@@ -55,23 +55,26 @@ export function WhyUs() {
           </div>
         </div>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 sm:grid-cols-2">
-          {pillars.map((pillar, index) => (
-            <Reveal key={pillar.number} delay={index * 0.08} className="h-full">
-              <article className="group h-full bg-ink p-8 transition-colors duration-300 hover:bg-ink-2 sm:p-10">
-                <span className="font-display text-5xl font-medium text-sky">
+        <Stagger
+          className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 sm:grid-cols-2"
+          stagger={0.1}
+        >
+          {pillars.map((pillar) => (
+            <StaggerItem key={pillar.number} className="h-full">
+              <article className="group h-full bg-ink p-8 transition-colors duration-500 hover:bg-ink-2 sm:p-10">
+                <span className="font-display text-5xl font-medium text-sky transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-hover:scale-110">
                   {pillar.number}
                 </span>
                 <h3 className="font-display mt-6 text-2xl leading-snug font-medium text-white">
                   {pillar.title}
                 </h3>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 sm:text-base">
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 transition-colors duration-500 group-hover:text-white/80 sm:text-base">
                   {pillar.body}
                 </p>
               </article>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
         <Reveal delay={0.15}>
           <p className="font-display mx-auto mt-16 max-w-3xl text-center text-balance text-2xl leading-snug text-white sm:text-3xl lg:text-4xl">

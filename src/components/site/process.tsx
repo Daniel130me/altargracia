@@ -1,6 +1,6 @@
 import { SectionHeading } from "./section-heading";
 import { Pill } from "./pill";
-import { Reveal } from "./reveal";
+import { DrawLine, Reveal } from "./reveal";
 
 const steps = [
   {
@@ -42,15 +42,12 @@ export function Process() {
         />
 
         <div className="relative mt-16">
-          <div
-            aria-hidden="true"
-            className="absolute left-0 right-0 top-8 hidden border-t-2 border-dashed border-ink/15 lg:block"
-          />
+          <DrawLine className="absolute left-0 right-0 top-8 hidden origin-left border-t-2 border-dashed border-ink/15 lg:block" />
           <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {steps.map((step, index) => (
               <Reveal key={step.number} delay={index * 0.1}>
                 <li className="group relative">
-                  <span className="relative z-10 flex size-16 items-center justify-center rounded-full border border-haze bg-royal font-display text-xl font-semibold text-white shadow-card transition-transform duration-300 group-hover:-translate-y-1">
+                  <span className="relative z-10 flex size-16 items-center justify-center rounded-full border border-haze bg-royal font-display text-xl font-semibold text-white shadow-card transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1.5 group-hover:bg-ink group-hover:shadow-soft">
                     {step.number}
                   </span>
                   <h3 className="font-display mt-6 text-xl leading-snug font-medium text-ink">

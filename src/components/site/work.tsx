@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { SectionHeading } from "./section-heading";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
+import { ParallaxImage } from "./parallax-image";
 
 const projects = [
   {
@@ -58,14 +58,14 @@ export function Work() {
                 <div
                   className={`relative ${project.aspect} overflow-hidden rounded-[2rem] bg-ink-2 shadow-card`}
                 >
-                  <Image
+                  <ParallaxImage
                     src={project.image}
                     alt={project.alt}
-                    fill
                     sizes="(min-width: 1024px) 40rem, 100vw"
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    className="h-full w-full"
+                    imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                   />
-                  <span className="absolute left-5 top-5 rounded-full bg-ink/85 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-sky backdrop-blur-sm">
+                  <span className="absolute left-5 top-5 rounded-full bg-ink/85 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-sky backdrop-blur-sm transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1">
                     {project.tag}
                   </span>
                 </div>
