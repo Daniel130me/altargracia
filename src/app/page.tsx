@@ -10,6 +10,7 @@ import { Audiences } from "@/components/site/audiences";
 import { WhyUs } from "@/components/site/why-us";
 import { Process } from "@/components/site/process";
 import { Products } from "@/components/site/products";
+import { Testimonials } from "@/components/site/testimonials";
 import { Faq } from "@/components/site/faq";
 import { Cta } from "@/components/site/cta";
 import { Footer } from "@/components/site/footer";
@@ -31,6 +32,7 @@ export default function Home() {
         <WhyUs />
         <Process />
         <Products />
+        <Testimonials />
         <Faq />
         <Cta />
       </main>

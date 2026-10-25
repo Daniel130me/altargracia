@@ -114,3 +114,19 @@ Stage Summary:
 - Site now communicates through 4 real photos of African professionals (hero, intro, process, products), each parallax-framed with the site's rounded aesthetic.
 - "Our Process" upgraded from generic 4-col circles to a scroll-driven vertical timeline with photo, floating card and lighting nodes — a new distinct effect.
 - New dark stats band with spring count-up numbers; "Our Work" section fully removed.
+
+---
+Task ID: 8
+Agent: main (Z.ai)
+Task: Add a testimonials section — three realistic Nigerian testimonials, each with a real photo.
+
+Work Log:
+- Sourced portraits via z-ai image-search (4 query rounds: businesswoman, male founder, educator ×2; 13 candidates downloaded). Visually vetted every candidate with the Read tool: rejected all watermarked stock (Dreamstime/Alamy/123RF bars), event-backdrop and non-African shots. Final picks: man in navy suit at office desk (4016×6016, clean), African female teacher in classroom (1793×1336, clean), two-women-with-laptops photo (right woman cropped, 4080×3301, clean).
+- scripts/process_avatars.py (PIL): ratio-based square crops → 400×400 progressive JPEG q86; Emeka's box refined once (cx .448→.462, cy .300→.325, side .42→.37) after visual check. Output: public/images/testimonial-{emeka,aisha,tomilola}.jpg.
+- NEW testimonials.tsx (server component importing client Reveal/DrawLine): white section between Products and FAQ (both neighbors bg-mist) with faint bg-grid-royal mask-fade + corner royal glow. Header row = SectionHeading ("Client Stories" / "Trusted by businesses, schools and founders across Nigeria.") + 4.9/5 rating chip (stars, "across 250+ client engagements" — ties into Stats band numbers). Cards: 3-col grid (md:2, mobile stack), bg-mist rounded-[2rem] p-8/9, hover lift -translate-y-1.5 + bg-white + shadow-soft (spring ease), royal/10 ghost ldquoglyph → royal/20 on hover, 5 royal Stars, quote text ink/85, DrawLine hairline, footer = 56px avatar (ring-haze → ring-royal/40 on hover) + name font-display + BadgeCheck (aria "Verified client") + role/org line. Per-card Reveal up staggered 0.09s.
+- Personas/copy written realistic & specific to services: Emeka Nwosu (Operations Director, SwiftHaul Logistics — Lagos; 3-depot ICT overhaul, after-sales support), Mrs. Aisha Bello-Abubakar (Administrator, Noble Steps Academy — Kaduna; 40-system computer lab, termly servicing), Tomilola Alabi (Co-founder & CEO, ShopLinc — Yaba, Lagos; POS + inventory delivery on schedule).
+- page.tsx: import + <Testimonials /> between Products and Faq.
+- Verification (agent-browser): desktop 1440×900 + mobile 390×844 screenshots — heading wraps cleanly, rating chip stacks, cards read well; 3 avatar Images all complete with naturalWidth > 0; scrollWidth 1440/390 (no horizontal overflow); zero console/page errors (only standard dev messages); bun run lint clean. Desktop hover left structural-only per known headless (hover:none) limitation.
+
+Stage Summary:
+- New "Client Stories" section: three realistic Nigerian testimonials (Lagos logistics, Kaduna school, Yaba startup — one per site audience) with authentic vetted photos, brand-consistent stars/rating chip tied to the stats band, and the site's reveal/hover animation language.

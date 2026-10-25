@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "smiling Nigerian businesswoman in blazer professional portrait in modern office",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8ec24a975819.jpg",
+      "caption": "Shutterstock promotional page with watermarks, showing smiling colleagues at laptop; text: \"We have great content.\"",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1101px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5738a1496e16.jpg",
+      "caption": "A Shutterstock promotional advertisement featuring a photo of colleagues working together. The image contains a large amount of text information and multiple Shutterstock and Maskot Images watermarks.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/01bae89ce2c4.jpg",
+      "caption": "A smiling businesswoman in a gray suit sits at an office desk with laptop. Contains visible 123RF watermarks, so not suitable for background image.",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "866px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8b7bcc3c229a.jpeg",
+      "caption": "",
+      "source": "Pexels",
+      "original_width": "4080px",
+      "original_height": "3301px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6d4f4d4e7739.jpg",
+      "caption": "A thoughtful businesswoman with curly hair sits at a table with colleagues; Alamy watermarks cover the image.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "956px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8f14b10dfc3c.jpg",
+      "caption": "A smiling young woman with curly hair takes a selfie in a bright office. Contains \"depositphotos\" watermarks and Image ID: 648225498.",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1167px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a9550a31c630.jpeg",
+      "caption": "A Black businessman in a navy suit sits at a desk, focused on his laptop, with a phone nearby. Suitable for background image.",
+      "source": "Pexels",
+      "original_width": "4016px",
+      "original_height": "6016px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/60b98be97533.jpg",
+      "caption": "Smiling businesswoman with arms crossed in a renovated office; Dreamstime watermarks and ID 470944739 text present.",
+      "source": "Dreamstime",
+      "original_width": "1600px",
+      "original_height": "934px"
+    }
+  ]
+}
