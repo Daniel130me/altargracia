@@ -2,6 +2,7 @@ import { Asterisk } from "lucide-react";
 import { Eyebrow } from "./section-heading";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
+import { ParallaxImage } from "./parallax-image";
 
 export function Intro() {
   return (
@@ -57,22 +58,34 @@ export function Intro() {
 
           <div className="lg:col-span-5">
             <Reveal delay={0.16}>
-              <blockquote className="relative rounded-[2rem] border border-haze bg-white p-8 shadow-card sm:p-10">
-                <Asterisk
-                  className="animate-spin-slow absolute right-8 top-8 size-8 text-royal"
-                  aria-hidden="true"
-                />
-                <p className="font-display text-2xl leading-snug text-ink sm:text-[1.7rem]">
-                  &ldquo;We believe technology should make work easier,{" "}
-                  <em className="italic">not more complicated.</em>&rdquo;
-                </p>
-                <footer className="mt-6 flex items-center gap-3">
-                  <span className="h-px w-10 bg-ink/20" aria-hidden="true" />
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-stone">
-                    The Altagracia Belief
-                  </span>
-                </footer>
-              </blockquote>
+              <div className="relative">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] rounded-tr-[4.5rem] shadow-soft">
+                  <ParallaxImage
+                    src="/images/intro-professional.jpg"
+                    alt="African business professional reviewing documents at her desk"
+                    sizes="(min-width: 1024px) 38vw, 100vw"
+                    className="h-full w-full"
+                    range={44}
+                  />
+                </div>
+                {/* belief card overlapping the photo */}
+                <blockquote className="relative z-10 -mt-24 ml-5 mr-5 rounded-[1.5rem] border border-haze bg-white p-7 shadow-card sm:ml-8 sm:mr-8 sm:p-8 lg:ml-6 lg:mr-[-1.25rem]">
+                  <Asterisk
+                    className="animate-spin-slow absolute right-7 top-7 size-7 text-royal"
+                    aria-hidden="true"
+                  />
+                  <p className="font-display text-xl leading-snug text-ink sm:text-[1.45rem]">
+                    &ldquo;We believe technology should make work easier,{" "}
+                    <em className="italic">not more complicated.</em>&rdquo;
+                  </p>
+                  <footer className="mt-5 flex items-center gap-3">
+                    <span className="h-px w-10 bg-ink/20" aria-hidden="true" />
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-stone">
+                      The Altagracia Belief
+                    </span>
+                  </footer>
+                </blockquote>
+              </div>
             </Reveal>
           </div>
         </div>

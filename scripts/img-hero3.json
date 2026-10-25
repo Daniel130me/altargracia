@@ -1,0 +1,61 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "nigerian tech startup team working together with laptops in their office"
+✅ Got 7 images
+{
+  "success": true,
+  "query": "nigerian tech startup team working together with laptops in their office",
+  "count": 7,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3096477738dd.jpg",
+      "caption": "",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1102px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8bff252a1e94.jpg",
+      "caption": "",
+      "source": "WeeTracker",
+      "original_width": "1200px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b10f3501d234.jpg",
+      "caption": "",
+      "source": "The New York Times",
+      "original_width": "1600px",
+      "original_height": "901px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/8610d9522686.jpg",
+      "caption": "",
+      "source": "United Nations Development Programme",
+      "original_width": "1920px",
+      "original_height": "1280px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d5ef3258828b.jpg",
+      "caption": "",
+      "source": "Technext",
+      "original_width": "6154px",
+      "original_height": "2750px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4f78e96592f6.jpeg",
+      "caption": "",
+      "source": "VA Masters",
+      "original_width": "1792px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cdfd2a56fba5.jpg",
+      "caption": "",
+      "source": "Brookings Institution",
+      "original_width": "2022px",
+      "original_height": "1190px"
+    }
+  ]
+}

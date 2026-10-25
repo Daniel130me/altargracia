@@ -94,3 +94,23 @@ Work Log:
 
 Stage Summary:
 - Audiences section now reproduces the reference video: pinned headline + CTA on the left, service rows with icon/arrow circles and drawn dividers scrolling past on the right; per-row scroll entrances; fully responsive (stacked on mobile), reduced-motion safe via Reveal/DrawLine.
+
+---
+Task ID: 7
+Agent: main (Z.ai)
+Task: Process section redesign, African-people photography across the site, remove "Our Work" section, add animated stats band.
+
+Work Log:
+- Removed Work section: dropped import + <Work /> from page.tsx, deleted work.tsx and orphaned images (project-network.png, project-software.png, products-desk.png). No nav anchors referenced #work (grepped).
+- Sourced real photography via z-ai image-search (4 sequential query rounds; visually vetted every candidate with the Read tool, rejected mixed/white-subject and watermarked stock). Final picks: hero = Brookings co-working photo of African professionals (PIL-cropped to exact 0.844 hero-frame ratio, subject centred, ceiling trimmed); intro = Pexels African businesswoman portrait; process = EY photo of two Black developers at monitors; products = Pexels African technician repairing PC hardware. Processed via Pillow (resize to slot width, progressive JPEG q82-84): hero-team-focus.jpg, intro-professional.jpg, process-consultation.jpg, products-service.jpg.
+- Learned Next dev image-optimizer + browser HTTP cache kept serving the OLD hero-team.jpg after file replacement under the same URL — fixed by using fresh filenames per iteration (final: hero-team-focus.jpg); old-name files deleted.
+- process.tsx REWRITTEN (was generic centered heading + 4-col numbered circles): split grid — left col-span-5: left-aligned SectionHeading + parallax/unveil photo with floating "It starts with a conversation." card + royal CTA pill; right col-span-7: vertical timeline with haze track + spring-smoothed scroll-linked gradient fill (useScroll offset start 0.78 → end 0.55, useSpring 100/30) aligned to node centres; NodeBadge nodes light up per-step via whileInView variant propagation (royal disc scale+rotate out behind numeral, numeral ink→white). Client component now.
+- NEW stats.tsx (client): ink band "Altagracia in Numbers" between Intro and Solutions — 10+ Years of Experience, 250+ Clients Supported, 480+ Projects Delivered, 98% Client Satisfaction Rate; per-stat useSpring count-up triggered by useInView (once, -60px), reduced-motion jumps to final; white grid pattern + royal glow matching WhyUs; lg 4-col with white/10 dividers, mobile 2x2.
+- intro.tsx: right column now a 4/5 portrait ParallaxImage (rounded-tr 4.5rem) with the belief blockquote overlapping (-mt-24, lg:mr -1.25rem editorial overhang); quote kept Asterisk spin.
+- products.tsx + hero.tsx: image srcs/alt swapped to the new African-people photos; hero object-[50%_38%] for mobile face-safe crop.
+- Verification (agent-browser 1440x900 + 390x844): work section gone (10 main sections, #work null); count-up completes exactly [10+,250+,480+,98%] (captured mid-flight 479 on desktop, 8/204/410/84 on mobile = spring animating); timeline nodes lit + fill line drawn; hero/intro/process/products photos confirmed visually in screenshots; no horizontal overflow (390=390); console clean; bun run lint clean.
+
+Stage Summary:
+- Site now communicates through 4 real photos of African professionals (hero, intro, process, products), each parallax-framed with the site's rounded aesthetic.
+- "Our Process" upgraded from generic 4-col circles to a scroll-driven vertical timeline with photo, floating card and lighting nodes — a new distinct effect.
+- New dark stats band with spring count-up numbers; "Our Work" section fully removed.

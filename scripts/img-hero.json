@@ -1,0 +1,54 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "african business team collaborating with laptops in a modern office"
+✅ Got 6 images
+{
+  "success": true,
+  "query": "african business team collaborating with laptops in a modern office",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a928f5dfd6cc.jpeg",
+      "caption": "",
+      "source": "Pexels",
+      "original_width": "1125px",
+      "original_height": "750px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1e8b6ae8f5a9.jpg",
+      "caption": "",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1167px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6e9ff026f6c0.jpg",
+      "caption": "",
+      "source": "Northeastern University Graduate Programs",
+      "original_width": "1200px",
+      "original_height": "960px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/003b63cf3cb6.jpg",
+      "caption": "",
+      "source": "SAS",
+      "original_width": "1500px",
+      "original_height": "801px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ee5ec9f854eb.webp",
+      "caption": "",
+      "source": "Salesforce",
+      "original_width": "1024px",
+      "original_height": "1024px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1566ff2cc62b.png",
+      "caption": "",
+      "source": "www.cyversity.org",
+      "original_width": "1404px",
+      "original_height": "790px"
+    }
+  ]
+}

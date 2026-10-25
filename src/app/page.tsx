@@ -4,10 +4,10 @@ import { SmoothScroll } from "@/components/site/smooth-scroll";
 import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Intro } from "@/components/site/intro";
+import { Stats } from "@/components/site/stats";
 import { Solutions } from "@/components/site/solutions";
 import { Audiences } from "@/components/site/audiences";
 import { WhyUs } from "@/components/site/why-us";
-import { Work } from "@/components/site/work";
 import { Process } from "@/components/site/process";
 import { Products } from "@/components/site/products";
 import { Faq } from "@/components/site/faq";
@@ -25,10 +25,10 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Intro />
+        <Stats />
         <Solutions />
         <Audiences />
         <WhyUs />
-        <Work />
         <Process />
         <Products />
         <Faq />

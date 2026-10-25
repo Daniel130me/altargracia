@@ -37,8 +37,8 @@ export function Products() {
             <div className="relative">
               <div className="h-[20rem] overflow-hidden rounded-[2rem] rounded-tr-[6rem] rounded-bl-[6rem] shadow-soft sm:h-[26rem]">
                 <ParallaxImage
-                  src="/images/products-desk.png"
-                  alt="Modern workspace with laptop, monitor and office technology in cool blue light"
+                  src="/images/products-service.jpg"
+                  alt="African ICT technician servicing desktop computer hardware"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-full w-full"
                   range={56}

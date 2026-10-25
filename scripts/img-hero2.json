@@ -1,0 +1,68 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "group of black african business professionals having a meeting in a modern office"
+✅ Got 8 images
+{
+  "success": true,
+  "query": "group of black african business professionals having a meeting in a modern office",
+  "count": 8,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d0571994d786.jpg",
+      "caption": "",
+      "source": "AtkinsRéalis",
+      "original_width": "1600px",
+      "original_height": "511px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/72f5786eb3ee.jpg",
+      "caption": "",
+      "source": "afresource.africa",
+      "original_width": "928px",
+      "original_height": "1152px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cfb69d5ce538.jpg",
+      "caption": "",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "957px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/86149906f3a3.webp",
+      "caption": "",
+      "source": "WeWork",
+      "original_width": "1223px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e47e6d8a3244.jpg",
+      "caption": "",
+      "source": "Acxiom",
+      "original_width": "2560px",
+      "original_height": "1707px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/59f117b27e60.webp",
+      "caption": "",
+      "source": "Ascentium",
+      "original_width": "1168px",
+      "original_height": "728px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/eb1c91784f91.jpg",
+      "caption": "",
+      "source": "Cru",
+      "original_width": "1280px",
+      "original_height": "854px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/91df821b2255.jpg",
+      "caption": "",
+      "source": "The New York Times",
+      "original_width": "1800px",
+      "original_height": "3199px"
+    }
+  ]
+}

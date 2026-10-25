@@ -155,12 +155,12 @@ export function Hero() {
                   transition={{ duration: 1.5, ease: EASE, delay: 0.25 }}
                 >
                   <Image
-                    src="/images/hero-team.jpg"
-                    alt="Business team collaborating around a computer in a modern office"
+                    src="/images/hero-team-focus.jpg"
+                    alt="African business professionals collaborating on laptops in a modern office"
                     fill
                     priority
                     sizes="(min-width: 1024px) 33vw, 100vw"
-                    className="object-cover"
+                    className="object-cover object-[50%_38%]"
                   />
                 </motion.div>
               </div>

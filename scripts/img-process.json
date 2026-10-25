@@ -1,0 +1,54 @@
+🚀 Initializing Z-AI SDK...
+🔎 Searching images: "african it consultant advising a client in front of a computer"
+✅ Got 6 images
+{
+  "success": true,
+  "query": "african it consultant advising a client in front of a computer",
+  "count": 6,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7c9a1a393dd3.jpg",
+      "caption": "",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "925px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/855bf0f99622.webp",
+      "caption": "",
+      "source": "Nexford University",
+      "original_width": "6420px",
+      "original_height": "3569px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a75923404e6e.jpg",
+      "caption": "",
+      "source": "EY",
+      "original_width": "2048px",
+      "original_height": "1365px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f6a5058eb301.webp",
+      "caption": "",
+      "source": "University of Roehampton London Online",
+      "original_width": "1600px",
+      "original_height": "900px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/0d29d4388df9.jpg",
+      "caption": "",
+      "source": "DepositPhotos",
+      "original_width": "1600px",
+      "original_height": "1129px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5471079800de.jpg",
+      "caption": "",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "961px"
+    }
+  ]
+}
