@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "smiling African store staff handing over boxed laptop computer to customer in shop",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c533127b5a07.jpg",
+      "caption": "A shop assistant gives a paper bag to a customer. The image contains multiple Alamy watermarks and text 4650.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "947px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cce7c467ca08.jpg",
+      "caption": "Two happy young girls embracing, one wearing a shirt with the word \"joyful\". Suitable for background image.",
+      "source": "Samaritan's Purse",
+      "original_width": "1200px",
+      "original_height": "800px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/93f9d4cb4574.jpg",
+      "caption": "Smiling man with headset on pink background surrounded by business icons (charts, folder, gear, wrench). Suitable for background image.",
+      "source": "Salesforce",
+      "original_width": "1680px",
+      "original_height": "1120px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/46f247147272.jpg",
+      "caption": "E-commerce collage promoting Powkey S99 portable power station with \"Best Seller\" and \"Limited time deal\" banners.",
+      "source": "eBay",
+      "original_width": "1024px",
+      "original_height": "1152px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/33e3cae250ee.jpg",
+      "caption": "Person on video call via laptop. Text: screen share, participants, chat, record, hang up. Suitable for background image.",
+      "source": "Reward Gateway",
+      "original_width": "2000px",
+      "original_height": "1402px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/9084b3ef48ac.jpg",
+      "caption": "A three-panel Cuyana brand photoshoot showing women with leather tote bags; text \"CUYANA\" appears.",
+      "source": "Cuyana",
+      "original_width": "1080px",
+      "original_height": "1920px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3ab7d8ff0b37.png",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1080px",
+      "original_height": "1080px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/51935f2143e5.png",
+      "caption": "A diver in a black wetsuit stands in murky water holding a barnacle-covered wooden artifact; partial cut-off caption text present.",
+      "source": "Lagniappe Mobile",
+      "original_width": "1200px",
+      "original_height": "900px"
+    }
+  ]
+}

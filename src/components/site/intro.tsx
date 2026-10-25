@@ -49,7 +49,7 @@ export function Intro() {
             </Reveal>
             <Reveal delay={0.1}>
               <div className="mt-9">
-                <Pill href="#contact" variant="ink">
+                <Pill href="/about" variant="ink">
                   Get to Know Us
                 </Pill>
               </div>

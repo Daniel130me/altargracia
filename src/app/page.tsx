@@ -1,6 +1,3 @@
-import { Header } from "@/components/site/header";
-import { ScrollProgress } from "@/components/site/scroll-progress";
-import { SmoothScroll } from "@/components/site/smooth-scroll";
 import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Intro } from "@/components/site/intro";
@@ -13,31 +10,22 @@ import { Products } from "@/components/site/products";
 import { Testimonials } from "@/components/site/testimonials";
 import { Faq } from "@/components/site/faq";
 import { Cta } from "@/components/site/cta";
-import { Footer } from "@/components/site/footer";
-import { BackToTop } from "@/components/site/back-to-top";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-ink">
-      <SmoothScroll />
-      <ScrollProgress />
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <Marquee />
-        <Intro />
-        <Stats />
-        <Solutions />
-        <Audiences />
-        <WhyUs />
-        <Process />
-        <Products />
-        <Testimonials />
-        <Faq />
-        <Cta />
-      </main>
-      <Footer />
-      <BackToTop />
-    </div>
+    <main className="flex-1">
+      <Hero />
+      <Marquee />
+      <Intro />
+      <Stats />
+      <Solutions />
+      <Audiences />
+      <WhyUs />
+      <Process />
+      <Products />
+      <Testimonials />
+      <Faq />
+      <Cta />
+    </main>
   );
 }

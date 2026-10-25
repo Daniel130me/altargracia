@@ -88,10 +88,10 @@ export function Products() {
 
             <Reveal delay={0.2}>
               <div className="mt-9 flex flex-wrap gap-3.5">
-                <Pill href="#contact" variant="ink">
+                <Pill href="/procurement" variant="ink">
                   Explore Products & Supply
                 </Pill>
-                <Pill href="#contact" variant="outline">
+                <Pill href="/contact" variant="outline">
                   Request Product Availability
                 </Pill>
               </div>

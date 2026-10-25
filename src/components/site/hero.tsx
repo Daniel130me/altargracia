@@ -134,7 +134,7 @@ export function Hero() {
                 <Pill href="#solutions" variant="royal">
                   Explore Our Solutions
                 </Pill>
-                <Pill href="#contact" variant="outline">
+                <Pill href="/contact" variant="outline">
                   Discuss Your Requirements
                 </Pill>
               </div>

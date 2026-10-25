@@ -62,7 +62,7 @@ export function Faq() {
                 our team directly — we&rsquo;re happy to help.
               </p>
               <div className="mt-8">
-                <Pill href="#contact" variant="ink">
+                <Pill href="/contact" variant="ink">
                   Ask a Question
                 </Pill>
               </div>

@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { SmoothScroll } from "@/components/site/smooth-scroll";
+import { ScrollProgress } from "@/components/site/scroll-progress";
+import { Header } from "@/components/site/header";
+import { Footer } from "@/components/site/footer";
+import { BackToTop } from "@/components/site/back-to-top";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -44,9 +49,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${fraunces.variable} ${inter.variable}`}>
       <body className="antialiased bg-background text-foreground font-sans">
-        {children}
+        <SmoothScroll />
+        <ScrollProgress />
+        <Header />
+        <div className="flex min-h-screen flex-col"> 
+          {children}
+          <Footer />
+          <BackToTop />
+        </div>
         <Toaster />
       </body>
     </html>

@@ -52,7 +52,7 @@ export function Audiences() {
               </Reveal>
               <Reveal delay={0.24}>
                 <div className="mt-9">
-                  <Pill href="#contact" variant="ink">
+                  <Pill href="/contact" variant="ink">
                     Talk to Us About Your Organization
                   </Pill>
                 </div>

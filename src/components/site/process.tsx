@@ -108,7 +108,7 @@ export function Process() {
 
             <Reveal delay={0.28}>
               <div className="mt-16 lg:mt-16">
-                <Pill href="#contact" variant="royal">
+                <Pill href="/contact" variant="royal">
                   Start a Conversation
                 </Pill>
               </div>

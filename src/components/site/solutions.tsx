@@ -29,6 +29,7 @@ const solutions = [
     tagline: "Equip your business with the technology it needs.",
     body: "Computers, laptops, office equipment, accessories and other ICT products for businesses, schools and organizations. Whether you need equipment for a new office, an upgrade or a larger procurement requirement, tell us what you're looking for.",
     link: "Explore ICT Supply",
+    href: "/procurement",
   },
   {
     icon: Code2,
@@ -36,6 +37,7 @@ const solutions = [
     tagline: "Build technology around the way your business works.",
     body: "From professional websites and web applications to custom software and user experience design, we help businesses develop digital solutions that address their needs — with a focus on practical functionality and ease of use.",
     link: "Explore Digital Solutions",
+    href: "/digital-solutions",
   },
   {
     icon: Megaphone,
@@ -43,6 +45,7 @@ const solutions = [
     tagline: "Help more people find and connect with your business.",
     body: "Having a great product or service is only part of running a successful business — people also need to know you exist. We help businesses improve their online presence, connect with relevant audiences and communicate their value.",
     link: "Explore Digital Marketing",
+    href: "/digital-marketing",
   },
   {
     icon: GraduationCap,
@@ -50,6 +53,7 @@ const solutions = [
     tagline: "Build the skills your people need to do more.",
     body: "Technology becomes more valuable when people know how to use it effectively. We provide practical ICT training opportunities for individuals, employees and teams looking to build useful digital skills.",
     link: "Explore ICT Training",
+    href: "/training",
   },
   {
     icon: Wrench,
@@ -57,6 +61,7 @@ const solutions = [
     tagline: "Keep your technology working when it matters.",
     body: "Technology problems can interrupt important work. From device repairs and maintenance to technical assistance, our ICT support services help customers address technology challenges and keep their equipment in good working condition.",
     link: "Explore ICT Support",
+    href: "/support",
   },
 ];
 
@@ -120,7 +125,7 @@ export function Solutions() {
 
         <Reveal delay={0.1}>
           <div className="mt-12 flex justify-center">
-            <Pill href="#contact" variant="ink">
+            <Pill href="/services" variant="ink">
               View All Solutions
             </Pill>
           </div>
@@ -199,7 +204,7 @@ function ServiceCardBody({
         </p>
         {/* text link — small screens only (desktop gets the round action) */}
         <Link
-          href="#contact"
+          href={item.href}
           className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-royal lg:hidden"
         >
           <span className="border-b border-ink/25 pb-0.5">{item.link}</span>
@@ -208,7 +213,7 @@ function ServiceCardBody({
       </div>
 
       <Link
-        href="#contact"
+        href={item.href}
         aria-label={item.link}
         className="hidden size-16 shrink-0 items-center justify-center rounded-full border border-haze text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-royal group-hover:bg-royal group-hover:text-white group-hover:shadow-card lg:flex"
       >
@@ -244,7 +249,7 @@ function CtaCardBody() {
         </div>
       </div>
       <Link
-        href="#contact"
+        href="/contact"
         className="relative inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-sky transition-colors hover:text-white lg:self-center"
       >
         <span className="border-b border-sky/40 pb-0.5">Talk to Our Team</span>

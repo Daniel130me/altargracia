@@ -1,41 +1,35 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { Logo } from "./logo";
+import { SERVICES, SITE } from "@/lib/site";
 
 const quickLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Business Solutions", href: "#solutions" },
-  { label: "Products & Supply", href: "#products" },
-  { label: "About Us", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Our Solutions", href: "/services" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const solutionLinks = [
-  { label: "ICT Equipment & Supply", href: "#solutions" },
-  { label: "Software & Digital Solutions", href: "#solutions" },
-  { label: "Digital Marketing", href: "#solutions" },
-  { label: "ICT Training", href: "#solutions" },
-  { label: "Technical Support", href: "#solutions" },
-];
+const solutionLinks = SERVICES.map((s) => ({ label: s.short, href: s.href }));
 
 const contactRows = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+234 800 000 0000",
-    href: "tel:+2348000000000",
+    value: SITE.phone.label,
+    href: SITE.phone.href,
   },
   {
     icon: Mail,
     label: "Email",
-    value: "hello@altagracia.tech",
-    href: "mailto:hello@altagracia.tech",
+    value: SITE.email.label,
+    href: SITE.email.href,
   },
   {
     icon: MapPin,
     label: "Office",
-    value: "Lagos, Nigeria",
-    href: "#contact",
+    value: SITE.location,
+    href: "/contact",
   },
 ];
 
@@ -134,13 +128,13 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-7 text-xs text-white/45 sm:px-6 md:flex-row lg:px-8">
           <p>© 2026 Altagracia Technologies. All rights reserved.</p>
           <p className="flex items-center gap-5">
-            <Link href="#home" className="transition-colors hover:text-sky">
+            <Link href="/contact" className="transition-colors hover:text-sky">
               Privacy Policy
             </Link>
             <span aria-hidden="true" className="text-white/25">
               |
             </span>
-            <Link href="#home" className="transition-colors hover:text-sky">
+            <Link href="/contact" className="transition-colors hover:text-sky">
               Terms &amp; Conditions
             </Link>
           </p>

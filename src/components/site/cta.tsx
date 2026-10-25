@@ -113,10 +113,10 @@ export function Cta() {
 
         <Reveal delay={0.24}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
-            <Pill href="#contact" variant="ink">
+            <Pill href="/contact" variant="ink">
               Request a Quote
             </Pill>
-            <Pill href="#contact" variant="white">
+            <Pill href="/contact" variant="white">
               Talk to Our Team
             </Pill>
           </div>

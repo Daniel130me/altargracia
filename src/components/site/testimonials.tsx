@@ -42,7 +42,7 @@ function Stars() {
 
 export function Testimonials() {
   return (
-    <section className="relative isolate overflow-hidden bg-white py-24 lg:py-32">
+    <section id="testimonials" className="relative isolate overflow-hidden bg-white py-24 lg:py-32">
       {/* faint texture + corner glow, matching the Why-Us treatment */}
       <div
         aria-hidden="true"

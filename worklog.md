@@ -130,3 +130,24 @@ Work Log:
 
 Stage Summary:
 - New "Client Stories" section: three realistic Nigerian testimonials (Lagos logistics, Kaduna school, Yaba startup — one per site audience) with authentic vetted photos, brand-consistent stars/rating chip tied to the stats band, and the site's reveal/hover animation language.
+
+---
+Task ID: 9
+Agent: main (Z.ai)
+Task: Build the full multi-page site (8 new pages) communicating competence, trust, reliability — per user's detailed brand/SEO/content guidelines.
+
+Work Log:
+- Defined page set + SEO titles/descriptions: /about, /services (overview), /procurement, /digital-solutions, /digital-marketing, /training, /support, /contact — each with unique metadata, one primary topic, clear headings, natural keywords, conversion language.
+- NEW src/lib/site.tsx: single source of truth — SITE contact facts, SERVICES (5 lines with exact brand terminology), TESTIMONIALS, NUMBERS.
+- Globalized chrome: SmoothScroll/ScrollProgress/Header/Footer/BackToTop moved from page.tsx into root layout (all pages share them); page.tsx now only composes home sections; html[data-scroll-behavior=smooth] added to silence Next route-transition warning.
+- Header rewritten: real routes (/, /services, /about, /contact), Solutions dropdown now links the 5 service pages + "All Solutions Overview", usePathname active-link highlighting (bg-mist), Request a Quote → /contact; mobile sheet = 4 main links + services sub-list + CTA. Footer: quick links + 5 service links all real routes.
+- Homepage internal links rewired: solutions deck cards → service pages, "View All Solutions" → /services, products → /procurement + /contact, intro "Get to Know Us" → /about, audiences/process/faq/cta/hero #contact → /contact. #testimonials id added for about-page cross-link.
+- Shared primitives: page-hero.tsx (fixed-header clearance, grid fade, optional ParallaxImage frame tl/tr), cta-band.tsx (royal band, Request a Quotation + call chips, response note), quote-strip.tsx (ink card single-testimonial evidence per service page), mini-faq.tsx (page-specific accordions), service-blocks.tsx (FeatureGrid/StepsRow/CheckList/RelatedServices cross-links).
+- stats.tsx: CountUp extracted/exported (reused on /about with ink styling, same spring count-up).
+- Images: image-search rounds for training/procurement/marketing — training succeeded (real Nigerian adult computer-training classroom, cropped to 16/11 excluding brand banners + odd on-screen graphic); procurement/marketing searches returned only ads/watermarks/non-African shots after 3 query rounds each → generated via z-ai image CLI (photorealistic Nigerian subjects, 1344x768, center-cropped 16/11) consistent with site's existing generated photos. Outputs: training-session.jpg, procurement-supply.jpg, marketing-team.jpg (1400/1117px progressive JPEGs q84).
+- Pages follow the user's content rules: short confident headlines (reusing their good examples verbatim where fitting), 1–3-sentence paragraphs, consistent terminology (ICT Solutions / ICT Equipment & Procurement / Digital Solutions / Professional ICT Training / Request a Quotation), honest availability note ("Products and availability are subject to confirmation"), no unconfirmed capabilities, CAC registration chip repeated as trust evidence, per-page relevant testimonial (Emeka→procurement/support, Aisha→training, Tomilola→digital solutions/marketing), page-specific FAQs addressing common questions, RelatedServices cross-links, CtaBand on every page.
+- /contact: EnquiryForm client component (name/email/phone/organization/service select/message, inline validation errors, loading/success/error states, "Send Another Enquiry" reset) → POST /api/enquiries (zod-validated) → Prisma Enquiry model (schema updated, db push done). Info column: contact cards, "Help Us Help You" checklist, response-time note, CAC chip.
+- Verification: all 9 routes 200; bun run lint clean; agent-browser walkthrough 1440×900 — contact form filled+submitted END-TO-END (row verified in SQLite, then deleted), success state + reset verified; active nav states; dropdown link navigates to /procurement; homepage hero intact after chrome move; about numbers count-up; screenshots of about/services/procurement/training/marketing/contact all clean; mobile 390×844 — menu sheet with services sub-list, no horizontal overflow (390); zero console/page errors.
+
+Stage Summary:
+- Site is now a full 9-page website (home + 8) sharing one chrome, one data source and one animation language; every page targets a distinct search intent, ends in a clear Request-a-Quotation path, and the quotation form actually stores enquiries in the database.

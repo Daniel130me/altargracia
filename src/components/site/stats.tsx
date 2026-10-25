@@ -16,7 +16,17 @@ const stats = [
 ];
 
 /** Counts from 0 to `value` with spring easing when scrolled into view. */
-function StatNumber({ value, suffix }: { value: number; suffix: string }) {
+export function CountUp({
+  value,
+  suffix,
+  valueClassName = "text-white",
+  suffixClassName = "text-sky",
+}: {
+  value: number;
+  suffix: string;
+  valueClassName?: string;
+  suffixClassName?: string;
+}) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -39,11 +49,17 @@ function StatNumber({ value, suffix }: { value: number; suffix: string }) {
   }, [spring]);
 
   return (
-    <p className="font-display text-5xl font-medium tracking-tight text-white tabular-nums sm:text-6xl lg:text-[4.25rem]">
+    <p
+      className={`font-display text-5xl font-medium tracking-tight tabular-nums sm:text-6xl lg:text-[4.25rem] ${valueClassName}`}
+    >
       <span ref={ref}>0</span>
-      <span className="text-sky">{suffix}</span>
+      <span className={suffixClassName}>{suffix}</span>
     </p>
   );
+}
+
+function StatNumber({ value, suffix }: { value: number; suffix: string }) {
+  return <CountUp value={value} suffix={suffix} />;
 }
 
 export function Stats() {

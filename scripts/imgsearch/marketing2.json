@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "smiling young African man working on laptop in bright modern office creating content",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 8,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/49a22eeb4ce9.jpg",
+      "caption": "A man in a white shirt talks on a phone at a laptop in a bright office. Contains visible watermarks (123RF), so not suitable for background image.",
+      "source": "123RF",
+      "original_width": "1300px",
+      "original_height": "866px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cd481350865c.jpg",
+      "caption": "Diverse office colleagues laughing together while working at a computer, with visible stock photo watermarks throughout.",
+      "source": "YouWorkForThem",
+      "original_width": "1184px",
+      "original_height": "789px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e9cb2e12a1a3.jpg",
+      "caption": "A smiling bearded man in a denim shirt talks on his phone at a home office desk with laptop, notebooks, pens, and documents; watermarked.",
+      "source": "YouWorkForThem",
+      "original_width": "1184px",
+      "original_height": "789px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/33663cc75307.jpg",
+      "caption": "Office colleagues smiling taking a selfie with smartphone while a man poses with peace sign behind; contains Shutterstock watermarks.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1093px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ff72d76a2739.jpg",
+      "caption": "Four Asian colleagues collaborate around a computer in a bright modern office with large windows; high clarity, no watermark, suitable for background image",
+      "source": "EY",
+      "original_width": "2048px",
+      "original_height": "1365px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2e05f43bddbb.jpg",
+      "caption": "Two men in professional attire discuss a blank paper before a window. Suitable for background image.",
+      "source": "benpor.com",
+      "original_width": "1800px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a445e5f0ddb6.jpg",
+      "caption": "A hand uses a laptop trackpad displaying a blurred photo gallery grid on a wooden desk; no watermark, high visual quality, suitable for background image.",
+      "source": "Picjumbo",
+      "original_width": "2000px",
+      "original_height": "3000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/ca15b7aea90e.jpg",
+      "caption": "A smiling Black man in a dark suit and tie outdoors, warm golden sunset bokeh background, sharp and clear. Suitable for background image.",
+      "source": "Picjumbo",
+      "original_width": "2210px",
+      "original_height": "1473px"
+    }
+  ]
+}

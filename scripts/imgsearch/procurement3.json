@@ -1,0 +1,65 @@
+{
+  "success": true,
+  "query": "African IT technician unpacking new laptop computer boxes in an office",
+  "count": 8,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bbb3e33a7992.jpg",
+      "caption": "Shutterstock promotional webpage with watermarks and logos, text: \"We have great content\", \"Sign up and get started today!\", contact number.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "892px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6b3fe1154a89.png",
+      "caption": "A silver HP Chromebook laptop lies closed on a red table beside a denim bucket hat.",
+      "source": "HP",
+      "original_width": "1400px",
+      "original_height": "574px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b9a58835ccc2.jpg",
+      "caption": "A laptop with two attached portable side monitors displaying a starry sky, on a white background. Suitable for background image.",
+      "source": "invzi",
+      "original_width": "1254px",
+      "original_height": "1254px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d8b0e9f777de.png",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b3d5558e2b29.jpg",
+      "caption": "Sage-green patterned pegboard with keyboard, headphones, Xbox controller organizing a white desk workspace. Contains watermark \"WWW.DESKNEKO.COM\" and DESKNEKO logo; not suitable as background image.",
+      "source": "Etsy",
+      "original_width": "2500px",
+      "original_height": "2500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/822b7d5b142f.jpg",
+      "caption": "Pink MUNBYN digital postal scale with blue LCD display, showing \"01 oz\" and \"Max:30KG/66LB d=1G/0.1OZ\", buttons \"MODE\" \"PCS\", plus adapter, batteries, and measuring tape; product photo, no watermark, high clarity, suitable for background image",
+      "source": "munbyn",
+      "original_width": "1500px",
+      "original_height": "1500px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6dc2f88387e9.webp",
+      "caption": "Home garage golf simulator setup: projector, black enclosure, white impact screen showing golf course, green turf mat, laptop, launch monitor.",
+      "source": "GolfBays",
+      "original_width": "1600px",
+      "original_height": "893px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/b9a86202f02d.webp",
+      "caption": "Flat illustration of an open organized tech bag containing laptop, cables, notebook, earbuds, glasses, keys, wallet, and pens.",
+      "source": "Gustav Concept",
+      "original_width": "1536px",
+      "original_height": "1024px"
+    }
+  ]
+}
