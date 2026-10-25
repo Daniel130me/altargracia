@@ -79,3 +79,18 @@ Stage Summary:
 - Site now has Lenis buttery wheel scrolling (native touch, a11y-safe, modal-aware) + all anchors/back-to-top on the same eased curve.
 - "What We Do" is a professional sticky stacking deck: cards pin at stepped tops, incoming cards slide over, covered cards scale back + dim, deck assembles, holds, exits as one unit.
 - Parallax amplified across hero (shapes/image/floor/content fade), work/products images, why-us glows, CTA decor — all spring-smoothed and reduced-motion safe.
+
+---
+Task ID: 6
+Agent: main (Z.ai)
+Task: Apply reference-video effect to "Built Around Your Business" (Audiences) section — pinned-left headline with service rows scrolling past.
+
+Work Log:
+- Analyzed upload/20261025-0658-26.9893886.mp4 (3.13s, 94 frames): frame-by-frame comparison shows left headline column pins (sticky) while a right column of service rows (line icon + title + description + circular arrow button, thin dividers between rows) scrolls past 1:1; pinned column releases at section end. z-ai vision SDK + ffmpeg frame extraction used for analysis.
+- audiences.tsx REWRITTEN from centered heading + 4-col card grid to two-column grid lg:grid-cols-[2fr_3fr]: LEFT self-start lg:sticky lg:top-28 (eyebrow, display headline with italic em, lede, ink CTA pill — all Reveals, CTA now always visible while scrolling); RIGHT 4 full-width rows replacing cards: grid-cols-[auto_1fr_auto] items-center, icon circle mist-2→royal hover (rotate-6/scale-110 spring ease), font-display title + stone body, circular arrow button mist-2→royal hover with arrow nudge.
+- Dividers: DrawLine (scaleX draw-in) between rows + closing divider after last row — matches video's thin 1px separators; per-row Reveal (up, 0.05s cascade) so each row enters as IT arrives during scroll (Stagger container trigger replaced — better for the scrolling-past pattern).
+- Mobile: sticky disabled (lg only), rows stack under intro; verified no horizontal overflow (390px scrollWidth = 390).
+- Verification (agent-browser 1440x900): sticky div pins at exactly 112px (headline visual top 156 = 112 + eyebrow offset) — page +150px scroll left headline static while row moved 150px; releases at section end (sticky top -197 at scrollY 5950, exits with section); hover verified structurally (article matches :hover true; .group-hover:bg-royal rules compiled under @media(hover:hover) — headless env reports hover:none, same known limitation as Task 5, works on real devices); console clean; bun run lint clean.
+
+Stage Summary:
+- Audiences section now reproduces the reference video: pinned headline + CTA on the left, service rows with icon/arrow circles and drawn dividers scrolling past on the right; per-row scroll entrances; fully responsive (stacked on mobile), reduced-motion safe via Reveal/DrawLine.
