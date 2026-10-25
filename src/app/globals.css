@@ -257,6 +257,33 @@
   }
 }
 
+/* ── Lenis smooth scrolling (classes are toggled on <html> by the library) ── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ── Sticky card stack ("What We Do") ──────────────────────────────
+   Each card pins a step lower than the one before, so the top edge of
+   every card beneath peeks out — a subtle deck. Responsive via var. */
+.stack-item {
+  top: calc(4.75rem + var(--stack-i, 0) * 0.85rem);
+}
+@media (min-width: 1024px) {
+  .stack-item {
+    top: calc(5.5rem + var(--stack-i, 0) * 1.5rem);
+  }
+}
+
 /* Respect users who prefer reduced motion — freeze all decorative loops */
 @media (prefers-reduced-motion: reduce) {
   html {

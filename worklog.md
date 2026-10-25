@@ -61,3 +61,21 @@ Work Log:
 
 Stage Summary:
 - Site now has 8 distinct scroll-driven effects: progress bar, velocity marquee (speed/reverse/skew), scroll-linked word reveal, image curtain unveil, image parallax (hero/work/products), decor parallax (hero shapes/CTA), scroll rotation, grid floor drift — all reduced-motion safe and spring-smoothed.
+
+---
+Task ID: 5
+Agent: main (Z.ai)
+Task: Premium scroll experience — sticky stacking cards, Lenis smooth-scroll feel, stronger parallax ("all of it but used professionally").
+
+Work Log:
+- Installed lenis@1.3.27. NEW smooth-scroll.tsx: window-level Lenis (lerp 0.11, native touch via syncTouch:false, skipped under reduced motion), raf loop, capture-phase anchor interception (preventDefault + stopPropagation before Next <Link>) routing all in-page #hash clicks through lenis.scrollTo with CSS scroll-padding-top supplying header clearance (offset 0 — verified Lenis respects scroll-padding natively; manual -104 offset double-counted). MutationObserver on body stops/starts Lenis when Radix sheets lock scroll. Menu-link edge case fixed: if locked, queue pendingTarget + dispatch synthetic Escape to close sheet, scroll on unlock (verified end-to-end: sheet closes, Lenis restarts, lands at 104px clearance).
+- globals.css: Lenis recommended rules (html.lenis height auto, .lenis-smooth scroll-behavior auto !important, lenis-stopped overflow hidden); .stack-item sticky top = 4.75rem + i*0.85rem (mobile) / 5.5rem + i*1.5rem (lg) via --stack-i inline var.
+- solutions.tsx REWRITTEN as sticky card deck ("What We Do"): 5 full-width service cards + ink CTA closer, each in a .stack-item sticky wrapper (pb-6/8 gap, 38vh runway spacer after deck so the assembled stack holds before exiting). Container-level useScroll(["start start","end end"]); per-card scale 1→1-(n-1-i)*0.028 and ink veil 0→0.28 (origin center top) so covered cards settle back with depth. Cards: white rounded-[2rem] shadow-soft, NO borders/numbers; icon circle mist-2→royal hover rotate; lg grid [auto_1fr_auto] with round action button (group-hover fills royal + arrow rotates 45deg), mobile keeps text link; CTA card bg-ink + faint white grid texture. Section overflow-hidden REMOVED (unclipped ancestor required for sticky). Fixed h-full-vs-min-height collapse (CTA body white gap) by dropping h-full and relying on flex stretch; bodyH now 368/368.
+- Parallax strengthened: hero imageY 48→96 (track oversized to -top-24/100%+12rem), circleY -56→-130, ringY 44→110, gridY 110→180, hero content fade 1→0.3 + y -36 on exit; ParallaxImage default 36→48; work 44→64; products 34→56; CTA drifts -70/-56→-110/90; why-us converted to client with section-scoped glow drift (±90px, opposite directions) + ScrollRotate 160→220deg.
+- back-to-top.tsx routed through scrollToTarget() helper (Lenis when active, native fallback).
+- Verification (agent-browser): Lenis confirmed (eased scrollY catch-up 169→497→572→597, lenis-smooth class, __lenis instance); deck mechanics — card pinned at exactly 88px, stepped holds [88,112,136,160,184,208] at deck assembly, scales [0.90…0.99], veils rising, hold-then-exit after runway fix; header hides on Lenis scroll; anchor lands 104px; menu flow verified. Mobile 390px: tops 76→144px, card heights 428–458 fit viewport, menu sheet + Lenis stop/start verified, hero/CTA/footer screenshots OK. Console: zero errors (only pre-existing dev warnings: EASE-value-export notice + products LCP eager suggestion). bun run lint clean. Note: headless test env reports (hover:none) so @media(hover:hover) styles can't be visually engaged in walkthrough — verified structurally (classes + compiled rules + specificity) instead.
+
+Stage Summary:
+- Site now has Lenis buttery wheel scrolling (native touch, a11y-safe, modal-aware) + all anchors/back-to-top on the same eased curve.
+- "What We Do" is a professional sticky stacking deck: cards pin at stepped tops, incoming cards slide over, covered cards scale back + dim, deck assembles, holds, exits as one unit.
+- Parallax amplified across hero (shapes/image/floor/content fade), work/products images, why-us glows, CTA decor — all spring-smoothed and reduced-motion safe.

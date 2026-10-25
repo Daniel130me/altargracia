@@ -31,10 +31,13 @@ export function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 48]);
-  const circleY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -56]);
-  const ringY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 44]);
-  const gridY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 96]);
+  const circleY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -130]);
+  const ringY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 180]);
+  // content gently recedes as the hero scrolls away
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, reduce ? 1 : 0.3]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -36]);
 
   return (
     <section
@@ -74,7 +77,10 @@ export function Hero() {
         <Asterisk className="animate-spin-slow size-10 text-ink/15" />
       </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44">
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative mx-auto max-w-7xl px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44"
+      >
         <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-8">
           {/* left rail */}
           <div className="hidden lg:col-span-2 lg:block">
@@ -140,7 +146,7 @@ export function Hero() {
             <Reveal delay={0.3} y={40}>
               <div className="relative h-[22rem] overflow-hidden rounded-[2rem] rounded-tl-[6rem] rounded-br-[6rem] shadow-soft sm:h-[26rem] lg:h-[30rem]">
                 <motion.div
-                  className="absolute inset-x-0 -top-12 h-[calc(100%+6rem)]"
+                  className="absolute inset-x-0 -top-24 h-[calc(100%+12rem)]"
                   style={{ y: imageY }}
                   initial={
                     reduce ? { opacity: 0 } : { opacity: 0, scale: 1.12 }
@@ -180,7 +186,7 @@ export function Hero() {
             </div>
           </div>
         </Reveal>
-      </div>
+      </motion.div>
     </section>
   );
 }

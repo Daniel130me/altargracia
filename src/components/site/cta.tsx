@@ -34,8 +34,8 @@ export function Cta() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  const driftUp = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -70]);
-  const driftDown = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 56]);
+  const driftUp = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -110]);
+  const driftDown = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
 
   return (
     <section

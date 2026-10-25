@@ -191,6 +191,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent
               side="top"
+              data-lenis-prevent
               className="rounded-b-3xl border-haze bg-white px-6 pb-8 pt-5"
             >
               <SheetHeader className="p-0">

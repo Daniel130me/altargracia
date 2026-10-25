@@ -1,4 +1,15 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import {
   ArrowUpRight,
   Code2,
@@ -49,91 +60,62 @@ const solutions = [
   },
 ];
 
+const TOTAL = solutions.length + 1; // services + closing CTA card
+
 export function Solutions() {
+  const reduce = useReducedMotion();
+  const stackRef = useRef<HTMLDivElement>(null);
+
+  // 0 → container top reaches the viewport top, 1 → container bottom
+  // reaches the viewport bottom. Drives the per-card settle scale.
+  const { scrollYProgress } = useScroll({
+    target: stackRef,
+    offset: ["start start", "end end"],
+  });
+
   return (
-    <section
-      id="solutions"
-      className="relative isolate overflow-hidden bg-mist py-24 lg:py-32"
-    >
-      {/* faint blueprint grid, fading down from the top */}
+    <section id="solutions" className="relative isolate bg-mist py-24 lg:py-32">
+      {/* faint blueprint grid, fading down from the top (no overflow-hidden
+          here on purpose — an unclipped ancestor keeps position:sticky working) */}
       <div
         aria-hidden="true"
         className="bg-grid-royal pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,black_5%,transparent_65%)]"
       />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <SectionHeading
-            eyebrow="What We Do"
-            title={
-              <>
-                The right technology for{" "}
-                <em className="font-light italic">every stage</em> of your
-                business.
-              </>
-            }
-            lede="From essential ICT equipment to digital transformation, we provide solutions designed around real business needs."
-          />
-        </div>
+        <SectionHeading
+          eyebrow="What We Do"
+          title={
+            <>
+              The right technology for{" "}
+              <em className="font-light italic">every stage</em> of your
+              business.
+            </>
+          }
+          lede="From essential ICT equipment to digital transformation, we provide solutions designed around real business needs."
+        />
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* sticky deck — each card pins in place and the next slides over it */}
+        <div ref={stackRef} className="mt-14 lg:mt-20">
           {solutions.map((item, index) => (
-            <Reveal
+            <StackCard
               key={item.title}
-              delay={(index % 3) * 0.08}
-              className={index === 0 ? "md:col-span-2 lg:col-span-1" : ""}
+              index={index}
+              progress={reduce ? undefined : scrollYProgress}
             >
-              <article className="group flex h-full flex-col rounded-[1.75rem] border border-haze bg-white p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-soft sm:p-8">
-                <span className="flex size-11 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white">
-                  <item.icon className="size-5" aria-hidden="true" />
-                </span>
-                <h3 className="font-display mt-6 text-2xl leading-tight font-medium text-ink">
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 text-sm font-semibold text-ink/70">
-                  {item.tagline}
-                </p>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-stone">
-                  {item.body}
-                </p>
-                <Link
-                  href="#contact"
-                  className="mt-7 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-ink/60"
-                >
-                  <span className="border-b border-ink/25 pb-0.5 transition-colors group-hover:border-ink/50">
-                    {item.link}
-                  </span>
-                  <ArrowUpRight
-                    className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </Link>
-              </article>
-            </Reveal>
+              <ServiceCardBody item={item} />
+            </StackCard>
           ))}
 
-          {/* CTA tile */}
-          <Reveal delay={0.16}>
-            <Link
-              href="#contact"
-              className="group flex h-full min-h-[16rem] flex-col justify-between overflow-hidden rounded-[1.75rem] bg-ink p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-soft"
-              aria-label="View all solutions and talk to our team"
-            >
-              <span className="flex size-11 items-center justify-center rounded-full bg-royal text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 group-hover:scale-110">
-                <ArrowUpRight className="size-5" aria-hidden="true" />
-              </span>
-              <span>
-                <span className="font-display block text-2xl leading-tight font-medium text-white sm:text-[1.7rem]">
-                  Not sure where to start?
-                </span>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-sky">
-                  <span className="border-b border-sky/40 pb-0.5">
-                    View All Solutions
-                  </span>
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </span>
-              </span>
-            </Link>
-          </Reveal>
+          <StackCard
+            index={TOTAL - 1}
+            progress={reduce ? undefined : scrollYProgress}
+          >
+            <CtaCardBody />
+          </StackCard>
+
+          {/* runway — lets the fully assembled deck hold for a beat
+              before the whole stack scrolls away */}
+          <div aria-hidden="true" className="h-[38vh]" />
         </div>
 
         <Reveal delay={0.1}>
@@ -145,5 +127,129 @@ export function Solutions() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/* ── One card of the sticky deck ─────────────────────────────────── */
+
+type StackCardProps = {
+  index: number;
+  progress?: MotionValue<number>;
+  children: React.ReactNode;
+};
+
+function StackCard({ index, progress, children }: StackCardProps) {
+  // While later cards slide over this one it settles back: a gentle
+  // scale-down plus a soft ink veil — depth without gimmicks.
+  const fallback = useMotionValue(0);
+  const p = progress ?? fallback;
+
+  const range: [number, number] = [index / TOTAL, 1];
+  const targetScale = 1 - (TOTAL - 1 - index) * 0.028;
+  const scale = useTransform(p, range, [1, targetScale]);
+  const veil = useTransform(
+    p,
+    range,
+    [0, index === TOTAL - 1 ? 0 : 0.28]
+  );
+
+  return (
+    <div
+      className="stack-item sticky pb-6 sm:pb-8"
+      style={{ "--stack-i": index } as React.CSSProperties}
+    >
+      <motion.article
+        style={{ scale, transformOrigin: "center top" }}
+        className="group relative flex min-h-[19rem] overflow-hidden rounded-[2rem] bg-white shadow-soft will-change-transform sm:min-h-[20rem] lg:min-h-[23rem]"
+      >
+        {children}
+        {/* soft dim layer as the card gets covered */}
+        <motion.div
+          aria-hidden="true"
+          style={{ opacity: veil }}
+          className="pointer-events-none absolute inset-0 rounded-[inherit] bg-ink"
+        />
+      </motion.article>
+    </div>
+  );
+}
+
+/* ── Card bodies ─────────────────────────────────────────────────── */
+
+function ServiceCardBody({
+  item,
+}: {
+  item: (typeof solutions)[number];
+}) {
+  return (
+    <div className="grid w-full gap-7 p-8 sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-12 lg:p-14">
+      <span className="flex size-14 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white lg:size-16">
+        <item.icon className="size-6 lg:size-7" aria-hidden="true" />
+      </span>
+
+      <div>
+        <h3 className="font-display text-2xl leading-tight font-medium text-ink sm:text-3xl">
+          {item.title}
+        </h3>
+        <p className="mt-2.5 text-sm font-semibold text-ink/70 sm:text-base">
+          {item.tagline}
+        </p>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone sm:text-base">
+          {item.body}
+        </p>
+        {/* text link — small screens only (desktop gets the round action) */}
+        <Link
+          href="#contact"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-royal lg:hidden"
+        >
+          <span className="border-b border-ink/25 pb-0.5">{item.link}</span>
+          <ArrowUpRight className="size-4" aria-hidden="true" />
+        </Link>
+      </div>
+
+      <Link
+        href="#contact"
+        aria-label={item.link}
+        className="hidden size-16 shrink-0 items-center justify-center rounded-full border border-haze text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-royal group-hover:bg-royal group-hover:text-white group-hover:shadow-card lg:flex"
+      >
+        <ArrowUpRight
+          className="size-5 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45"
+          aria-hidden="true"
+        />
+      </Link>
+    </div>
+  );
+}
+
+function CtaCardBody() {
+  return (
+    <div className="relative flex w-full flex-col justify-between gap-8 bg-ink p-8 sm:p-10 lg:flex-row lg:items-center lg:gap-12 lg:p-14">
+      {/* faint grid texture on the dark closer card */}
+      <div
+        aria-hidden="true"
+        className="bg-grid-white pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_80%_80%_at_75%_25%,black,transparent)]"
+      />
+      <div className="relative flex items-start gap-6 lg:items-center">
+        <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-royal text-white transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45 lg:size-16">
+          <ArrowUpRight className="size-6 lg:size-7" aria-hidden="true" />
+        </span>
+        <div>
+          <h3 className="font-display text-2xl leading-tight font-medium text-white sm:text-3xl">
+            Not sure where to start?
+          </h3>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/65 sm:text-base">
+            Tell us what you&rsquo;re trying to achieve and we&rsquo;ll help you
+            find the right mix of equipment, digital services and support.
+          </p>
+        </div>
+      </div>
+      <Link
+        href="#contact"
+        className="relative inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-sky transition-colors hover:text-white lg:self-center"
+      >
+        <span className="border-b border-sky/40 pb-0.5">Talk to Our Team</span>
+        <ArrowUpRight className="size-4" aria-hidden="true" />
+      </Link>
+    </div>
   );
 }

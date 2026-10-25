@@ -37,7 +37,7 @@ export function ParallaxImage({
   priority = false,
   className,
   imgClassName,
-  range = 36,
+  range = 48,
   unveil = false,
 }: ParallaxImageProps) {
   const reduce = useReducedMotion();

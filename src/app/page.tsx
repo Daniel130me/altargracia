@@ -1,5 +1,6 @@
 import { Header } from "@/components/site/header";
 import { ScrollProgress } from "@/components/site/scroll-progress";
+import { SmoothScroll } from "@/components/site/smooth-scroll";
 import { Hero } from "@/components/site/hero";
 import { Marquee } from "@/components/site/marquee";
 import { Intro } from "@/components/site/intro";
@@ -17,6 +18,7 @@ import { BackToTop } from "@/components/site/back-to-top";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-white text-ink">
+      <SmoothScroll />
       <ScrollProgress />
       <Header />
       <main className="flex-1">

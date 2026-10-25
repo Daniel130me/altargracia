@@ -71,7 +71,7 @@ export function Work() {
                     alt={project.alt}
                     sizes="(min-width: 1024px) 40rem, 100vw"
                     className="h-full w-full"
-                    range={44}
+                    range={64}
                     unveil
                     imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                   />

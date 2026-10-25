@@ -1,4 +1,13 @@
+"use client";
+
+import { useRef } from "react";
 import { Asterisk } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { SectionHeading } from "./section-heading";
 import {
   Reveal,
@@ -32,18 +41,33 @@ const pillars = [
 ];
 
 export function WhyUs() {
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  // blue depth glows drift against each other while the section passes
+  const glowTopY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -90]);
+  const glowBottomY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
+
   return (
-    <section className="relative isolate overflow-hidden bg-ink py-24 text-white lg:py-32">
+    <section
+      ref={sectionRef}
+      className="relative isolate overflow-hidden bg-ink py-24 text-white lg:py-32"
+    >
       {/* faint grid + blue depth glows */}
       <div
         aria-hidden="true"
         className="bg-grid-white pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_75%_65%_at_65%_15%,black,transparent)]"
       />
-      <div
+      <motion.div
+        style={{ y: glowTopY }}
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 right-[5%] -z-10 size-[28rem] rounded-full bg-royal/20 blur-[130px]"
       />
-      <div
+      <motion.div
+        style={{ y: glowBottomY }}
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-32 left-[-8%] -z-10 size-96 rounded-full bg-sky/10 blur-[130px]"
       />
@@ -66,7 +90,7 @@ export function WhyUs() {
           </div>
           <div className="flex items-end lg:col-span-6 lg:justify-end">
             <Reveal delay={0.2}>
-              <ScrollRotate deg={160}>
+              <ScrollRotate deg={220}>
                 <Asterisk
                   className="animate-spin-slow size-20 text-sky/70 lg:size-28"
                   aria-hidden="true"

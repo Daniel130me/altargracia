@@ -41,7 +41,7 @@ export function Products() {
                   alt="Modern workspace with laptop, monitor and office technology in cool blue light"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-full w-full"
-                  range={34}
+                  range={56}
                 />
               </div>
               <div className="absolute -bottom-6 left-6 flex max-w-xs items-start gap-3 rounded-2xl border border-haze bg-white p-4 shadow-card sm:left-10">

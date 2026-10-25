@@ -10,6 +10,7 @@ import {
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EASE } from "./reveal";
+import { scrollToTarget } from "./smooth-scroll";
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -33,7 +34,7 @@ export function BackToTop() {
     <motion.button
       type="button"
       aria-label="Scroll back to top"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      onClick={() => scrollToTarget(0, { duration: 1.6 })}
       initial={false}
       animate={
         visible
