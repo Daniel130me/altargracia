@@ -52,3 +52,11 @@ prompt
 server.log
 # Skills directory
 /skills/
+
+# Generated design research artifacts
+/scripts/imgcheck/
+/scripts/imgsearch/
+/scripts/audiences-*.png
+/scripts/v2-*.png
+/scripts/img-*.json
+/scripts/img-*.json.err
