@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CornerDownRight, Menu, Phone } from "lucide-react";
-import type { MouseEvent } from "react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "framer-motion";
+import { ChevronDown, Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -12,129 +13,216 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Logo } from "@/components/site/logo";
-import { SITE } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
+import { EASE } from "./reveal";
+import { Logo } from "./logo";
+import { Pill } from "./pill";
+import { SERVICES } from "@/lib/site";
 
-const NAV = [
-  { label: "Services", href: "#services" },
-  { label: "Why Us", href: "#why-us" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Reviews", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
-  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      // Hide when scrolling down past the hero top, reveal instantly on scroll up
+      setHidden(y > lastY && y > 260 && !open && !dropdownOpen);
+      lastY = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open, dropdownOpen]);
 
-  // Radix sheet locks body scroll and restores focus while closing, which
-  // can interrupt anchor navigation — so we close the sheet first, then
-  // scroll on a delay, and re-issue the scroll once more for safety.
-  function handleMobileNav(event: MouseEvent<HTMLAnchorElement>, href: string) {
-    event.preventDefault();
-    setOpen(false);
-    const target = document.querySelector(href);
-    if (!target) return;
-    const scrollTo = () =>
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.setTimeout(scrollTo, 450);
-    window.setTimeout(scrollTo, 950);
-  }
+  const linkCls = (href: string) =>
+    cn(
+      "rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-mist hover:text-ink",
+      pathname === href ? "bg-mist text-ink" : "text-ink/80"
+    );
 
   return (
-    <header className="sticky top-0 z-50">
+    <motion.header
+      initial={reduce ? { opacity: 0 } : { y: -72, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: EASE, delay: 0.05 }}
+      className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4"
+    >
       <div
         className={cn(
-          "border-b bg-background/85 backdrop-blur-md transition-all duration-300",
-          scrolled ? "border-ink/10 shadow-[0_1px_0_rgba(29,29,27,0.04)]" : "border-transparent"
+          "mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full border px-4 py-2.5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-5",
+          hidden
+            ? "pointer-events-none -translate-y-[130%] opacity-0"
+            : "translate-y-0 opacity-100",
+          scrolled
+            ? "border-haze bg-white/90 shadow-card backdrop-blur-xl"
+            : "border-transparent bg-white/60 backdrop-blur-md"
         )}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link href="/" aria-label="Altagracia Technologies — home" className="shrink-0">
           <Logo />
+        </Link>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Button
-              asChild
-              variant="outline"
-              className="hidden rounded-full border-ink/20 bg-cream px-5 font-medium text-ink hover:bg-secondary hover:text-ink sm:inline-flex"
-            >
-              <a href={SITE.phoneHref}>
-                <Phone className="h-4 w-4" aria-hidden="true" />
-                Book a call
-              </a>
-            </Button>
-            <Button
-              asChild
-              className="rounded-full bg-ink px-5 font-medium text-cream hover:bg-ink/85"
-            >
-              <a href="#contact">
-                <CornerDownRight className="h-4 w-4" aria-hidden="true" />
-                Let&apos;s talk
-              </a>
-            </Button>
+        {/* Desktop nav */}
+        <nav aria-label="Main navigation" className="hidden items-center gap-0.5 lg:flex">
+          {navLinks.slice(0, 1).map((link) => (
+            <Link key={link.href} href={link.href} className={linkCls(link.href)}>
+              {link.label}
+            </Link>
+          ))}
 
-            {/* Mobile menu */}
-            <Sheet open={open} onOpenChange={setOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  aria-label="Open menu"
-                  className="rounded-full border-ink/20 bg-cream lg:hidden"
+          {/* Solutions dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setDropdownOpen(true)}
+            onMouseLeave={() => setDropdownOpen(false)}
+          >
+            <Link
+              href="/services"
+              className={cn(
+                "flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-mist hover:text-ink",
+                dropdownOpen || pathname === "/services"
+                  ? "bg-mist text-ink"
+                  : "text-ink/80"
+              )}
+              aria-haspopup="true"
+              aria-expanded={dropdownOpen}
+              onClick={() => setDropdownOpen(false)}
+            >
+              Solutions
+              <ChevronDown
+                className={cn(
+                  "size-3.5 transition-transform duration-300",
+                  dropdownOpen && "rotate-180"
+                )}
+              />
+            </Link>
+            <div
+              className={cn(
+                "absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top",
+                dropdownOpen
+                  ? "visible translate-y-0 scale-100 opacity-100"
+                  : "invisible -translate-y-2 scale-[0.96] opacity-0"
+              )}
+            >
+              <div className="w-[24rem] rounded-3xl border border-haze bg-white p-2 shadow-soft">
+                {SERVICES.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={service.href}
+                    onClick={() => setDropdownOpen(false)}
+                    className="group/item flex items-start gap-3.5 rounded-2xl px-4 py-3 transition-all duration-300 ease-out hover:bg-mist hover:pl-5"
+                  >
+                    <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-royal text-white transition-transform duration-300 group-hover/item:scale-110">
+                      <service.icon className="size-4" />
+                    </span>
+                    <span>
+                      <span className="block text-sm font-semibold text-ink">
+                        {service.short}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-stone">
+                        {service.summary}
+                      </span>
+                    </span>
+                  </Link>
+                ))}
+                <Link
+                  href="/services"
+                  onClick={() => setDropdownOpen(false)}
+                  className="mt-1 flex items-center justify-between rounded-2xl border-t border-haze px-4 py-3 text-sm font-semibold text-royal transition-colors hover:text-ink"
                 >
-                  <Menu className="h-5 w-5" aria-hidden="true" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-80 border-ink/10">
-                <SheetHeader>
-                  <SheetTitle className="sr-only">Menu</SheetTitle>
-                  <SheetDescription className="sr-only">
-                    Site navigation links
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="mt-2 flex flex-col">
-                  <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
-                    {NAV.map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        onClick={(e) => handleMobileNav(e, item.href)}
-                        className="rounded-xl px-3 py-3 font-display text-lg font-medium tracking-tight text-ink transition-colors hover:bg-secondary"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </nav>
-                  <div className="mt-6 grid gap-2">
-                    <Button
-                      asChild
-                      className="rounded-full bg-ink font-medium text-cream hover:bg-ink/85"
-                    >
-                      <a href={SITE.phoneHref} onClick={() => setOpen(false)}>
-                        <Phone className="h-4 w-4" aria-hidden="true" />
-                        Call {SITE.phoneDisplay}
-                      </a>
-                    </Button>
-                    <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-                      {SITE.address}
-                      <br />
-                      {SITE.hours}
-                    </p>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                  All Solutions Overview
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </div>
           </div>
+
+          {navLinks.slice(1).map((link) => (
+            <Link key={link.href} href={link.href} className={linkCls(link.href)}>
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <Pill href="/contact" variant="ink" className="hidden px-6 py-2.5 sm:inline-flex">
+            Request a Quote
+          </Pill>
+
+          {/* Mobile menu */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              aria-label="Open menu"
+              className="flex size-10 items-center justify-center rounded-full border border-haze bg-white text-ink transition-colors hover:bg-mist lg:hidden"
+            >
+              <Menu className="size-5" />
+            </SheetTrigger>
+            <SheetContent
+              side="top"
+              data-lenis-prevent
+              className="rounded-b-3xl border-haze bg-white px-6 pb-8 pt-5"
+            >
+              <SheetHeader className="p-0">
+                <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+                <SheetDescription className="sr-only">
+                  Altagracia Technologies site navigation links
+                </SheetDescription>
+              </SheetHeader>
+              <nav aria-label="Mobile navigation" className="mt-2 flex flex-col gap-1">
+                {[
+                  { label: "Home", href: "/" },
+                  { label: "Our Solutions", href: "/services" },
+                  { label: "About Us", href: "/about" },
+                  { label: "Contact", href: "/contact" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="rounded-2xl px-4 py-3 font-display text-2xl font-medium text-ink transition-colors hover:bg-mist"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="mt-2 rounded-2xl bg-mist px-4 py-3">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-stone">
+                    Services
+                  </p>
+                  <ul className="mt-2 space-y-2.5">
+                    {SERVICES.map((service) => (
+                      <li key={service.slug}>
+                        <Link
+                          href={service.href}
+                          onClick={() => setOpen(false)}
+                          className="text-sm font-semibold text-ink/75 transition-colors hover:text-royal"
+                        >
+                          {service.short}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Pill href="/contact" variant="ink" className="mt-4 w-full" onClick={() => setOpen(false)}>
+                  Request a Quote
+                </Pill>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

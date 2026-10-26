@@ -1,49 +1,45 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { SmoothScroll } from "@/components/site/smooth-scroll";
+import { ScrollProgress } from "@/components/site/scroll-progress";
+import { Header } from "@/components/site/header";
+import { Footer } from "@/components/site/footer";
+import { BackToTop } from "@/components/site/back-to-top";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Altagracia Technologies | Everything ICT — One Place You Can Trust",
+  title: "Altagracia Technologies — Corporate ICT Solutions & Technology Supply",
   description:
-    "Computers, phones, repairs, web design and development, software development, UI/UX design, digital marketing and ICT training. Practical technology solutions for businesses and individuals.",
+    "Altagracia Technologies helps businesses and organizations meet their technology needs through ICT solutions, equipment supply, digital services and professional training.",
   keywords: [
+    "Altagracia Technologies",
     "ICT solutions",
-    "computer sales",
-    "phone accessories",
-    "laptop repair",
-    "web design and development",
+    "technology supply",
+    "equipment procurement",
     "software development",
-    "UI/UX design",
     "digital marketing",
     "ICT training",
-    "Altagracia Technologies",
+    "technical support",
   ],
-  authors: [{ name: "Altagracia Technologies" }],
-  icons: {
-    icon: "/logo.svg",
-  },
   openGraph: {
-    title: "Altagracia Technologies | Everything ICT — One Place You Can Trust",
+    title: "Altagracia Technologies — Corporate ICT Solutions & Technology Supply",
     description:
-      "Computers, phones, repairs, web design and development, software development, UI/UX design, digital marketing and ICT training — practical technology solutions for businesses and individuals.",
-    siteName: "Altagracia Technologies",
+      "ICT solutions, equipment supply, digital services and professional training for businesses and organizations.",
     type: "website",
+    siteName: "Altagracia Technologies",
   },
 };
 
@@ -53,11 +49,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased bg-background text-foreground`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${fraunces.variable} ${inter.variable}`}>
+      <body className="antialiased bg-background text-foreground font-sans">
+        <SmoothScroll />
+        <ScrollProgress />
+        <Header />
+        <div className="flex min-h-screen flex-col"> 
+          {children}
+          <Footer />
+          <BackToTop />
+        </div>
         <Toaster />
       </body>
     </html>

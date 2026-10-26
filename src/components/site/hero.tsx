@@ -1,327 +1,192 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
+import Image from "next/image";
 import {
   motion,
+  useReducedMotion,
   useScroll,
   useTransform,
-  type Variants,
 } from "framer-motion";
-import { CornerDownRight, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Asterisk,
-  AsteriskBadge,
-  LongArrow,
-  SquiggleArrow,
-} from "@/components/site/doodles";
-import { SITE } from "@/lib/site-config";
+import { ArrowDown, Asterisk } from "lucide-react";
+import { Pill } from "./pill";
+import { EASE, MaskWords, Reveal } from "./reveal";
 
-const TICKER_ITEMS = [
-  "Computers & Laptops",
-  "Phones & Accessories",
-  "Repairs & Maintenance",
-  "Digital Marketing",
-  "Web Design & Development",
-  "Software Development",
-  "UI/UX Design",
-  "ICT Training",
-  "General Contracts",
+const railWords = ["Corporate ICT", "Digital Services", "Technology Supply"];
+
+const headlineWords = [
+  { text: "Technology" },
+  { text: "solutions" },
+  { text: "that" },
+  { text: "move", em: true },
+  { text: "business", em: true },
+  { text: "forward." },
 ];
-
-const HEADLINE_WORDS = [
-  "Technology",
-  "made",
-  "easier,",
-  "for",
-  "work",
-  "and",
-  "everyday",
-  "life.",
-];
-
-const wordVariants: Variants = {
-  hidden: { y: "110%" },
-  show: (i: number) => ({
-    y: "0%",
-    transition: { duration: 0.7, delay: 0.08 + i * 0.055, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-const fadeVariants: Variants = {
-  hidden: { y: 18 },
-  show: (i: number) => ({
-    y: 0,
-    transition: { duration: 0.65, delay: 0.35 + i * 0.12, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
-
-function StaggeredWords({
-  words,
-  offset,
-  trustedWord = false,
-}: {
-  words: string[];
-  offset: number;
-  trustedWord?: boolean;
-}) {
-  return (
-    <span className="block">
-      {words.map((word, i) => {
-        const isLast = i === words.length - 1;
-        const globalIndex = offset + i;
-        return (
-          <span key={`${word}-${i}`} className="inline-block">
-            <span
-              className="inline-block overflow-hidden pb-[0.08em] align-bottom"
-            >
-              <motion.span
-                className="inline-block"
-                custom={globalIndex}
-                variants={wordVariants}
-                initial="hidden"
-                animate="show"
-              >
-                {word}
-              </motion.span>
-            </span>
-            {trustedWord && isLast ? (
-              <motion.span
-                className="inline-block align-bottom"
-                custom={globalIndex + 1}
-                variants={fadeVariants}
-                initial="hidden"
-                animate="show"
-              >
-                <AsteriskBadge
-                  tone="sage"
-                  className="ml-2 inline-flex h-[0.52em] w-[0.52em]"
-                />
-                <SquiggleArrow className="ml-2 inline-block h-[0.38em] w-auto text-ink/70" />
-              </motion.span>
-            ) : null}
-            {isLast ? null : <span>&nbsp;</span>}
-          </span>
-        );
-      })}
-    </span>
-  );
-}
-
-function TickerGroup() {
-  return (
-    <div className="flex shrink-0 items-center">
-      {[0, 1, 2].map((set) =>
-        TICKER_ITEMS.map((item, i) => (
-          <span key={`${set}-${i}`} className="flex shrink-0 items-center">
-            <span
-              className={
-                i % 2 === 0
-                  ? "text-sm uppercase tracking-wide text-ink/45"
-                  : "text-sm font-semibold uppercase tracking-wide text-ink"
-              }
-            >
-              {item}
-            </span>
-            {i < TICKER_ITEMS.length - 1 ? (
-              <LongArrow className="mx-6 text-ink/40" />
-            ) : (
-              <Asterisk className="mx-6 h-3.5 w-3.5 text-ink/40" />
-            )}
-          </span>
-        ))
-      )}
-    </div>
-  );
-}
 
 export function Hero() {
-  const collageRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+
   const { scrollYProgress } = useScroll({
-    target: collageRef,
-    offset: ["start end", "end start"],
+    target: sectionRef,
+    offset: ["start start", "end start"],
   });
-  const yMain = useTransform(scrollYProgress, [0, 1], [36, -36]);
-  const ySide = useTransform(scrollYProgress, [0, 1], [70, -50]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 96]);
+  const circleY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -130]);
+  const ringY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
+  const gridY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 180]);
+  // content gently recedes as the hero scrolls away
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, reduce ? 1 : 0.3]);
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -36]);
 
   return (
-    <section id="home" className="bg-grain relative overflow-hidden">
-      {/* Warm gradient wash across the hero */}
-      <div
+    <section
+      ref={sectionRef}
+      id="home"
+      className="relative isolate overflow-hidden bg-white"
+    >
+      {/* faint 3D perspective grid floor — drifts away as you scroll */}
+      <motion.div
+        style={{ y: gridY }}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-light via-background to-sky-light opacity-70"
-      />
-      {/* Vibrant blobs */}
-      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 [perspective:900px]"
+      >
+        <div className="bg-grid-royal absolute inset-0 origin-top opacity-80 [mask-image:linear-gradient(to_top,black_15%,transparent_78%)] [transform:rotateX(58deg)_scale(1.5)]" />
+      </motion.div>
+
+      {/* decorative shapes — float loop + scroll parallax */}
+      <motion.div
+        style={{ y: circleY }}
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-amber/20 blur-3xl"
-      />
-      <div
+        className="absolute -top-24 right-[8%] sm:size-72"
+      >
+        <div className="animate-float size-56 rounded-full bg-royal/80 blur-[2px] sm:size-72" />
+      </motion.div>
+      <motion.div
+        style={{ y: ringY }}
         aria-hidden="true"
-        className="pointer-events-none absolute -left-48 top-1/2 h-[28rem] w-[28rem] rounded-full bg-mauve/40 blur-3xl"
-      />
-      <div
+        className="absolute bottom-16 left-[38%] hidden lg:block"
+      >
+        <div className="animate-float-slow size-24 rounded-full border-[10px] border-ink/5" />
+      </motion.div>
+      <motion.div
+        style={{ y: circleY }}
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-1/3 h-[20rem] w-[20rem] rounded-full bg-sage-light/50 blur-3xl"
-      />
+        className="absolute left-[45%] top-28 hidden lg:block"
+      >
+        <Asterisk className="animate-spin-slow size-10 text-ink/15" />
+      </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:pt-14">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-10">
-          {/* Copy */}
-          <div>
-            <h1 className="mt-0 font-display text-[clamp(2.7rem,7.4vw,6rem)] font-medium leading-[1.03] tracking-[-0.03em] text-ink lg:text-[clamp(3.5rem,5vw,4.5rem)]">
-              <StaggeredWords words={HEADLINE_WORDS} offset={0} />
-            </h1>
-
-            <motion.p
-              variants={fadeVariants}
-              custom={0}
-              initial="hidden"
-              animate="show"
-              className="mt-6 max-w-md text-base leading-relaxed text-ink/60 sm:text-lg"
-            >
-              From computers, phones and repairs to web design and development,
-              software development, UI/UX design, digital marketing and training
-              across ICT, we help businesses and individuals find practical
-              technology solutions.
-            </motion.p>
-
-            <motion.div
-              variants={fadeVariants}
-              custom={1}
-              initial="hidden"
-              animate="show"
-              className="mt-8 flex flex-wrap items-center gap-3"
-            >
-              <Button
-                asChild
-                size="lg"
-                className="h-12 rounded-full bg-ink px-7 text-base font-medium text-cream hover:bg-forest"
-              >
-                <a href="#services">
-                  <CornerDownRight className="h-5 w-5" aria-hidden="true" />
-                  Explore our services
-                </a>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 rounded-full border-ink/25 bg-transparent px-7 text-base font-medium text-ink hover:bg-secondary hover:text-ink"
-              >
-                <a href="#contact">
-                  Get in touch
-                </a>
-              </Button>
-            </motion.div>
-
-            {/* Social proof with real customer photos */}
-            <motion.div
-              variants={fadeVariants}
-              custom={2}
-              initial="hidden"
-              animate="show"
-              className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3"
-            >
-              <div className="flex -space-x-3">
-                {[
-                  { src: "/images/real/avatar-1.jpg", alt: "Smiling customer — a school administrator" },
-                  { src: "/images/real/avatar-2.jpg", alt: "Smiling customer — a small business owner" },
-                  { src: "/images/real/avatar-3.jpg", alt: "Smiling customer — a boutique owner" },
-                ].map((a) => (
-                  <Image
-                    key={a.src}
-                    src={a.src}
-                    alt={a.alt}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-full border-2 border-background object-cover"
-                  />
-                ))}
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-sand font-display text-[11px] font-bold text-ink">
-                  50+
-                </span>
-              </div>
-              <div>
-                <div className="flex items-center gap-1" aria-label="Rated 5 out of 5 by customers">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-amber-500 text-amber-500" aria-hidden="true" />
-                  ))}
-                </div>
-                <p className="mt-0.5 text-xs font-medium text-ink/55">
-                  Trusted by 50+ businesses &amp; schools
-                </p>
-              </div>
-            </motion.div>
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative mx-auto max-w-7xl px-4 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-8 lg:pb-24 lg:pt-44"
+      >
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* left rail */}
+          <div className="hidden lg:col-span-2 lg:block">
+            <ul className="space-y-2.5">
+              {railWords.map((word, i) => (
+                <li
+                  key={word}
+                  className="font-display text-lg leading-snug text-ink/70"
+                >
+                  <Reveal delay={0.35 + i * 0.08} variant="left" y={undefined}>
+                    {word}
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+            <Reveal delay={0.6} variant="fade" y={undefined}>
+              <ArrowDown
+                className="animate-bounce-soft mt-10 size-6 text-ink/30"
+                aria-hidden="true"
+              />
+            </Reveal>
           </div>
 
-          {/* Photo collage with parallax */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            <div ref={collageRef} className="relative mx-auto max-w-[34rem]">
-              <motion.div style={{ y: yMain }} className="relative">
-                <div className="overflow-hidden rounded-[2rem] border border-ink/10 shadow-[0_24px_60px_rgba(24,42,32,0.18)] sm:rounded-[2.75rem]">
-                  <Image
-                    src="/images/real/hero-main.jpg"
-                    alt="Customers working on laptops inside Altagracia's modern computer showroom"
-                    width={1600}
-                    height={679}
-                    priority
-                    sizes="(min-width: 1024px) 42rem, 100vw"
-                    className="h-auto w-full object-cover"
-                  />
-                </div>
-              </motion.div>
+          {/* headline + copy + CTAs */}
+          <div className="lg:col-span-6">
+            <Reveal>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-ink">
+                <span className="mr-2.5 inline-block size-1.5 rotate-45 bg-royal ring-1 ring-ink/10" />
+                Corporate ICT Solutions · Digital Services · Technology Supply
+              </p>
+            </Reveal>
 
-              {/* floating secondary photo */}
-              <motion.div
-                style={{ y: ySide }}
-                className="absolute -bottom-10 -left-2 w-36 sm:-left-8 sm:w-44 lg:-left-14"
-              >
-                <div className="animate-float overflow-hidden rounded-2xl border-4 border-background shadow-[0_18px_44px_rgba(24,42,32,0.22)]">
-                  <Image
-                    src="/images/real/hero-side.jpg"
-                    alt="A complete office desk setup with a curved monitor, delivered and installed by Altagracia"
-                    width={900}
-                    height={900}
-                    sizes="176px"
-                    className="aspect-square w-full object-cover"
-                  />
-                </div>
-              </motion.div>
+            <h1 className="font-display mt-7 text-[clamp(2.9rem,6.4vw,5.2rem)] leading-[1.0] font-medium tracking-tight text-ink">
+              <MaskWords words={headlineWords} baseDelay={0.2} step={0.065} />
+            </h1>
 
-              {/* same-day badge */}
-              <div className="absolute -top-5 right-3 flex items-center gap-2.5 rounded-2xl bg-cream/95 py-2.5 pl-3 pr-4 shadow-[0_14px_36px_rgba(24,42,32,0.18)] backdrop-blur sm:right-8">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sage">
-                  <Asterisk className="h-4 w-4 text-ink" aria-hidden="true" />
-                </span>
-                <div>
-                  <p className="font-display text-sm font-bold leading-tight text-ink">
-                    We answer, same day
-                  </p>
-                  <p className="text-[11px] text-ink/55">{SITE.hours}</p>
-                </div>
+            <Reveal delay={0.55}>
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
+                We help businesses and organizations meet their technology needs
+                through ICT solutions, equipment supply, digital services and
+                professional training.
+              </p>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-stone sm:text-lg">
+                From your first enquiry to project delivery, our focus is on
+                understanding what you need and finding the right solution.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.68}>
+              <div className="mt-10 flex flex-wrap items-center gap-3.5">
+                <Pill href="#solutions" variant="royal">
+                  Explore Our Solutions
+                </Pill>
+                <Pill href="/contact" variant="outline">
+                  Discuss Your Requirements
+                </Pill>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+            </Reveal>
+          </div>
 
-      {/* Marquee ticker on amber band */}
-      <div
-        className="marquee-hover relative mt-14 overflow-hidden border-y border-ink/10 bg-gradient-to-r from-amber-light via-sand to-amber-light/60 py-4"
-        aria-hidden="true"
-      >
-        <div className="animate-marquee flex w-max">
-          <TickerGroup />
-          <TickerGroup />
+          {/* image */}
+          <div className="relative lg:col-span-4">
+            <Reveal delay={0.3} y={40}>
+              <div className="relative h-[22rem] overflow-hidden rounded-[2rem] rounded-tl-[6rem] rounded-br-[6rem] shadow-soft sm:h-[26rem] lg:h-[30rem]">
+                <motion.div
+                  className="absolute inset-x-0 -top-24 h-[calc(100%+12rem)]"
+                  style={{ y: imageY }}
+                  initial={
+                    reduce ? { opacity: 0 } : { opacity: 0, scale: 1.12 }
+                  }
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.5, ease: EASE, delay: 0.25 }}
+                >
+                  <Image
+                    src="/images/hero-team-focus.jpg"
+                    alt="African business professionals collaborating on laptops in a modern office"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                    className="object-cover object-[50%_38%]"
+                  />
+                </motion.div>
+              </div>
+            </Reveal>
+          </div>
         </div>
-      </div>
+
+        {/* supporting card */}
+        <Reveal delay={0.55}>
+          <div className="mt-12 inline-flex max-w-sm items-center gap-5 rounded-[1.75rem] border border-haze bg-white p-6 shadow-card transition-transform duration-500 ease-out hover:-translate-y-1 hover:shadow-soft lg:ml-2">
+            <Asterisk
+              className="animate-spin-slow size-8 shrink-0 text-ink"
+              aria-hidden="true"
+            />
+            <div>
+              <p className="font-display text-lg leading-snug text-ink">
+                Technology for businesses. Solutions for progress.
+              </p>
+              <span
+                className="mt-2 block h-px w-16 bg-ink/20"
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </motion.div>
     </section>
   );
 }

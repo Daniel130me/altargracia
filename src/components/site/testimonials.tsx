@@ -1,152 +1,128 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Quote } from "lucide-react";
-import { Reveal } from "@/components/site/reveal";
-import { cn } from "@/lib/utils";
+import { BadgeCheck, Star } from "lucide-react";
+import { SectionHeading } from "./section-heading";
+import { DrawLine, Reveal } from "./reveal";
 
-const TESTIMONIALS = [
+const testimonials = [
   {
     quote:
-      "It's now easy to get genuine laptops for our school — Altagracia supplied everything and even helped us set it all up. Very honest people.",
-    name: "Mrs. Adaeze Okafor",
-    role: "School Administrator, Surulere",
-    photo: "/images/real/avatar-1.jpg",
+      "Altagracia handled the ICT overhaul across our three depots — new workstations, networking, CCTV, the lot. What won us over is the after-sales support: response times are measured in hours, not days. Downtime that used to delay our dispatches is now practically zero.",
+    name: "Emeka Nwosu",
+    role: "Operations Director, SwiftHaul Logistics — Lagos",
+    img: "/images/testimonial-emeka.jpg",
+    alt: "Portrait of Emeka Nwosu, Operations Director at SwiftHaul Logistics, at his office desk",
   },
   {
     quote:
-      "My laptop stopped working and they fixed it the same day. They explained the problem in a way I could understand. I have found my tech people.",
-    name: "Kunle Adeyemi",
-    role: "Small Business Owner, Lagos Island",
-    photo: "/images/real/avatar-2.jpg",
+      "They equipped our computer laboratory with forty systems, installed the learning software and trained our teachers. Two years on, they still come in every term to service the lab. Any school looking for a technology partner that keeps its word should talk to them first.",
+    name: "Mrs. Aisha Bello-Abubakar",
+    role: "Administrator, Noble Steps Academy — Kaduna",
+    img: "/images/testimonial-aisha.jpg",
+    alt: "Portrait of Mrs. Aisha Bello-Abubakar, Administrator of Noble Steps Academy, in the school classroom",
   },
   {
     quote:
-      "They manage our social media adverts, and now we get customer calls every single week. Reliable and professional from day one.",
-    name: "Chiamaka Nwosu",
-    role: "Boutique Owner, Ikeja",
-    photo: "/images/real/avatar-3.jpg",
+      "As a young company we couldn't afford trial and error. They took time to understand how we actually operate before recommending anything, then delivered our POS and inventory setup on schedule and on budget. It feels less like a vendor and more like a technical co-founder.",
+    name: "Tomilola Alabi",
+    role: "Co-founder & CEO, ShopLinc — Yaba, Lagos",
+    img: "/images/testimonial-tomilola.jpg",
+    alt: "Portrait of Tomilola Alabi, Co-founder and CEO of ShopLinc, smiling with a laptop",
   },
 ];
 
-export function Testimonials() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    if (paused) return;
-    const timer = window.setInterval(() => {
-      setIndex((i) => (i + 1) % TESTIMONIALS.length);
-    }, 7000);
-    return () => window.clearInterval(timer);
-  }, [paused]);
-
-  const t = TESTIMONIALS[index];
-
+function Stars() {
   return (
-    <section
-      id="testimonials"
-      className="bg-grain relative overflow-hidden border-y border-ink/10 bg-gradient-to-br from-sand via-blush/20 to-mauve/15 py-20 lg:py-28"
-    >
-      {/* Decorative blob */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-mauve/20 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-10 h-64 w-64 rounded-full bg-blush/30 blur-3xl"
-      />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-          <Reveal>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/50 sm:text-xs">
-              / Testimonials /
-            </p>
-            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink sm:text-5xl">
-              Here&apos;s what
-              <br />
-              others say
-            </h2>
-            <span className="mt-8 hidden h-14 w-14 items-center justify-center rounded-full bg-ink text-sand lg:flex">
-              <Quote className="h-6 w-6" aria-hidden="true" />
-            </span>
-          </Reveal>
+    <div className="flex items-center gap-1" aria-label="Rated 5 out of 5 stars">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <Star key={i} className="size-3.5 fill-royal text-royal" aria-hidden="true" />
+      ))}
+    </div>
+  );
+}
 
-          <Reveal
-            delay={0.1}
-            className="flex flex-col justify-between"
-          >
-            <div
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            >
-              <AnimatePresence mode="wait">
-                <motion.figure
-                  key={index}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -14 }}
-                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+export function Testimonials() {
+  return (
+    <section id="testimonials" className="relative isolate overflow-hidden bg-white py-24 lg:py-32">
+      {/* faint texture + corner glow, matching the Why-Us treatment */}
+      <div
+        aria-hidden="true"
+        className="bg-grid-royal pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)] opacity-70"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 top-10 -z-10 size-[26rem] rounded-full bg-royal/8 blur-[130px]"
+      />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeading
+            eyebrow="Client Stories"
+            title={
+              <>
+                Trusted by businesses, schools and founders{" "}
+                <em className="font-light italic">across Nigeria.</em>
+              </>
+            }
+            lede="Real words from the organizations we serve — on the equipment we supply, the solutions we build and the support that follows long after delivery."
+          />
+
+          {/* rating summary chip */}
+          <Reveal delay={0.2} className="shrink-0">
+            <div className="inline-flex flex-col gap-2 rounded-[1.75rem] bg-mist px-7 py-6">
+              <Stars />
+              <p className="font-display text-2xl font-medium tracking-tight text-ink">
+                4.9<span className="text-stone">/5</span>
+              </p>
+              <p className="text-xs font-medium tracking-wide text-stone">
+                Average rating across 250+ client engagements
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <Reveal key={t.name} variant="up" delay={0.1 + i * 0.09} className="h-full">
+              <figure className="group relative flex h-full flex-col rounded-[2rem] bg-mist p-8 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:bg-white hover:shadow-soft sm:p-9">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-8 top-7 select-none font-display text-7xl leading-none text-royal/10 transition-colors duration-500 group-hover:text-royal/20"
                 >
-                  <blockquote className="font-display text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl">
-                    “{t.quote}”
-                  </blockquote>
-                  <figcaption className="mt-7 flex items-center gap-3">
-                    <span className="relative h-12 w-12 overflow-hidden rounded-full border-2 border-ink/10">
-                      <Image
-                        src={t.photo}
-                        alt={`Portrait of ${t.name}`}
-                        width={96}
-                        height={96}
-                        sizes="48px"
-                        className="h-full w-full object-cover"
-                      />
-                    </span>
-                    <span>
-                      <span className="block text-sm font-semibold text-ink">
-                        {t.name}
-                      </span>
-                      <span className="block text-xs text-ink/50">{t.role}</span>
-                    </span>
-                  </figcaption>
-                </motion.figure>
-              </AnimatePresence>
-            </div>
+                  &ldquo;
+                </span>
 
-            <div className="mt-10 flex items-center justify-between border-t border-ink/10 pt-6">
-              <div className="flex items-center gap-2">
-                {TESTIMONIALS.map((item, i) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    aria-label={`Show review from ${item.name}`}
-                    onClick={() => {
-                      setIndex(i);
-                      setPaused(true);
-                    }}
-                    className={cn(
-                      "h-2 rounded-full transition-all duration-300",
-                      i === index ? "w-8 bg-ink" : "w-2 bg-ink/20 hover:bg-ink/40"
-                    )}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                aria-label="Next review"
-                onClick={() => {
-                  setIndex((i) => (i + 1) % TESTIMONIALS.length);
-                  setPaused(true);
-                }}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream transition-colors hover:bg-forest"
-              >
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </button>
-            </div>
-          </Reveal>
+                <Stars />
+
+                <blockquote className="mt-5 flex-1 text-[15px] leading-relaxed text-ink/85">
+                  {t.quote}
+                </blockquote>
+
+                <DrawLine className="mt-8 h-px w-full origin-left bg-haze" />
+
+                <figcaption className="mt-6 flex items-center gap-4">
+                  <span className="relative size-14 shrink-0 overflow-hidden rounded-full ring-1 ring-haze transition-all duration-500 group-hover:ring-royal/40">
+                    <Image
+                      src={t.img}
+                      alt={t.alt}
+                      fill
+                      sizes="56px"
+                      className="object-cover"
+                    />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="flex items-center gap-1.5 font-display text-[15px] font-medium tracking-tight text-ink">
+                      <span className="truncate">{t.name}</span>
+                      <BadgeCheck
+                        className="size-4 shrink-0 text-royal"
+                        aria-label="Verified client"
+                      />
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-stone">{t.role}</p>
+                  </div>
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

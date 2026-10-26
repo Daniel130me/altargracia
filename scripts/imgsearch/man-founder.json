@@ -1,0 +1,58 @@
+{
+  "success": true,
+  "query": "young Nigerian man entrepreneur in smart shirt professional portrait smiling",
+  "count": 7,
+  "ranked": true,
+  "captioned_count": 7,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/04946f6f85e6.jpg",
+      "caption": "A smiling African man in a colorful patterned traditional shirt, blurred indoor background. Watermarked with \"dreamstime.com\"; ID 218923415 © Jonathan Erasmus.",
+      "source": "Dreamstime",
+      "original_width": "1600px",
+      "original_height": "1157px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/25075757d021.jpg",
+      "caption": "Shutterstock advertisement with watermarks. Text: \"We have great content\", \"Tell your story with compelling images, videos, and music. Access our library of over 500 million high-quality assets.\", \"Sign up and get started today!\", \"Contact us: 1-866-663-3954\". Contains watermarks and logos; not suitable for background image.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "890px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/557d2153d4b0.png",
+      "caption": "A smiling Black man wearing round sunglasses and a blue striped shirt stands in a lush tropical garden.",
+      "source": "Whiskey in a Tea Cup",
+      "original_width": "1280px",
+      "original_height": "854px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/40cb868ccbc1.jpg",
+      "caption": "Shutterstock advertisement with watermarks; text: \"We have great content,\" promotional copy, \"Sign up and get started today!\" contact number.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3e6583af572e.jpg",
+      "caption": "A smiling businesswoman sits on an office desk; the image has an Alamy watermark, so not suitable for background.",
+      "source": "Alamy",
+      "original_width": "1300px",
+      "original_height": "775px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c84c053d69bf.jpg",
+      "caption": "Shutterstock ad with watermarks: \"We have great content\" heading, contact info, and office photo with smiling colleagues.",
+      "source": "Shutterstock",
+      "original_width": "1500px",
+      "original_height": "1100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d3e1bb3793f6.jpg",
+      "caption": "A smiling middle-aged Black man in a navy suit, light blue shirt, and turquoise paisley tie stands before a banner reading \"ETH LAW\" and \"OUR THE\".",
+      "source": "Bonny FM 90.9",
+      "original_width": "1448px",
+      "original_height": "1086px"
+    }
+  ]
+}

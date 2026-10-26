@@ -1,166 +1,138 @@
 "use client";
 
-import Image from "next/image";
-import { BadgeCheck, HeartHandshake, PhoneCall, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
-import { Reveal } from "@/components/site/reveal";
-import { Sparkle } from "@/components/site/doodles";
-import { SITE } from "@/lib/site-config";
+import { useRef } from "react";
+import { Asterisk } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { SectionHeading } from "./section-heading";
+import {
+  Reveal,
+  ScrollRotate,
+  ScrollWords,
+  Stagger,
+  StaggerItem,
+} from "./reveal";
 
-const REASONS = [
+const pillars = [
   {
-    icon: BadgeCheck,
-    title: "Registered & verified",
-    desc: "Fully registered with the Corporate Affairs Commission (BN 3143241). A real, accountable business — not a random online seller.",
+    number: "01",
+    title: "Understanding Your Needs",
+    body: "We begin by listening to what you want to achieve, not simply recommending products or services.",
   },
   {
-    icon: ShieldCheck,
-    title: "Genuine products only",
-    desc: "No fakes and no “tokunbo” surprises. Everything we sell is original and covered by warranty.",
+    number: "02",
+    title: "Practical Solutions",
+    body: "We focus on technology that fits your requirements, rather than introducing unnecessary complexity.",
   },
   {
-    icon: PhoneCall,
-    title: "We answer our calls",
-    desc: "Call, WhatsApp or email — a real person picks up and responds the same day. You are never left wondering.",
+    number: "03",
+    title: "Clear Communication",
+    body: "We believe customers should understand what they're getting, what it involves and what happens next.",
   },
   {
-    icon: HeartHandshake,
-    title: "Support after you buy",
-    desc: "We do not disappear after payment. Whenever you need help, we are right here.",
+    number: "04",
+    title: "Professional Engagement",
+    body: "Whether it's an equipment enquiry or a larger ICT project, we aim to make every engagement organized, transparent and straightforward.",
   },
 ];
 
 export function WhyUs() {
+  const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  // blue depth glows drift against each other while the section passes
+  const glowTopY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -90]);
+  const glowBottomY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
+
   return (
     <section
-      id="why-us"
-      className="bg-grain bg-dots-dark relative overflow-hidden bg-gradient-to-br from-forest via-forest to-forest-2 py-20 text-cream lg:py-28"
+      ref={sectionRef}
+      className="relative isolate overflow-hidden bg-ink py-24 text-white lg:py-32"
     >
-      {/* vibrant glow blobs */}
+      {/* faint grid + blue depth glows */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-amber/10 blur-3xl"
+        className="bg-grid-white pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_75%_65%_at_65%_15%,black,transparent)]"
       />
-      <div
+      <motion.div
+        style={{ y: glowTopY }}
         aria-hidden="true"
-        className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-sage/25 blur-3xl"
+        className="pointer-events-none absolute -top-40 right-[5%] -z-10 size-[28rem] rounded-full bg-royal/20 blur-[130px]"
       />
-      <div
+      <motion.div
+        style={{ y: glowBottomY }}
         aria-hidden="true"
-        className="pointer-events-none absolute right-1/3 top-1/2 h-64 w-64 rounded-full bg-moss/40 blur-3xl"
+        className="pointer-events-none absolute -bottom-32 left-[-8%] -z-10 size-96 rounded-full bg-sky/10 blur-[130px]"
       />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <Reveal>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-cream/50 sm:text-xs">
-              / Why Altagracia /
-            </p>
-            <h2 className="mt-4 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-cream sm:text-5xl">
-              The ICT partner you
-              <br />
-              can actually rely on.
-              <Sparkle
-                className="ml-3 inline-block h-7 w-7 text-sage sm:h-9 sm:w-9"
-                aria-hidden="true"
-              />
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="max-w-md text-base leading-relaxed text-cream/65 lg:justify-self-end">
-              Anyone can sell you a device. Here is what makes us different —
-              and why our customers keep coming back.
-            </p>
-          </Reveal>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <SectionHeading
+              light
+              eyebrow="The Altagracia Approach"
+              title={
+                <>
+                  More than technology. A focus on{" "}
+                  <em className="font-light italic text-sky">
+                    what matters to you.
+                  </em>
+                </>
+              }
+              lede="Good technology is important. Understanding the people and businesses using it is just as important. Our approach focuses on four things."
+            />
+          </div>
+          <div className="flex items-end lg:col-span-6 lg:justify-end">
+            <Reveal delay={0.2}>
+              <ScrollRotate deg={220}>
+                <Asterisk
+                  className="animate-spin-slow size-20 text-sky/70 lg:size-28"
+                  aria-hidden="true"
+                />
+              </ScrollRotate>
+            </Reveal>
+          </div>
         </div>
 
-        <div className="mt-12 grid gap-5 lg:mt-16 lg:grid-cols-[1fr_1.25fr]">
-          {/* Real photo of the team answering calls */}
-          <Reveal className="h-full">
-            <div className="group relative h-full min-h-72 overflow-hidden rounded-[1.75rem] border border-cream/15 sm:min-h-80 lg:min-h-full">
-              <Image
-                src="/images/real/support.jpg"
-                alt="A member of the Altagracia support team taking a customer call"
-                width={1400}
-                height={785}
-                sizes="(min-width: 1024px) 36rem, 100vw"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-forest/85 via-forest/10 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5">
-                <p className="font-display text-lg font-semibold text-cream">
-                  A real person picks up.
-                </p>
-                <p className="mt-1 text-sm text-cream/70">
-                  Mon – Sat · 8:00 AM – 6:00 PM — same-day replies, every time.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          {/* 2×2 reasons */}
-          <div className="grid overflow-hidden rounded-[1.75rem] border border-cream/15 bg-forest-2/80 backdrop-blur-sm sm:grid-cols-2">
-            {REASONS.map((reason, i) => {
-              const iconBgs = [
-                "bg-sage text-ink",
-                "bg-amber/80 text-ink",
-                "bg-mauve/80 text-ink",
-                "bg-mist/80 text-ink",
-              ];
-              return (
-              <motion.div
-                key={reason.title}
-                initial={{ y: 16 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                className={
-                  "group p-7 transition-colors duration-300 hover:bg-moss/40 sm:p-9 " +
-                  (i % 2 === 1 ? "border-l border-cream/10 " : "") +
-                  (i >= 2 ? "border-t border-cream/10 " : "") +
-                  (i === 1 ? "max-sm:border-t max-sm:border-cream/10 " : "") +
-                  (i === 3 ? "max-sm:border-t max-sm:border-cream/10" : "")
-                }
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <span className={`flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-300 group-hover:-rotate-12 ${iconBgs[i]}`}>
-                    <reason.icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="font-display text-sm font-medium text-cream/30">
-                    ({String(i + 1).padStart(2, "0")})
-                  </span>
-                </div>
-                <h3 className="mt-6 font-display text-xl font-semibold tracking-tight text-cream sm:text-2xl">
-                  {reason.title}
+        <Stagger
+          className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 sm:grid-cols-2"
+          stagger={0.1}
+        >
+          {pillars.map((pillar) => (
+            <StaggerItem key={pillar.number} className="h-full">
+              <article className="group h-full bg-ink p-8 transition-colors duration-500 hover:bg-ink-2 sm:p-10">
+                <span className="font-display text-5xl font-medium text-sky transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-translate-y-1 group-hover:scale-110">
+                  {pillar.number}
+                </span>
+                <h3 className="font-display mt-6 text-2xl leading-snug font-medium text-white">
+                  {pillar.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-cream/60">
-                  {reason.desc}
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-white/60 transition-colors duration-500 group-hover:text-white/80 sm:text-base">
+                  {pillar.body}
                 </p>
-              </motion.div>
-            );
-            })}
-          </div>
-        </div>
+              </article>
+            </StaggerItem>
+          ))}
+        </Stagger>
 
-        <Reveal delay={0.15} className="mt-10">
-          <div className="flex flex-wrap items-center gap-3">
-            <a
-              href={SITE.phoneHref}
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-cream px-7 text-base font-medium text-ink transition-colors hover:bg-white"
-            >
-              <PhoneCall className="h-5 w-5" aria-hidden="true" />
-              Call us today
-            </a>
-            <a
-              href={SITE.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center gap-2 rounded-full border border-cream/30 px-7 text-base font-medium text-cream transition-colors hover:bg-cream/10"
-            >
-              WhatsApp us
-            </a>
-          </div>
-        </Reveal>
+        <ScrollWords
+          className="font-display mx-auto mt-16 max-w-3xl text-center text-2xl leading-snug text-white sm:text-3xl lg:text-4xl"
+          words={[
+            { text: "\u201CYour" },
+            { text: "requirements" },
+            { text: "come" },
+            { text: "first." },
+            { text: "The", em: true },
+            { text: "technology", em: true },
+            { text: "follows.\u201D", em: true },
+          ]}
+        />
       </div>
     </section>
   );

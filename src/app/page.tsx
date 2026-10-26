@@ -1,31 +1,31 @@
-import { Header } from "@/components/site/header";
 import { Hero } from "@/components/site/hero";
-import { TrustBar } from "@/components/site/trust-bar";
-import { Services } from "@/components/site/services";
+import { Marquee } from "@/components/site/marquee";
+import { Intro } from "@/components/site/intro";
+import { Stats } from "@/components/site/stats";
+import { Solutions } from "@/components/site/solutions";
+import { Audiences } from "@/components/site/audiences";
 import { WhyUs } from "@/components/site/why-us";
-import { HowItWorks } from "@/components/site/how-it-works";
+import { Process } from "@/components/site/process";
+import { Products } from "@/components/site/products";
 import { Testimonials } from "@/components/site/testimonials";
-import { PhotoMarquee } from "@/components/site/photos-marquee";
-import { ContactSection } from "@/components/site/contact";
-import { Footer } from "@/components/site/footer";
-import { DockNav } from "@/components/site/dock-nav";
+import { Faq } from "@/components/site/faq";
+import { Cta } from "@/components/site/cta";
 
 export default function Home() {
   return (
-    <div id="top" className="flex min-h-screen flex-col">
-      <Header />
-      <main className="flex-1">
-        <Hero />
-        <TrustBar />
-        <Services />
-        <WhyUs />
-        <HowItWorks />
-        <Testimonials />
-        <PhotoMarquee />
-        <ContactSection />
-      </main>
-      <Footer />
-      <DockNav />
-    </div>
+    <main className="flex-1">
+      <Hero />
+      <Marquee />
+      <Intro />
+      <Stats />
+      <Solutions />
+      <Audiences />
+      <WhyUs />
+      <Process />
+      <Products />
+      <Testimonials />
+      <Faq />
+      <Cta />
+    </main>
   );
 }
