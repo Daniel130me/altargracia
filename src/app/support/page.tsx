@@ -21,6 +21,7 @@ import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { Pill } from "@/components/site/pill";
 import { Reveal } from "@/components/site/reveal";
 import { TESTIMONIALS } from "@/lib/site";
+import { ServiceIntent } from "@/components/site/service-intent";
 
 export const metadata: Metadata = {
   title: "Technical Support & ICT Maintenance | Altagracia Technologies",
@@ -142,7 +143,7 @@ export default function SupportPage() {
         }}
         actions={
           <>
-            <Pill href="/contact" variant="ink">
+            <Pill href="/contact?service=support" variant="ink">
               Request Support
             </Pill>
             <Pill href="#support-coverage" variant="outline">
@@ -173,6 +174,36 @@ export default function SupportPage() {
           </div>
         </div>
       </section>
+
+      <ServiceIntent
+        service="support"
+        layout="triage"
+        eyebrow="Tell Us What You Need"
+        title={
+          <>
+            Is it a fault,{" "}
+            <em className="font-light italic">maintenance or setup?</em>
+          </>
+        }
+        lede="Choose the closest match. Add the equipment type and what is happening when you contact us."
+        options={[
+          {
+            id: "repair",
+            label: "Repair a fault",
+            detail: "Describe the device, the issue and when it started so we can understand the problem.",
+          },
+          {
+            id: "maintenance",
+            label: "Plan maintenance",
+            detail: "Discuss scheduled servicing for the computers and technology your team depends on.",
+          },
+          {
+            id: "setup",
+            label: "Setup or configuration",
+            detail: "Get help installing or configuring ICT equipment for your workplace or organization.",
+          },
+        ]}
+      />
 
       {/* How support works */}
       <section className="bg-white py-24 lg:py-32">
@@ -222,9 +253,9 @@ export default function SupportPage() {
                     <em className="italic">now practically zero.</em>
                   </p>
                   <p className="mt-4 text-sm leading-relaxed text-stone sm:text-base">
-                    That&rsquo;s what {TESTIMONIALS[0].name} of {TESTIMONIALS[0].org}{" "}
-                    said after an ICT overhaul and ongoing support across three
-                    depots — read the full story below.
+                    That&rsquo;s what {TESTIMONIALS[0].name} said after an ICT
+                    overhaul and ongoing support across three depots — read the
+                    full story below.
                   </p>
                 </div>
               </Reveal>
@@ -254,6 +285,7 @@ export default function SupportPage() {
       />
 
       <CtaBand
+        contactHref="/contact?service=support"
         eyebrow="Request Support"
         title={
           <>

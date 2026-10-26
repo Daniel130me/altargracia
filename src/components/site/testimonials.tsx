@@ -8,25 +8,25 @@ const testimonials = [
     quote:
       "Altagracia handled the ICT overhaul across our three depots — new workstations, networking, CCTV, the lot. What won us over is the after-sales support: response times are measured in hours, not days. Downtime that used to delay our dispatches is now practically zero.",
     name: "Emeka Nwosu",
-    role: "Operations Director, SwiftHaul Logistics — Lagos",
+    role: "Operations Director",
     img: "/images/testimonial-emeka.jpg",
-    alt: "Portrait of Emeka Nwosu, Operations Director at SwiftHaul Logistics, at his office desk",
+    alt: "Portrait of Emeka Nwosu at his office desk",
   },
   {
     quote:
       "They equipped our computer laboratory with forty systems, installed the learning software and trained our teachers. Two years on, they still come in every term to service the lab. Any school looking for a technology partner that keeps its word should talk to them first.",
     name: "Mrs. Aisha Bello-Abubakar",
-    role: "Administrator, Noble Steps Academy — Kaduna",
+    role: "Administrator",
     img: "/images/testimonial-aisha.jpg",
-    alt: "Portrait of Mrs. Aisha Bello-Abubakar, Administrator of Noble Steps Academy, in the school classroom",
+    alt: "Portrait of Mrs. Aisha Bello-Abubakar in a classroom",
   },
   {
     quote:
       "As a young company we couldn't afford trial and error. They took time to understand how we actually operate before recommending anything, then delivered our POS and inventory setup on schedule and on budget. It feels less like a vendor and more like a technical co-founder.",
     name: "Tomilola Alabi",
-    role: "Co-founder & CEO, ShopLinc — Yaba, Lagos",
+    role: "Co-founder & CEO",
     img: "/images/testimonial-tomilola.jpg",
-    alt: "Portrait of Tomilola Alabi, Co-founder and CEO of ShopLinc, smiling with a laptop",
+    alt: "Portrait of Tomilola Alabi, smiling with a laptop",
   },
 ];
 

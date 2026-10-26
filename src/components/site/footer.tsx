@@ -1,24 +1,26 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "./logo";
-import { SERVICES, SITE } from "@/lib/site";
+import { PHONE_NUMBERS, SERVICES, SITE } from "@/lib/site";
 
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Our Solutions", href: "/services" },
   { label: "About Us", href: "/about" },
+  { label: "Mission & Values", href: "/about/mission" },
+  { label: "How We Work", href: "/about/approach" },
   { label: "Contact", href: "/contact" },
 ];
 
 const solutionLinks = SERVICES.map((s) => ({ label: s.short, href: s.href }));
 
 const contactRows = [
-  {
+  ...PHONE_NUMBERS.map((phone, index) => ({
     icon: Phone,
-    label: "Phone",
-    value: SITE.phone.label,
-    href: SITE.phone.href,
-  },
+    label: index === 0 ? "Call Us" : "Alternate Number",
+    value: phone.label,
+    href: phone.href,
+  })),
   {
     icon: Mail,
     label: "Email",
@@ -50,10 +52,6 @@ export function Footer() {
               Helping businesses and organizations meet their technology needs
               through practical ICT solutions, digital services, equipment
               supply and training.
-            </p>
-            <p className="mt-7 inline-flex items-center gap-2.5 rounded-full border border-white/12 px-4 py-2 text-xs font-medium text-white/70">
-              <ShieldCheck className="size-4 text-sky" aria-hidden="true" />
-              Corporate Affairs Commission — Registered Business
             </p>
           </div>
 
@@ -102,7 +100,7 @@ export function Footer() {
             </h3>
             <ul className="mt-5 space-y-4">
               {contactRows.map((row) => (
-                <li key={row.label}>
+                <li key={row.href}>
                   <a
                     href={row.href}
                     className="group flex items-center gap-3.5 text-sm text-white/60 transition-colors hover:text-sky"

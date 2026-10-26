@@ -177,7 +177,7 @@ export function Hero() {
             />
             <div>
               <p className="font-display text-lg leading-snug text-ink">
-                Technology for businesses. Solutions for progress.
+                The right technology to move your business forward.
               </p>
               <span
                 className="mt-2 block h-px w-16 bg-ink/20"

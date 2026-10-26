@@ -15,7 +15,13 @@ const labelCls =
 
 type FieldErrors = Record<string, string | undefined>;
 
-export function EnquiryForm() {
+export function EnquiryForm({
+  defaultService = "",
+  defaultMessage = "",
+}: {
+  defaultService?: string;
+  defaultMessage?: string;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -155,7 +161,12 @@ export function EnquiryForm() {
           <label htmlFor="service" className={labelCls}>
             What does your enquiry relate to?
           </label>
-          <select id="service" name="service" className={inputCls} defaultValue="">
+          <select
+            id="service"
+            name="service"
+            className={inputCls}
+            defaultValue={defaultService}
+          >
             <option value="">General enquiry / not sure yet</option>
             {SERVICES.map((service) => (
               <option key={service.slug} value={service.name}>
@@ -173,6 +184,7 @@ export function EnquiryForm() {
             name="message"
             required
             rows={6}
+            defaultValue={defaultMessage}
             placeholder="Tell us what you need — the equipment list, the project idea or simply the problem you're trying to solve."
             className={cn(
               inputCls,

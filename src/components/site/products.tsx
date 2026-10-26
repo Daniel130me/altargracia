@@ -44,12 +44,6 @@ export function Products() {
                   range={56}
                 />
               </div>
-              <div className="absolute -bottom-6 left-6 flex max-w-xs items-start gap-3 rounded-2xl border border-haze bg-white p-4 shadow-card sm:left-10">
-                <span className="mt-0.5 block size-2 shrink-0 rotate-45 bg-royal ring-1 ring-ink/10" />
-                <p className="text-xs leading-relaxed text-stone">
-                  Products and availability are subject to confirmation.
-                </p>
-              </div>
             </div>
           </Reveal>
 

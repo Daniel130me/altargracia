@@ -43,7 +43,7 @@ const faqs = [
 
 export function Faq() {
   return (
-    <section id="faq" className="bg-mist pb-24 lg:pb-32">
+    <section id="faq" className="bg-mist pt-24 pb-24 lg:pt-32 lg:pb-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">

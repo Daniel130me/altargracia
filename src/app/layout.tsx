@@ -21,6 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://altagraciatechnologies.com"),
   title: "Altagracia Technologies — Corporate ICT Solutions & Technology Supply",
   description:
     "Altagracia Technologies helps businesses and organizations meet their technology needs through ICT solutions, equipment supply, digital services and professional training.",

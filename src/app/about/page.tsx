@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, ShieldCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
 import { CtaBand } from "@/components/site/cta-band";
 import { QuoteStrip } from "@/components/site/quote-strip";
@@ -9,7 +9,13 @@ import { Eyebrow } from "@/components/site/section-heading";
 import { CountUp } from "@/components/site/stats";
 import { Pill } from "@/components/site/pill";
 import { Reveal, Stagger, StaggerItem } from "@/components/site/reveal";
-import { NUMBERS, SERVICES, TESTIMONIALS } from "@/lib/site";
+import {
+  COMPANY_MISSION,
+  COMPANY_VISION,
+  NUMBERS,
+  SERVICES,
+  TESTIMONIALS,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Altagracia Technologies | Corporate ICT Solutions in Nigeria",
@@ -75,8 +81,8 @@ export default function AboutPage() {
             <Pill href="/services" variant="ink">
               Explore Our Solutions
             </Pill>
-            <Pill href="/contact" variant="outline">
-              Request a Quotation
+            <Pill href="/about/mission" variant="outline">
+              Our Mission &amp; Values
             </Pill>
           </>
         }
@@ -118,10 +124,6 @@ export default function AboutPage() {
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <p className="inline-flex items-center gap-2.5 rounded-full border border-haze bg-mist px-4 py-2 text-xs font-medium text-ink">
-                    <ShieldCheck className="size-4 text-royal" aria-hidden="true" />
-                    Corporate Affairs Commission — Registered Business
-                  </p>
                   <Pill href="/contact" variant="royal">
                     Talk to Our Team
                   </Pill>
@@ -146,6 +148,40 @@ export default function AboutPage() {
               </Reveal>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-mist py-20 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-5 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <Reveal>
+            <article className="h-full rounded-[2rem] bg-ink p-8 text-white sm:p-10 lg:p-12">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-sky">
+                Our mission
+              </p>
+              <p className="font-display mt-6 max-w-xl text-2xl leading-snug font-medium sm:text-3xl">
+                {COMPANY_MISSION}
+              </p>
+            </article>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <article className="flex h-full flex-col justify-between rounded-[2rem] border border-haze bg-white p-8 sm:p-10 lg:p-12">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-royal">
+                  Our vision
+                </p>
+                <p className="font-display mt-6 max-w-xl text-2xl leading-snug font-medium text-ink sm:text-3xl">
+                  {COMPANY_VISION}
+                </p>
+              </div>
+              <Link
+                href="/about/mission"
+                className="group mt-8 inline-flex items-center gap-2 self-start text-sm font-semibold text-ink transition-colors hover:text-royal"
+              >
+                Explore our mission and values
+                <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              </Link>
+            </article>
+          </Reveal>
         </div>
       </section>
 
@@ -276,8 +312,7 @@ export default function AboutPage() {
           <QuoteStrip testimonial={TESTIMONIALS[0]} />
           <Reveal delay={0.1}>
             <p className="mt-8 text-center text-sm text-stone">
-              {TESTIMONIALS[1].name} ({TESTIMONIALS[1].org}) and{" "}
-              {TESTIMONIALS[2].name} ({TESTIMONIALS[2].org}) also share their
+              {TESTIMONIALS[1].name} and {TESTIMONIALS[2].name} also share their
               experience on the{" "}
               <Link
                 href="/#testimonials"

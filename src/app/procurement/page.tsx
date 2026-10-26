@@ -21,6 +21,7 @@ import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { Pill } from "@/components/site/pill";
 import { Reveal } from "@/components/site/reveal";
 import { TESTIMONIALS } from "@/lib/site";
+import { ServiceIntent } from "@/components/site/service-intent";
 
 export const metadata: Metadata = {
   title: "ICT Equipment & Procurement for Organizations | Altagracia Technologies",
@@ -154,7 +155,7 @@ export default function ProcurementPage() {
         frame="tr"
         actions={
           <>
-            <Pill href="/contact" variant="ink">
+            <Pill href="/contact?service=procurement" variant="ink">
               Request a Quotation
             </Pill>
             <Pill href="#supply-categories" variant="outline">
@@ -183,17 +184,38 @@ export default function ProcurementPage() {
           <div className="mt-12">
             <FeatureGrid items={features} />
           </div>
-          <Reveal delay={0.15}>
-            <p className="mt-8 rounded-2xl border border-haze bg-white px-5 py-4 text-sm leading-relaxed text-stone">
-              <strong className="font-semibold text-ink">
-                Products and availability are subject to confirmation.
-              </strong>{" "}
-              Models and stock vary — send us your requirements and we&rsquo;ll confirm
-              what&rsquo;s available and propose the best options.
-            </p>
-          </Reveal>
         </div>
       </section>
+
+      <ServiceIntent
+        service="procurement"
+        layout="tiles"
+        eyebrow="Plan Your Supply"
+        title={
+          <>
+            What are you{" "}
+            <em className="font-light italic">looking to equip?</em>
+          </>
+        }
+        lede="Choose the closest fit to start a focused enquiry. You can add specifications and quantities in the form."
+        options={[
+          {
+            id: "office",
+            label: "Office or team",
+            detail: "Set up a new workspace, equip a growing team or refresh existing devices.",
+          },
+          {
+            id: "school",
+            label: "School or institution",
+            detail: "Discuss computers, learning equipment and related technology needs.",
+          },
+          {
+            id: "single",
+            label: "Single item",
+            detail: "Enquire about a computer, phone or other individual technology product.",
+          },
+        ]}
+      />
 
       {/* How procurement works */}
       <section className="bg-white py-24 lg:py-32">
@@ -290,6 +312,7 @@ export default function ProcurementPage() {
       />
 
       <CtaBand
+        contactHref="/contact?service=procurement"
         eyebrow="Request a Quotation"
         title={
           <>

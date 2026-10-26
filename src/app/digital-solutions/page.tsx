@@ -21,6 +21,7 @@ import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { Pill } from "@/components/site/pill";
 import { Reveal } from "@/components/site/reveal";
 import { TESTIMONIALS } from "@/lib/site";
+import { ServiceIntent } from "@/components/site/service-intent";
 
 export const metadata: Metadata = {
   title: "Business Software Development & Digital Solutions | Altagracia Technologies",
@@ -142,7 +143,7 @@ export default function DigitalSolutionsPage() {
         }}
         actions={
           <>
-            <Pill href="/contact" variant="ink">
+            <Pill href="/contact?service=digital-solutions" variant="ink">
               Discuss Your Project
             </Pill>
             <Pill href="#what-we-build" variant="outline">
@@ -173,6 +174,36 @@ export default function DigitalSolutionsPage() {
           </div>
         </div>
       </section>
+
+      <ServiceIntent
+        service="digital-solutions"
+        layout="steps"
+        eyebrow="Shape Your Project"
+        title={
+          <>
+            Where should your{" "}
+            <em className="font-light italic">digital project begin?</em>
+          </>
+        }
+        lede="Pick a starting point and tell us what you want the solution to help you do."
+        options={[
+          {
+            id: "website",
+            label: "Business website",
+            detail: "Plan a new website or refresh an existing one around your customers and goals.",
+          },
+          {
+            id: "custom",
+            label: "Software or web app",
+            detail: "Discuss a business process that could benefit from a custom digital solution.",
+          },
+          {
+            id: "improve",
+            label: "Improve what I have",
+            detail: "Review an existing website or software product and discuss the issues to solve.",
+          },
+        ]}
+      />
 
       {/* Approach */}
       <section className="bg-white py-24 lg:py-32">
@@ -260,6 +291,7 @@ export default function DigitalSolutionsPage() {
       />
 
       <CtaBand
+        contactHref="/contact?service=digital-solutions"
         eyebrow="Discuss Your Project"
         title={
           <>

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronDown, Menu } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -21,7 +21,6 @@ import { SERVICES } from "@/lib/site";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -31,6 +30,9 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const aboutMenuRef = useRef<HTMLDivElement>(null);
+  const aboutTriggerRef = useRef<HTMLButtonElement>(null);
   const reduce = useReducedMotion();
 
   useEffect(() => {
@@ -39,13 +41,15 @@ export function Header() {
       const y = window.scrollY;
       setScrolled(y > 24);
       // Hide when scrolling down past the hero top, reveal instantly on scroll up
-      setHidden(y > lastY && y > 260 && !open && !dropdownOpen);
+      setHidden(
+        y > lastY && y > 260 && !open && !dropdownOpen && !aboutDropdownOpen
+      );
       lastY = y;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [open, dropdownOpen]);
+  }, [open, dropdownOpen, aboutDropdownOpen]);
 
   const linkCls = (href: string) =>
     cn(
@@ -150,6 +154,96 @@ export function Header() {
             </div>
           </div>
 
+          {/* About Us dropdown */}
+          <div
+            ref={aboutMenuRef}
+            className="relative"
+            onMouseEnter={() => setAboutDropdownOpen(true)}
+            onMouseLeave={() => {
+              if (!aboutMenuRef.current?.contains(document.activeElement)) {
+                setAboutDropdownOpen(false);
+              }
+            }}
+            onBlur={(event) => {
+              const nextTarget = event.relatedTarget;
+              if (
+                !(nextTarget instanceof Node) ||
+                !event.currentTarget.contains(nextTarget)
+              ) {
+                setAboutDropdownOpen(false);
+              }
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                setAboutDropdownOpen(false);
+                aboutTriggerRef.current?.focus();
+              } else if (
+                event.key === "ArrowDown" &&
+                event.target === aboutTriggerRef.current
+              ) {
+                event.preventDefault();
+                setAboutDropdownOpen(true);
+                requestAnimationFrame(() => {
+                  aboutMenuRef.current?.querySelector("a")?.focus();
+                });
+              }
+            }}
+          >
+            <button
+              ref={aboutTriggerRef}
+              type="button"
+              className={cn(
+                "flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-mist hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal",
+                aboutDropdownOpen || pathname.startsWith("/about")
+                  ? "bg-mist text-ink"
+                  : "text-ink/80"
+              )}
+              aria-expanded={aboutDropdownOpen}
+              aria-controls="about-navigation-menu"
+              onClick={() => setAboutDropdownOpen((value) => !value)}
+            >
+              About Us
+              <ChevronDown
+                className={cn(
+                  "size-3.5 transition-transform duration-300",
+                  aboutDropdownOpen && "rotate-180"
+                )}
+                aria-hidden="true"
+              />
+            </button>
+            <div
+              id="about-navigation-menu"
+              className={cn(
+                "absolute left-1/2 top-full z-40 w-72 -translate-x-1/2 pt-3 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top",
+                aboutDropdownOpen
+                  ? "visible translate-y-0 scale-100 opacity-100"
+                  : "invisible -translate-y-2 scale-[0.96] opacity-0"
+              )}
+            >
+              <div className="rounded-3xl border border-haze bg-white p-2 shadow-soft">
+                {[
+                  { label: "About Altagracia", href: "/about" },
+                  { label: "Mission, Vision & Values", href: "/about/mission" },
+                  { label: "How We Work", href: "/about/approach" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setAboutDropdownOpen(false)}
+                    aria-current={pathname === link.href ? "page" : undefined}
+                    className="group/item flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold text-ink transition-colors hover:bg-mist hover:text-royal"
+                  >
+                    {link.label}
+                    <ArrowUpRight
+                      className="size-4 opacity-50 transition-all group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5 group-hover/item:opacity-100"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {navLinks.slice(1).map((link) => (
             <Link key={link.href} href={link.href} className={linkCls(link.href)}>
               {link.label}
@@ -185,7 +279,6 @@ export function Header() {
                 {[
                   { label: "Home", href: "/" },
                   { label: "Our Solutions", href: "/services" },
-                  { label: "About Us", href: "/about" },
                   { label: "Contact", href: "/contact" },
                 ].map((link) => (
                   <Link
@@ -215,6 +308,31 @@ export function Header() {
                     ))}
                   </ul>
                 </div>
+                <details className="mt-2 rounded-2xl bg-mist px-4 py-3">
+                  <summary className="cursor-pointer list-none font-display text-2xl font-medium text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-center justify-between">
+                      About Us
+                      <ChevronDown className="size-4" aria-hidden="true" />
+                    </span>
+                  </summary>
+                  <ul className="mt-3 space-y-2.5 border-t border-haze pt-3">
+                    {[
+                      { label: "About Altagracia", href: "/about" },
+                      { label: "Mission, Vision & Values", href: "/about/mission" },
+                      { label: "How We Work", href: "/about/approach" },
+                    ].map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          onClick={() => setOpen(false)}
+                          className="block py-1 text-sm font-semibold text-ink/75 transition-colors hover:text-royal"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
                 <Pill href="/contact" variant="ink" className="mt-4 w-full" onClick={() => setOpen(false)}>
                   Request a Quote
                 </Pill>

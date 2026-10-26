@@ -1,30 +1,22 @@
 import type { Metadata } from "next";
-import {
-  MonitorSmartphone,
-  FileSpreadsheet,
-  Mail,
-  ShieldAlert,
-  Users,
-  Presentation,
-} from "lucide-react";
 import { PageHero } from "@/components/site/page-hero";
 import { CtaBand } from "@/components/site/cta-band";
 import { MiniFaq } from "@/components/site/mini-faq";
 import { QuoteStrip } from "@/components/site/quote-strip";
 import {
-  FeatureGrid,
   RelatedServices,
   StepsRow,
 } from "@/components/site/service-blocks";
-import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
+import { SectionHeading } from "@/components/site/section-heading";
 import { Pill } from "@/components/site/pill";
 import { Reveal } from "@/components/site/reveal";
+import { TrainingCourseCatalog } from "@/components/site/training-course-catalog";
 import { TESTIMONIALS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Professional ICT Training for Teams & Individuals | Altagracia Technologies",
   description:
-    "Practical ICT training for individuals, employees and teams in Nigeria — computer fundamentals, office productivity, business tools and device care. Request a training plan.",
+    "Explore practical technology courses in digital marketing, web development, UI/UX, cybersecurity, DevOps and more. Available physically and online.",
   keywords: [
     "ICT training Nigeria",
     "professional ICT training",
@@ -39,39 +31,6 @@ export const metadata: Metadata = {
     siteName: "Altagracia Technologies",
   },
 };
-
-const features = [
-  {
-    icon: MonitorSmartphone,
-    title: "Computer Fundamentals",
-    body: "Confident, everyday use of computers — for beginners and those returning to formal study.",
-  },
-  {
-    icon: FileSpreadsheet,
-    title: "Office Productivity Tools",
-    body: "Documents, spreadsheets and presentations, taught with real work scenarios.",
-  },
-  {
-    icon: Mail,
-    title: "Internet, Email & Online Tools",
-    body: "Professional communication and safe, effective use of online services at work.",
-  },
-  {
-    icon: Presentation,
-    title: "Business Software Skills",
-    body: "Training on the specific tools your organization uses, delivered around your workflows.",
-  },
-  {
-    icon: ShieldAlert,
-    title: "Device Care & Troubleshooting",
-    body: "Practical habits and basic fixes that keep everyday technology problems small.",
-  },
-  {
-    icon: Users,
-    title: "Custom Team Training",
-    body: "A training plan built around your team's roles, skill gaps and schedule.",
-  },
-];
 
 const steps = [
   {
@@ -148,7 +107,7 @@ export default function TrainingPage() {
         }}
         actions={
           <>
-            <Pill href="/contact" variant="ink">
+            <Pill href="/contact?service=training" variant="ink">
               Request a Training Plan
             </Pill>
             <Pill href="#training-areas" variant="outline">
@@ -174,8 +133,8 @@ export default function TrainingPage() {
             }
             lede="Every topic is taught with practical, work-relevant examples — because the goal is capability, not certificates."
           />
-          <div className="mt-12">
-            <FeatureGrid items={features} />
+          <div className="mt-12 rounded-[2rem] border border-haze bg-white p-6 shadow-soft sm:p-9 lg:p-12">
+            <TrainingCourseCatalog />
           </div>
         </div>
       </section>
@@ -250,6 +209,7 @@ export default function TrainingPage() {
       />
 
       <CtaBand
+        contactHref="/contact?service=training"
         eyebrow="Request a Training Plan"
         title={
           <>

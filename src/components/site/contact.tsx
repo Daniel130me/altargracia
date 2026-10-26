@@ -136,7 +136,7 @@ export function ContactSection() {
               href={SITE.phoneHref}
               className="inline-flex h-10 items-center rounded-full bg-cream px-5 text-sm font-medium text-ink transition-colors hover:bg-white"
             >
-              Book a call
+              Call {SITE.phoneDisplay}
             </a>
             <a
               href={SITE.emailHref}
@@ -173,9 +173,9 @@ export function ContactSection() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="max-w-md text-base leading-relaxed text-cream/70">
-              Call, WhatsApp, email or visit — tell us what you need and a real
-              person will respond today. Prefer that we call you? Fill the form
-              instead. It takes 30 seconds.
+              Call, WhatsApp or email to tell us what you need. We respond to
+              enquiries within one business day. Prefer that we call you? Fill
+              in the form and we&rsquo;ll follow up.
             </p>
 
             <div className="relative mt-8 max-w-md overflow-hidden rounded-2xl border border-cream/15">
@@ -203,6 +203,12 @@ export function ContactSection() {
                     className="block font-medium text-cream transition-colors hover:text-sage"
                   >
                     {SITE.phoneDisplay}
+                  </a>
+                  <a
+                    href={SITE.alternatePhoneHref}
+                    className="block font-medium text-cream transition-colors hover:text-sage"
+                  >
+                    {SITE.alternatePhoneDisplay}
                   </a>
                   <a
                     href={SITE.whatsappHref}

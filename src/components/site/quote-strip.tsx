@@ -36,7 +36,7 @@ export function QuoteStrip({ testimonial: t }: QuoteStripProps) {
                 {t.name}
               </span>
               <span className="mt-0.5 block text-xs text-white/55">
-                {t.role}, {t.org}
+                {t.role}
               </span>
             </span>
           </figcaption>

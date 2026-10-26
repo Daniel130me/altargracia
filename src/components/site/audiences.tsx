@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, GraduationCap, Landmark, Rocket } from "lucide-react";
+import { Building2, GraduationCap, Landmark, Rocket } from "lucide-react";
 import { Eyebrow } from "./section-heading";
 import { Pill } from "./pill";
 import { DrawLine, Reveal } from "./reveal";
@@ -67,8 +67,8 @@ export function Audiences() {
                     {i > 0 ? (
                       <DrawLine className="h-px w-full origin-left bg-haze" />
                     ) : null}
-                    <article className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 py-10 sm:gap-7 sm:py-11 lg:py-12">
-                      <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-mist-2 text-royal transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-110 group-hover:bg-royal group-hover:text-white sm:size-14">
+                    <article className="grid grid-cols-[auto_1fr] items-center gap-4 py-10 sm:gap-7 sm:py-11 lg:py-12">
+                      <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-mist-2 text-royal sm:size-14">
                         <item.icon
                           className="size-5 sm:size-6"
                           aria-hidden="true"
@@ -82,12 +82,6 @@ export function Audiences() {
                           {item.body}
                         </p>
                       </div>
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-royal group-hover:text-white sm:size-12">
-                        <ArrowRight
-                          className="size-4.5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5 sm:size-5"
-                          aria-hidden="true"
-                        />
-                      </span>
                     </article>
                   </div>
                 </Reveal>

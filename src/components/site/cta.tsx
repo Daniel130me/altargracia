@@ -10,19 +10,26 @@ import {
 import { Asterisk, Mail, Phone } from "lucide-react";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
+import { SITE } from "@/lib/site";
 
 const contactOptions = [
   {
     icon: Phone,
     label: "Call Us",
-    value: "+234 800 000 0000",
-    href: "tel:+2348000000000",
+    value: SITE.phone.label,
+    href: SITE.phone.href,
+  },
+  {
+    icon: Phone,
+    label: "Alternate Number",
+    value: SITE.alternatePhone.label,
+    href: SITE.alternatePhone.href,
   },
   {
     icon: Mail,
     label: "Email Us",
-    value: "hello@altagracia.tech",
-    href: "mailto:hello@altagracia.tech",
+    value: SITE.email.label,
+    href: SITE.email.href,
   },
 ];
 

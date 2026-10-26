@@ -11,11 +11,46 @@ import {
 
 export const SITE = {
   name: "Altagracia Technologies",
-  phone: { label: "+234 800 000 0000", href: "tel:+2348000000000" },
-  email: { label: "hello@altagracia.tech", href: "mailto:hello@altagracia.tech" },
+  phone: { label: "+234 805 349 9040", href: "tel:+2348053499040" },
+  alternatePhone: { label: "+234 803 714 8609", href: "tel:+2348037148609" },
+  email: {
+    label: "info@altagraciatechnologies.com",
+    href: "mailto:info@altagraciatechnologies.com",
+  },
   location: "Lagos, Nigeria",
   responseNote: "We respond to enquiries within one business day.",
 };
+
+export const PHONE_NUMBERS = [SITE.phone, SITE.alternatePhone] as const;
+
+export const COMPANY_MISSION =
+  "Make technology useful and accessible by bringing together ICT equipment, digital solutions, practical training and dependable support.";
+
+export const COMPANY_VISION =
+  "A future where businesses and organizations can use technology confidently to serve people and grow sustainably.";
+
+export const COMPANY_VALUES = [
+  {
+    title: "Listen first",
+    body: "Understand the need before recommending a product or service.",
+  },
+  {
+    title: "Keep it practical",
+    body: "Focus on useful solutions that fit the work to be done.",
+  },
+  {
+    title: "Communicate clearly",
+    body: "Make scope, options and next steps easy to understand.",
+  },
+  {
+    title: "Take responsibility",
+    body: "Treat every commitment with care from first conversation through delivery.",
+  },
+  {
+    title: "Keep learning",
+    body: "Build skills and adapt as technology and customer needs change.",
+  },
+] as const;
 
 /* ── The five service lines (terminology consistent site-wide) ───── */
 
@@ -85,7 +120,6 @@ export type Testimonial = {
   quote: string;
   name: string;
   role: string;
-  org: string;
   img: string;
   alt: string;
 };
@@ -96,27 +130,24 @@ export const TESTIMONIALS: Testimonial[] = [
       "Altagracia handled the ICT overhaul across our three depots — new workstations, networking, CCTV, the lot. What won us over is the after-sales support: response times are measured in hours, not days. Downtime that used to delay our dispatches is now practically zero.",
     name: "Emeka Nwosu",
     role: "Operations Director",
-    org: "SwiftHaul Logistics — Lagos",
     img: "/images/testimonial-emeka.jpg",
-    alt: "Portrait of Emeka Nwosu, Operations Director at SwiftHaul Logistics",
+    alt: "Portrait of Emeka Nwosu, Operations Director",
   },
   {
     quote:
       "They equipped our computer laboratory with forty systems, installed the learning software and trained our teachers. Two years on, they still come in every term to service the lab. Any school looking for a technology partner that keeps its word should talk to them first.",
     name: "Mrs. Aisha Bello-Abubakar",
     role: "Administrator",
-    org: "Noble Steps Academy — Kaduna",
     img: "/images/testimonial-aisha.jpg",
-    alt: "Portrait of Mrs. Aisha Bello-Abubakar, Administrator of Noble Steps Academy",
+    alt: "Portrait of Mrs. Aisha Bello-Abubakar, Administrator",
   },
   {
     quote:
       "As a young company we couldn't afford trial and error. They took time to understand how we actually operate before recommending anything, then delivered our POS and inventory setup on schedule and on budget. It feels less like a vendor and more like a technical co-founder.",
     name: "Tomilola Alabi",
     role: "Co-founder & CEO",
-    org: "ShopLinc — Yaba, Lagos",
     img: "/images/testimonial-tomilola.jpg",
-    alt: "Portrait of Tomilola Alabi, Co-founder and CEO of ShopLinc",
+    alt: "Portrait of Tomilola Alabi, Co-founder and CEO",
   },
 ];
 

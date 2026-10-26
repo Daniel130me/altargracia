@@ -21,6 +21,7 @@ import { Eyebrow, SectionHeading } from "@/components/site/section-heading";
 import { Pill } from "@/components/site/pill";
 import { Reveal } from "@/components/site/reveal";
 import { TESTIMONIALS } from "@/lib/site";
+import { ServiceIntent } from "@/components/site/service-intent";
 
 export const metadata: Metadata = {
   title: "Digital Marketing Services for Businesses | Altagracia Technologies",
@@ -142,7 +143,7 @@ export default function DigitalMarketingPage() {
         frame="tr"
         actions={
           <>
-            <Pill href="/contact" variant="ink">
+            <Pill href="/contact?service=digital-marketing" variant="ink">
               Discuss Your Visibility
             </Pill>
             <Pill href="#what-we-do" variant="outline">
@@ -173,6 +174,36 @@ export default function DigitalMarketingPage() {
           </div>
         </div>
       </section>
+
+      <ServiceIntent
+        service="digital-marketing"
+        layout="pills"
+        eyebrow="Find Your Starting Point"
+        title={
+          <>
+            What would help more people{" "}
+            <em className="font-light italic">find you?</em>
+          </>
+        }
+        lede="Choose the area you want to work on first. We can discuss the right mix for your business."
+        options={[
+          {
+            id: "presence",
+            label: "Online presence",
+            detail: "Improve how your business appears and communicates across its online touchpoints.",
+          },
+          {
+            id: "campaign",
+            label: "Marketing campaign",
+            detail: "Discuss a campaign around a service, product or business goal.",
+          },
+          {
+            id: "content",
+            label: "Content and social",
+            detail: "Plan useful content and a consistent social presence for your audience.",
+          },
+        ]}
+      />
 
       {/* How it works */}
       <section className="bg-white py-24 lg:py-32">
@@ -254,6 +285,7 @@ export default function DigitalMarketingPage() {
       />
 
       <CtaBand
+        contactHref="/contact?service=digital-marketing"
         eyebrow="Let's Talk Visibility"
         title={
           <>

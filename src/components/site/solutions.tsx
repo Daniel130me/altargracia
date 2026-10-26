@@ -187,7 +187,11 @@ function ServiceCardBody({
   item: (typeof solutions)[number];
 }) {
   return (
-    <div className="grid w-full gap-7 p-8 sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-12 lg:p-14">
+    <Link
+      href={item.href}
+      aria-label={`${item.link}: ${item.title}`}
+      className="relative z-10 grid w-full gap-7 p-8 outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-royal sm:p-10 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:gap-12 lg:p-14"
+    >
       <span className="flex size-14 items-center justify-center rounded-full bg-mist-2 text-ink transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-6 group-hover:bg-royal group-hover:text-white lg:size-16">
         <item.icon className="size-6 lg:size-7" aria-hidden="true" />
       </span>
@@ -202,27 +206,19 @@ function ServiceCardBody({
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-stone sm:text-base">
           {item.body}
         </p>
-        {/* text link — small screens only (desktop gets the round action) */}
-        <Link
-          href={item.href}
-          className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-royal lg:hidden"
-        >
+        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors group-hover:text-royal">
           <span className="border-b border-ink/25 pb-0.5">{item.link}</span>
           <ArrowUpRight className="size-4" aria-hidden="true" />
-        </Link>
+        </span>
       </div>
 
-      <Link
-        href={item.href}
-        aria-label={item.link}
-        className="hidden size-16 shrink-0 items-center justify-center rounded-full border border-haze text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-royal group-hover:bg-royal group-hover:text-white group-hover:shadow-card lg:flex"
-      >
+      <span className="hidden size-16 shrink-0 items-center justify-center rounded-full border border-haze text-ink transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-royal group-hover:bg-royal group-hover:text-white group-hover:shadow-card lg:flex">
         <ArrowUpRight
           className="size-5 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-45"
           aria-hidden="true"
         />
-      </Link>
-    </div>
+      </span>
+    </Link>
   );
 }
 

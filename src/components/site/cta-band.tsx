@@ -1,12 +1,13 @@
 import { Phone } from "lucide-react";
 import { Pill } from "./pill";
 import { Reveal } from "./reveal";
-import { SITE } from "@/lib/site";
+import { PHONE_NUMBERS, SITE } from "@/lib/site";
 
 type CtaBandProps = {
   eyebrow?: string;
   title?: React.ReactNode;
   lede?: string;
+  contactHref?: string;
 };
 
 /**
@@ -15,6 +16,7 @@ type CtaBandProps = {
  */
 export function CtaBand({
   eyebrow = "Let's Discuss Your Requirements",
+  contactHref = "/contact",
   title = (
     <>
       Tell us what you need. We&rsquo;ll help you{" "}
@@ -53,25 +55,28 @@ export function CtaBand({
 
         <Reveal delay={0.24}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3.5">
-            <Pill href="/contact" variant="ink">
+            <Pill href={contactHref} variant="ink">
               Request a Quotation
             </Pill>
-            <a
-              href={SITE.phone.href}
-              className="group inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/10 py-3 pl-4 pr-7 backdrop-blur-sm transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-white/50 hover:bg-white/20"
-            >
-              <span className="flex size-10 items-center justify-center rounded-full bg-white text-royal transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-6">
-                <Phone className="size-4.5" aria-hidden="true" />
-              </span>
-              <span className="text-left">
-                <span className="block text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">
-                  Call Us
+            {PHONE_NUMBERS.map((phone, index) => (
+              <a
+                key={phone.href}
+                href={phone.href}
+                className="group inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/10 py-3 pl-4 pr-7 backdrop-blur-sm transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-white/50 hover:bg-white/20"
+              >
+                <span className="flex size-10 items-center justify-center rounded-full bg-white text-royal transition-transform duration-300 group-hover:scale-105">
+                  <Phone className="size-4.5" aria-hidden="true" />
                 </span>
-                <span className="block text-sm font-semibold text-white">
-                  {SITE.phone.label}
+                <span className="text-left">
+                  <span className="block text-[11px] font-bold uppercase tracking-[0.16em] text-white/60">
+                    {index === 0 ? "Call Us" : "Alternate Number"}
+                  </span>
+                  <span className="block text-sm font-semibold text-white">
+                    {phone.label}
+                  </span>
                 </span>
-              </span>
-            </a>
+              </a>
+            ))}
           </div>
         </Reveal>
 
